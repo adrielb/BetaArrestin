@@ -1,0 +1,31 @@
+\documentclass{article}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usetikzlibrary{decorations.pathreplacing}
+\begin{document}
+
+\section{Model Schematic}
+
+\tikzstyle{block1} = [draw,thick,  fill=blue!20,minimum size=1cm]
+\tikzstyle{block2} = [draw,thick,   fill=red!20,minimum size=1cm]
+\tikzstyle{block3} = [draw,thick, fill=brown!20,minimum size=1cm]
+\tikzstyle{block4} = [draw,thick,fill=yellow!20,minimum size=1cm]
+\tikzstyle{empty}  = [minimum size=0.5cm]
+\begin{tikzpicture}[>=latex']
+  \draw[help lines] (-2,0) grid (2,5);
+  \foreach \y in {1,2,3,4} {
+    \node[block\y] at (-0.5,\y) (bloc\y) {};
+    \node[block\y] at ( 0.5,\y) (blok\y) {};
+    \node[empty]   at ( 0.5,\y) (b\y) {};
+  }
+  \node[] at (0,5) (input) {input};
+  \draw[->] (blok4.east) to[bend left=80] node[midway,right] {$p_4$} (blok3.east);
+  \draw[decorate, decoration={brace,amplitude=10pt}] (blok4.east) -- (blok2.east);
+  \draw[->,thick] (b1.100) -- (b2.260);
+  \draw[<-,thick] (b1.80) -- (b2.280);
+  \draw[->] (input.south) .. controls +(down:0.5cm) and +(right:1cm) .. (b4.east);
+\end{tikzpicture}
+
+
+\end{document}
+

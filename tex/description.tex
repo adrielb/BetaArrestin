@@ -1,0 +1,23 @@
+We used the two member MAPK scaffold model (cite PNAS paper)
+as a basis for our model with the following alterations.
+First, RAF (MAPKKK) dynamics were removed and 
+a basal level of RAF activation was assumed.
+Second, we spacially partition the cell into "front" and "back" compartments,
+each with subcellular regions of cytoplasm, membrane and vesicles. 
+Scaffold is capable of recycling through those three subcellular regions and 
+is initially only cytoplasmic. 
+MAPK components are cytoplasmic
+however they can be recruited to vesicle scaffolds,
+which can further catalyze the creation of dually phosphorylated MAPK.
+
+Translocation of cytoplasmic scaffold to the membrane occurs at a rate
+proportional to input dose.
+Translocation of membrane scaffold to vesicles occurs at a biphasic rate
+dependent on membrane scaffold.
+The readout for the model is the amount of dually phosphorylated MAPK.
+
+Simulation was carried out through temporal integration of the system to steady
+state until an equilibrium tolerance was reached. 
+
+X-p phosphorylation, X-Ph phosphatase, X-k, kinase
+

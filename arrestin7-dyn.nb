@@ -1,0 +1,1126 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     40754,       1117]
+NotebookOptionsPosition[     39018,       1054]
+NotebookOutlinePosition[     39358,       1069]
+CellTagsIndexPosition[     39315,       1066]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["figs/figs3", "Section",
+ CellChangeTimes->{{3.577555569659384*^9, 3.5775555826543827`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"fig2", "[", "]"}], ":=", 
+  RowBox[{"Block", "[", 
+   RowBox[{
+    RowBox[{"{", "dat", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"dat", "=", 
+      RowBox[{"myrunsim", "[", 
+       RowBox[{
+        RowBox[{"{", "}"}], ",", 
+        RowBox[{"lengthX", "\[Rule]", 
+         RowBox[{"Select", "[", 
+          RowBox[{"lenX", ",", 
+           RowBox[{
+            RowBox[{"#", ">", "0.2"}], "&"}]}], "]"}]}], ",", 
+        RowBox[{"gradient", "\[Rule]", 
+         RowBox[{"{", "1", "}"}]}], ",", 
+        RowBox[{"slevel", "\[Rule]", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"Range", "[", 
+            RowBox[{"StotNative", ",", "StotOE", ",", 
+             FractionBox[
+              RowBox[{"StotOE", "-", "StotNative"}], "30."]}], "]"}], "/.", 
+           "p\[Theta]0"}], ")"}]}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Block", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"MI", ",", "ERK"}], "}"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"ERK", "=", 
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{
+               FractionBox["Stot", "StotNative"], ",", 
+               FractionBox[
+                RowBox[{
+                 RowBox[{"MAPKpp", "[", "0", "]"}], "+", 
+                 RowBox[{"MAPKpp", "[", "1", "]"}]}], 
+                RowBox[{"2", "*", "MAXMAPKPP"}]]}], "}"}], "/.", "dat"}], "//", 
+            RowBox[{
+             RowBox[{"Transpose", "[", 
+              RowBox[{"#", ",", 
+               RowBox[{"{", 
+                RowBox[{"3", ",", "2", ",", "1"}], "}"}]}], "]"}], "&"}]}], "//", 
+           RowBox[{
+            RowBox[{"Flatten", "[", 
+             RowBox[{"#", ",", "1"}], "]"}], "&"}]}], "//", "Mean"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"MI", "=", 
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{
+               FractionBox["Stot", "StotNative"], ",", "MI"}], "}"}], "//.", 
+             "dat"}], "//", 
+            RowBox[{
+             RowBox[{"Transpose", "[", 
+              RowBox[{"#", ",", 
+               RowBox[{"{", 
+                RowBox[{"3", ",", "2", ",", "1"}], "}"}]}], "]"}], "&"}]}], "//", 
+           RowBox[{
+            RowBox[{"Flatten", "[", 
+             RowBox[{"#", ",", "1"}], "]"}], "&"}]}], "//", "Mean"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"ListPlot", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"ERK", "\[Transpose]"}], "/", 
+              RowBox[{"{", 
+               RowBox[{"1", ",", 
+                RowBox[{"Max", "[", 
+                 RowBox[{"ERK", "[", 
+                  RowBox[{"[", 
+                   RowBox[{"All", ",", "2"}], "]"}], "]"}], "]"}]}], "}"}]}], 
+             "//", "Transpose"}], ",", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"MI", "\[Transpose]"}], "/", 
+              RowBox[{"{", 
+               RowBox[{"1", ",", 
+                RowBox[{"Max", "[", 
+                 RowBox[{"MI", "[", 
+                  RowBox[{"[", 
+                   RowBox[{"All", ",", "2"}], "]"}], "]"}], "]"}]}], "}"}]}], 
+             "//", "Transpose"}]}], "}"}], ",", 
+          RowBox[{"Joined", "\[Rule]", "True"}], ",", 
+          RowBox[{"PlotRange", "\[Rule]", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"-", "0.5"}], ",", "1"}], "}"}]}], ",", 
+          RowBox[{"Filling", "\[Rule]", "Axis"}], ",", 
+          RowBox[{"AxesOrigin", "\[Rule]", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"StotOpt", "/.", "p\[Theta]0"}], ",", "0"}], "}"}]}], 
+          ",", 
+          RowBox[{"AxesLabel", "\[Rule]", 
+           RowBox[{"{", 
+            RowBox[{"\"\<Scaffold\>\"", ",", "\"\<AU\>\""}], "}"}]}], ",", 
+          RowBox[{"PlotStyle", "\[Rule]", "Thick"}], ",", 
+          RowBox[{"ImageSize", "\[Rule]", "Full"}]}], "\[IndentingNewLine]", 
+         "]"}]}]}], "]"}]}]}], "]"}]}]], "Input",
+ CellChangeTimes->{
+  3.575301712538292*^9, {3.575307442573172*^9, 3.575307476061749*^9}, {
+   3.575315958064116*^9, 3.57531597811425*^9}, 3.575389060666449*^9, 
+   3.5753917533634253`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"fig3", "[", "]"}], ":=", 
+  RowBox[{"Block", "[", 
+   RowBox[{
+    RowBox[{"{", "dat", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"dat", "=", 
+      RowBox[{"myrunsim", "[", 
+       RowBox[{
+        RowBox[{"{", "}"}], ",", 
+        RowBox[{"lengthX", "\[Rule]", 
+         RowBox[{"Drop", "[", 
+          RowBox[{"lenX", ",", "4"}], "]"}]}], ",", 
+        RowBox[{"gradient", "\[Rule]", 
+         RowBox[{"Chop", "@", 
+          RowBox[{"Range", "[", 
+           RowBox[{"0.1", ",", "1.0", ",", "0.1"}], "]"}]}]}], ",", 
+        RowBox[{"slevel", "\[Rule]", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"StotNative", ",", "StotOpt"}], "}"}], "/.", 
+           "p\[Theta]0"}], ")"}]}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"ListLinePlot", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"\[Gamma]", ",", "MI"}], "}"}], "//.", "dat"}], "//", 
+         "Transpose"}], "//", "Mean"}], ",", 
+       RowBox[{"PlotMarkers", "\[Rule]", "Automatic"}], ",", 
+       RowBox[{"AxesLabel", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"\"\<Gradient\>\"", ",", "\"\<MI\>\""}], "}"}]}], ",", 
+       RowBox[{"PlotRange", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"0", ",", "1"}], "}"}], ",", "All"}], "}"}]}], ",", 
+       RowBox[{"Filling", "\[Rule]", "Axis"}], ",", 
+       RowBox[{"ImageSize", "\[Rule]", "Full"}]}], "]"}]}]}], 
+   "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{{3.575301280250963*^9, 3.5753012940274487`*^9}, 
+   3.575301379752356*^9, 3.575301591444055*^9, {3.5753074818582172`*^9, 
+   3.575307511692123*^9}, 3.5753076895953407`*^9, {3.575309193239609*^9, 
+   3.5753091982716846`*^9}, {3.575315725846966*^9, 3.575315778388747*^9}, {
+   3.57539071233809*^9, 3.575390727054462*^9}, {3.575390962359709*^9, 
+   3.575390967752282*^9}, {3.5753935572344933`*^9, 3.575393557283743*^9}}]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["user dynamic", "Section",
+ CellChangeTimes->{{3.5775555869984007`*^9, 3.577555589854308*^9}, {
+  3.577623477324768*^9, 3.5776234806256104`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ Cell[BoxData[
+  FormBox["\[Theta]0", TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " history"
+}], "Subsection",
+ CellChangeTimes->{{3.578050716704064*^9, 3.5780507256063747`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"\[Theta]0", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "8.`", ",", "1.`", ",", "0.1`", ",", "0.002`", ",", "106.`", ",", "0", 
+     ",", "2.`", ",", "2", ",", "0.4`", ",", "0.001`", ",", "5.`", ",", 
+     "1.2`", ",", "3.`", ",", "80.`", ",", "0.01`", ",", "0.0001`"}], "}"}]}],
+   ";"}]], "Input",
+ CellChangeTimes->{{3.577558987523753*^9, 3.57755899341028*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"\[Theta]0", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "8.`", ",", "1.`", ",", "0.001`", ",", "0.4`", ",", "106.`", ",", "0.05`",
+      ",", "2.`", ",", "2", ",", "5.`", ",", "1.2`", ",", "3.`", ",", "80.`", 
+     ",", "0.01`", ",", "0.0001`"}], "}"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.577622912893587*^9, 3.57762291711021*^9}, {
+  3.577623512309407*^9, 3.5776235173426456`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"\[Theta]0", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "6.453274755472493`", ",", "0.8916716435781761`", ",", 
+     "0.0008786265948197527`", ",", "0.46673182838798777`", ",", "106.`", ",",
+      "0.01994027597867131`", ",", "1.699614720550015`", ",", 
+     "3.111737499008124`", ",", "7.7361529131953635`", ",", 
+     "1.5317441989952074`", ",", "3.286489530659703`", ",", 
+     "41.5791685191688`", ",", "0.00854845835255231`", ",", 
+     "0.0000940845113378234`"}], "}"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.5777230669367523`*^9, 3.577723070590934*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"\[Theta]0", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "6.5`", ",", "0.89`", ",", "0.00088`", ",", "0.48`", ",", "110.`", ",", 
+     "0.02`", ",", "1.5`", ",", "2.1`", ",", "7.7`", ",", "1.5`", ",", "3.3`",
+      ",", "42.`", ",", "0.0085`", ",", "0.000094`"}], "}"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.577729720861807*^9, 3.5777297256426573`*^9}},
+ FontColor->RGBColor[1, 0, 0]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"\[Theta]0", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "7.7727600199566265`", ",", "0.954703307360893`", ",", 
+     "0.0008416478666017165`", ",", "0.2637496016106016`", ",", 
+     "135.40594383694437`", ",", "0.013781226229618578`", ",", 
+     "1.6308816989756665`", ",", "5.422752487106169`", ",", 
+     "6.9041467885074415`", ",", "1.7214632216186063`", ",", 
+     "2.964332627296892`", ",", "33.07583825031443`", ",", 
+     "0.009180786817136903`", ",", "0.00009392005343394266`"}], "}"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.5778157848448772`*^9, 3.577815793490732*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"\[Theta]0", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "7.8`", ",", "0.95`", ",", "0.00084`", ",", "0.26`", ",", "140.`", ",", 
+     "0.014`", ",", "1.6`", ",", "5.4`", ",", "6.9`", ",", "1.7`", ",", "3.`",
+      ",", "33.`", ",", "0.0092`", ",", "0.000094`"}], "}"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.5778159158978043`*^9, 3.577815920488011*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"\[Theta]0", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "0.1`", ",", "0.95`", ",", "0", ",", "0.1`", ",", "140.`", ",", "0.014`", 
+     ",", "0.5`", ",", "20", ",", "6.9`", ",", "1.`", ",", "3.`", ",", "10.`",
+      ",", "0.0092`", ",", "0.000094`"}], "}"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.577817978838747*^9, 3.5778179830764647`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"\[Theta]0", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "0.10069886060628748`", ",", "0.961757477435496`", ",", "0.`", ",", 
+     "0.09930719127987278`", ",", "140.`", ",", "0.013594276353189544`", ",", 
+     "0.3989898603504708`", ",", "16.56958512605597`", ",", 
+     "6.738495372486713`", ",", "0.9861510339787058`", ",", 
+     "2.9099563495842085`", ",", "10.07851034416071`", ",", 
+     "0.009290239197472412`", ",", "0.00009211413669592569`"}], "}"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.5780500259308157`*^9, 3.578050032606182*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"temp", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"ToExpression", "@", 
+      RowBox[{"ToString", "@", 
+       RowBox[{"NumberForm", "[", 
+        RowBox[{"#", ",", "2"}], "]"}]}]}], "&"}], "/@", "\[Theta]0"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"v", ",", "\[Theta]0", ",", "temp", ",", " ", 
+     RowBox[{"\[Theta]0", "-", "temp"}], ",", 
+     FractionBox[
+      RowBox[{"\[Theta]0", "-", "temp"}], "\[Theta]0"]}], "}"}], 
+   "\[Transpose]"}], "//", "TableForm"}]}], "Input",
+ CellChangeTimes->{{3.577724157749016*^9, 3.577724214845937*^9}, {
+  3.577724335036188*^9, 3.577724352158614*^9}, {3.577727095413164*^9, 
+  3.577727097392016*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"NumberForm", "::", "sigz"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"In addition to the number of digits requested, one or more \
+zeros will appear as placeholders. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/NumberForm/sigz\\\", \
+ButtonNote -> \\\"NumberForm::sigz\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.5777270976782923`*^9, 3.577815798360721*^9, 
+  3.5780505246798573`*^9, 3.578050696230826*^9, 3.578060301144272*^9}],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"p4b", "0.10069886060628748`", "0.1`", "0.0006988606062874742`", 
+     "0.006940104407138033`"},
+    {"p2", "0.961757477435496`", "0.96`", "0.0017574774354960354`", 
+     "0.0018273603031216438`"},
+    {"p3a", "0.`", "0.`", "0.`", "Indeterminate"},
+    {"p3b", "0.09930719127987278`", "0.099`", "0.00030719127987277606`", 
+     "0.0030933437539989762`"},
+    {"p3c", "140.`", "140.`", "0.`", "0.`"},
+    {"p3d", "0.013594276353189544`", "0.014`", 
+     RowBox[{"-", "0.0004057236468104561`"}], 
+     RowBox[{"-", "0.029845181624196093`"}]},
+    {"p3e", "0.3989898603504708`", "0.4`", 
+     RowBox[{"-", "0.0010101396495292292`"}], 
+     RowBox[{"-", "0.002531742657926012`"}]},
+    {"p3f", "16.56958512605597`", "17.`", 
+     RowBox[{"-", "0.4304148739440308`"}], 
+     RowBox[{"-", "0.025976201013457826`"}]},
+    {"p5", "6.738495372486713`", "6.7`", "0.03849537248671275`", 
+     "0.0057127549042905665`"},
+    {"StotNative", "0.9861510339787058`", "0.99`", 
+     RowBox[{"-", "0.0038489660212941423`"}], 
+     RowBox[{"-", "0.0039030187959801436`"}]},
+    {"StotOpt", "2.9099563495842085`", "2.9`", "0.009956349584208546`", 
+     "0.003421477296603149`"},
+    {"StotOE", "10.07851034416071`", "10.`", "0.07851034416071023`", 
+     "0.007789875832810707`"},
+    {"maxdose", "0.009290239197472412`", "0.0093`", 
+     RowBox[{"-", "9.76080252758707`*^-6"}], 
+     RowBox[{"-", "0.0010506513686152112`"}]},
+    {"dX", "0.00009211413669592569`", "0.000092`", "1.141366959256894`*^-7", 
+     "0.001239079038459227`"}
+   },
+   GridBoxAlignment->{
+    "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+     "RowsIndexed" -> {}},
+   GridBoxSpacings->{"Columns" -> {
+       Offset[0.27999999999999997`], {
+        Offset[2.0999999999999996`]}, 
+       Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+       Offset[0.2], {
+        Offset[0.4]}, 
+       Offset[0.2]}, "RowsIndexed" -> {}}],
+  Function[BoxForm`e$, 
+   TableForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{{3.577724357598666*^9, 3.577724381414371*^9}, {
+   3.577724413957933*^9, 3.577724422916832*^9}, 3.577727097768145*^9, 
+   3.577815798472597*^9, 3.5780505248844967`*^9, 3.5780506963514633`*^9, 
+   3.578060301250565*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"\[Theta]0", "=", "temp"}], ";"}]], "Input",
+ CellChangeTimes->{{3.577727102411639*^9, 3.577727104941278*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["user", "Subsection",
+ CellChangeTimes->{{3.578050731411467*^9, 3.5780507408700867`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"input\[Theta]0", "[", "]"}]], "Input",
+ CellChangeTimes->{{3.57530729451792*^9, 3.5753072959496717`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  TagBox[GridBox[{
+     {
+      StyleBox["\[Null]",
+       ShowStringCharacters->False], 
+      TagBox["\<\"\[Theta]0\"\>",
+       HoldForm], 
+      TagBox["\<\"-10%\"\>",
+       HoldForm], 
+      TagBox["\<\"+10%\"\>",
+       HoldForm], 
+      TagBox["\<\"-1%\"\>",
+       HoldForm], 
+      TagBox["\<\"+1%\"\>",
+       HoldForm]},
+     {
+      TagBox["p4b",
+       HoldForm], 
+      InputFieldBox[Dynamic[
+        Part[$CellContext`\[Theta]0, 1]], Number,
+       FieldSize->{11, 1}], 
+      ButtonBox["\<\"-\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 1] = 
+        0.9 Part[$CellContext`\[Theta]0, 1]),
+       Evaluator->Automatic,
+       Method->"Preemptive"], 
+      ButtonBox["\<\"+\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 1] = 
+        1.1 Part[$CellContext`\[Theta]0, 1]),
+       Evaluator->Automatic,
+       Method->"Preemptive"], 
+      ButtonBox["\<\"-\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 1] = 
+        0.99 Part[$CellContext`\[Theta]0, 1]),
+       Evaluator->Automatic,
+       Method->"Preemptive"], 
+      ButtonBox["\<\"+\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 1] = 
+        1.01 Part[$CellContext`\[Theta]0, 1]),
+       Evaluator->Automatic,
+       Method->"Preemptive"]},
+     {
+      TagBox["p2",
+       HoldForm], 
+      InputFieldBox[Dynamic[
+        Part[$CellContext`\[Theta]0, 2]], Number,
+       FieldSize->{11, 1}], 
+      ButtonBox["\<\"-\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 2] = 
+        0.9 Part[$CellContext`\[Theta]0, 2]),
+       Evaluator->Automatic,
+       Method->"Preemptive"], 
+      ButtonBox["\<\"+\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 2] = 
+        1.1 Part[$CellContext`\[Theta]0, 2]),
+       Evaluator->Automatic,
+       Method->"Preemptive"], 
+      ButtonBox["\<\"-\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 2] = 
+        0.99 Part[$CellContext`\[Theta]0, 2]),
+       Evaluator->Automatic,
+       Method->"Preemptive"], 
+      ButtonBox["\<\"+\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 2] = 
+        1.01 Part[$CellContext`\[Theta]0, 2]),
+       Evaluator->Automatic,
+       Method->"Preemptive"]},
+     {
+      TagBox["p3a",
+       HoldForm], 
+      InputFieldBox[Dynamic[
+        Part[$CellContext`\[Theta]0, 3]], Number,
+       FieldSize->{11, 1}], 
+      ButtonBox["\<\"-\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 3] = 
+        0.9 Part[$CellContext`\[Theta]0, 3]),
+       Evaluator->Automatic,
+       Method->"Preemptive"], 
+      ButtonBox["\<\"+\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 3] = 
+        1.1 Part[$CellContext`\[Theta]0, 3]),
+       Evaluator->Automatic,
+       Method->"Preemptive"], 
+      ButtonBox["\<\"-\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 3] = 
+        0.99 Part[$CellContext`\[Theta]0, 3]),
+       Evaluator->Automatic,
+       Method->"Preemptive"], 
+      ButtonBox["\<\"+\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 3] = 
+        1.01 Part[$CellContext`\[Theta]0, 3]),
+       Evaluator->Automatic,
+       Method->"Preemptive"]},
+     {
+      TagBox["p3b",
+       HoldForm], 
+      InputFieldBox[Dynamic[
+        Part[$CellContext`\[Theta]0, 4]], Number,
+       FieldSize->{11, 1}], 
+      ButtonBox["\<\"-\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 4] = 
+        0.9 Part[$CellContext`\[Theta]0, 4]),
+       Evaluator->Automatic,
+       Method->"Preemptive"], 
+      ButtonBox["\<\"+\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 4] = 
+        1.1 Part[$CellContext`\[Theta]0, 4]),
+       Evaluator->Automatic,
+       Method->"Preemptive"], 
+      ButtonBox["\<\"-\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 4] = 
+        0.99 Part[$CellContext`\[Theta]0, 4]),
+       Evaluator->Automatic,
+       Method->"Preemptive"], 
+      ButtonBox["\<\"+\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 4] = 
+        1.01 Part[$CellContext`\[Theta]0, 4]),
+       Evaluator->Automatic,
+       Method->"Preemptive"]},
+     {
+      TagBox["p3c",
+       HoldForm], 
+      InputFieldBox[Dynamic[
+        Part[$CellContext`\[Theta]0, 5]], Number,
+       FieldSize->{11, 1}], 
+      ButtonBox["\<\"-\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 5] = 
+        0.9 Part[$CellContext`\[Theta]0, 5]),
+       Evaluator->Automatic,
+       Method->"Preemptive"], 
+      ButtonBox["\<\"+\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 5] = 
+        1.1 Part[$CellContext`\[Theta]0, 5]),
+       Evaluator->Automatic,
+       Method->"Preemptive"], 
+      ButtonBox["\<\"-\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 5] = 
+        0.99 Part[$CellContext`\[Theta]0, 5]),
+       Evaluator->Automatic,
+       Method->"Preemptive"], 
+      ButtonBox["\<\"+\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 5] = 
+        1.01 Part[$CellContext`\[Theta]0, 5]),
+       Evaluator->Automatic,
+       Method->"Preemptive"]},
+     {
+      TagBox["p3d",
+       HoldForm], 
+      InputFieldBox[Dynamic[
+        Part[$CellContext`\[Theta]0, 6]], Number,
+       FieldSize->{11, 1}], 
+      ButtonBox["\<\"-\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 6] = 
+        0.9 Part[$CellContext`\[Theta]0, 6]),
+       Evaluator->Automatic,
+       Method->"Preemptive"], 
+      ButtonBox["\<\"+\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 6] = 
+        1.1 Part[$CellContext`\[Theta]0, 6]),
+       Evaluator->Automatic,
+       Method->"Preemptive"], 
+      ButtonBox["\<\"-\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 6] = 
+        0.99 Part[$CellContext`\[Theta]0, 6]),
+       Evaluator->Automatic,
+       Method->"Preemptive"], 
+      ButtonBox["\<\"+\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 6] = 
+        1.01 Part[$CellContext`\[Theta]0, 6]),
+       Evaluator->Automatic,
+       Method->"Preemptive"]},
+     {
+      TagBox["p3e",
+       HoldForm], 
+      InputFieldBox[Dynamic[
+        Part[$CellContext`\[Theta]0, 7]], Number,
+       FieldSize->{11, 1}], 
+      ButtonBox["\<\"-\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 7] = 
+        0.9 Part[$CellContext`\[Theta]0, 7]),
+       Evaluator->Automatic,
+       Method->"Preemptive"], 
+      ButtonBox["\<\"+\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 7] = 
+        1.1 Part[$CellContext`\[Theta]0, 7]),
+       Evaluator->Automatic,
+       Method->"Preemptive"], 
+      ButtonBox["\<\"-\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 7] = 
+        0.99 Part[$CellContext`\[Theta]0, 7]),
+       Evaluator->Automatic,
+       Method->"Preemptive"], 
+      ButtonBox["\<\"+\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 7] = 
+        1.01 Part[$CellContext`\[Theta]0, 7]),
+       Evaluator->Automatic,
+       Method->"Preemptive"]},
+     {
+      TagBox["p3f",
+       HoldForm], 
+      InputFieldBox[Dynamic[
+        Part[$CellContext`\[Theta]0, 8]], Number,
+       FieldSize->{11, 1}], 
+      ButtonBox["\<\"-\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 8] = 
+        0.9 Part[$CellContext`\[Theta]0, 8]),
+       Evaluator->Automatic,
+       Method->"Preemptive"], 
+      ButtonBox["\<\"+\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 8] = 
+        1.1 Part[$CellContext`\[Theta]0, 8]),
+       Evaluator->Automatic,
+       Method->"Preemptive"], 
+      ButtonBox["\<\"-\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 8] = 
+        0.99 Part[$CellContext`\[Theta]0, 8]),
+       Evaluator->Automatic,
+       Method->"Preemptive"], 
+      ButtonBox["\<\"+\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 8] = 
+        1.01 Part[$CellContext`\[Theta]0, 8]),
+       Evaluator->Automatic,
+       Method->"Preemptive"]},
+     {
+      TagBox["p5",
+       HoldForm], 
+      InputFieldBox[Dynamic[
+        Part[$CellContext`\[Theta]0, 9]], Number,
+       FieldSize->{11, 1}], 
+      ButtonBox["\<\"-\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 9] = 
+        0.9 Part[$CellContext`\[Theta]0, 9]),
+       Evaluator->Automatic,
+       Method->"Preemptive"], 
+      ButtonBox["\<\"+\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 9] = 
+        1.1 Part[$CellContext`\[Theta]0, 9]),
+       Evaluator->Automatic,
+       Method->"Preemptive"], 
+      ButtonBox["\<\"-\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 9] = 
+        0.99 Part[$CellContext`\[Theta]0, 9]),
+       Evaluator->Automatic,
+       Method->"Preemptive"], 
+      ButtonBox["\<\"+\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 9] = 
+        1.01 Part[$CellContext`\[Theta]0, 9]),
+       Evaluator->Automatic,
+       Method->"Preemptive"]},
+     {
+      TagBox["StotNative",
+       HoldForm], 
+      InputFieldBox[Dynamic[
+        Part[$CellContext`\[Theta]0, 10]], Number,
+       FieldSize->{11, 1}], 
+      ButtonBox["\<\"-\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 10] = 
+        0.9 Part[$CellContext`\[Theta]0, 10]),
+       Evaluator->Automatic,
+       Method->"Preemptive"], 
+      ButtonBox["\<\"+\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 10] = 
+        1.1 Part[$CellContext`\[Theta]0, 10]),
+       Evaluator->Automatic,
+       Method->"Preemptive"], 
+      ButtonBox["\<\"-\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 10] = 
+        0.99 Part[$CellContext`\[Theta]0, 10]),
+       Evaluator->Automatic,
+       Method->"Preemptive"], 
+      ButtonBox["\<\"+\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 10] = 
+        1.01 Part[$CellContext`\[Theta]0, 10]),
+       Evaluator->Automatic,
+       Method->"Preemptive"]},
+     {
+      TagBox["StotOpt",
+       HoldForm], 
+      InputFieldBox[Dynamic[
+        Part[$CellContext`\[Theta]0, 11]], Number,
+       FieldSize->{11, 1}], 
+      ButtonBox["\<\"-\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 11] = 
+        0.9 Part[$CellContext`\[Theta]0, 11]),
+       Evaluator->Automatic,
+       Method->"Preemptive"], 
+      ButtonBox["\<\"+\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 11] = 
+        1.1 Part[$CellContext`\[Theta]0, 11]),
+       Evaluator->Automatic,
+       Method->"Preemptive"], 
+      ButtonBox["\<\"-\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 11] = 
+        0.99 Part[$CellContext`\[Theta]0, 11]),
+       Evaluator->Automatic,
+       Method->"Preemptive"], 
+      ButtonBox["\<\"+\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 11] = 
+        1.01 Part[$CellContext`\[Theta]0, 11]),
+       Evaluator->Automatic,
+       Method->"Preemptive"]},
+     {
+      TagBox["StotOE",
+       HoldForm], 
+      InputFieldBox[Dynamic[
+        Part[$CellContext`\[Theta]0, 12]], Number,
+       FieldSize->{11, 1}], 
+      ButtonBox["\<\"-\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 12] = 
+        0.9 Part[$CellContext`\[Theta]0, 12]),
+       Evaluator->Automatic,
+       Method->"Preemptive"], 
+      ButtonBox["\<\"+\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 12] = 
+        1.1 Part[$CellContext`\[Theta]0, 12]),
+       Evaluator->Automatic,
+       Method->"Preemptive"], 
+      ButtonBox["\<\"-\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 12] = 
+        0.99 Part[$CellContext`\[Theta]0, 12]),
+       Evaluator->Automatic,
+       Method->"Preemptive"], 
+      ButtonBox["\<\"+\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 12] = 
+        1.01 Part[$CellContext`\[Theta]0, 12]),
+       Evaluator->Automatic,
+       Method->"Preemptive"]},
+     {
+      TagBox["maxdose",
+       HoldForm], 
+      InputFieldBox[Dynamic[
+        Part[$CellContext`\[Theta]0, 13]], Number,
+       FieldSize->{11, 1}], 
+      ButtonBox["\<\"-\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 13] = 
+        0.9 Part[$CellContext`\[Theta]0, 13]),
+       Evaluator->Automatic,
+       Method->"Preemptive"], 
+      ButtonBox["\<\"+\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 13] = 
+        1.1 Part[$CellContext`\[Theta]0, 13]),
+       Evaluator->Automatic,
+       Method->"Preemptive"], 
+      ButtonBox["\<\"-\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 13] = 
+        0.99 Part[$CellContext`\[Theta]0, 13]),
+       Evaluator->Automatic,
+       Method->"Preemptive"], 
+      ButtonBox["\<\"+\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 13] = 
+        1.01 Part[$CellContext`\[Theta]0, 13]),
+       Evaluator->Automatic,
+       Method->"Preemptive"]},
+     {
+      TagBox["dX",
+       HoldForm], 
+      InputFieldBox[Dynamic[
+        Part[$CellContext`\[Theta]0, 14]], Number,
+       FieldSize->{11, 1}], 
+      ButtonBox["\<\"-\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 14] = 
+        0.9 Part[$CellContext`\[Theta]0, 14]),
+       Evaluator->Automatic,
+       Method->"Preemptive"], 
+      ButtonBox["\<\"+\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 14] = 
+        1.1 Part[$CellContext`\[Theta]0, 14]),
+       Evaluator->Automatic,
+       Method->"Preemptive"], 
+      ButtonBox["\<\"-\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 14] = 
+        0.99 Part[$CellContext`\[Theta]0, 14]),
+       Evaluator->Automatic,
+       Method->"Preemptive"], 
+      ButtonBox["\<\"+\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>(Part[$CellContext`\[Theta]0, 14] = 
+        1.01 Part[$CellContext`\[Theta]0, 14]),
+       Evaluator->Automatic,
+       Method->"Preemptive"]}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}},
+    GridBoxDividers->{
+     "Columns" -> {False, True, {False}, False}, "ColumnsIndexed" -> {}, 
+      "Rows" -> {False, True, {False}, False}, "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[2.0999999999999996`]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}],
+   {OutputFormsDump`HeadedRows, OutputFormsDump`HeadedColumns}],
+  Function[BoxForm`e$, 
+   TableForm[
+   BoxForm`e$, 
+    TableHeadings -> {{$CellContext`p4b, $CellContext`p2, $CellContext`p3a, \
+$CellContext`p3b, $CellContext`p3c, $CellContext`p3d, $CellContext`p3e, \
+$CellContext`p3f, $CellContext`p5, $CellContext`StotNative, \
+$CellContext`StotOpt, $CellContext`StotOE, $CellContext`maxdose, \
+$CellContext`dX}, {"\[Theta]0", "-10%", "+10%", "-1%", "+1%"}}]]]], "Output",
+ CellChangeTimes->{
+  3.57590574108245*^9, 3.577555628634112*^9, 3.577559465955271*^9, {
+   3.5776234466389112`*^9, 3.577623470773324*^9}, 3.577623819801749*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Dynamic", "[", 
+  RowBox[{
+   RowBox[{"Block", "[", 
+    RowBox[{
+     RowBox[{"{", "dat", "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"dat", "=", 
+       RowBox[{"myrunsim", "[", 
+        RowBox[{
+         RowBox[{"{", "}"}], ",", 
+         RowBox[{"gradient", "\[Rule]", 
+          RowBox[{"{", "1", "}"}]}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"dat", "=", 
+       RowBox[{"Transpose", "[", 
+        RowBox[{"dat", ",", 
+         RowBox[{"{", 
+          RowBox[{"2", ",", "3", ",", "1", ",", "4"}], "}"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"dat", "=", 
+       RowBox[{"Flatten", "[", 
+        RowBox[{"dat", ",", "1"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"Column", "[", 
+       RowBox[{"{", 
+        RowBox[{"\[Theta]0", ",", 
+         RowBox[{"figs", "[", "dat", "]"}]}], "}"}], "]"}]}]}], 
+    "\[IndentingNewLine]", "]"}], ",", 
+   RowBox[{"TrackedSymbols", "\[RuleDelayed]", 
+    RowBox[{"{", "\[Theta]0", "}"}]}], ",", 
+   RowBox[{"SynchronousUpdating", "\[Rule]", "False"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.5753814677697897`*^9, 3.575381498736887*^9}, {
+  3.575381726413534*^9, 3.575381727892537*^9}, {3.575381838394389*^9, 
+  3.575381850513453*^9}, {3.575381896793129*^9, 3.575381920633913*^9}, {
+  3.575382353152543*^9, 3.5753824013413877`*^9}, {3.5753853940383797`*^9, 
+  3.575385439021057*^9}, {3.575385536976931*^9, 3.575385539592803*^9}, {
+  3.5753856103222857`*^9, 3.575385642197324*^9}, {3.575385798498088*^9, 
+  3.575385803083316*^9}, {3.575387000609871*^9, 3.5753870081854563`*^9}, {
+  3.575387425888435*^9, 3.575387432527131*^9}, {3.575387847251649*^9, 
+  3.575387847401998*^9}, {3.575388390813306*^9, 3.57538839098765*^9}}],
+
+Cell[BoxData[
+ DynamicBox[ToBoxes[
+   Block[{$CellContext`dat}, $CellContext`dat = $CellContext`myrunsim[{}, \
+$CellContext`gradient -> {1}]; $CellContext`dat = 
+     Transpose[$CellContext`dat, {2, 3, 1, 4}]; $CellContext`dat = 
+     Flatten[$CellContext`dat, 1]; Column[{$CellContext`\[Theta]0, 
+       $CellContext`figs[$CellContext`dat]}]], StandardForm],
+  ImageSizeCache->{1061., {333.5, 339.5}},
+  SynchronousUpdating->False,
+  TrackedSymbols:>{$CellContext`\[Theta]0}]], "Output",
+ CellChangeTimes->{3.577623832791045*^9, 3.577727121104752*^9, 
+  3.577816094158639*^9, 3.578050534629273*^9}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Loss dynamic", "Section",
+ CellChangeTimes->{{3.5776234836177607`*^9, 3.577623485913583*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["viz"], "Input",
+ CellChangeTimes->{{3.5776240884000597`*^9, 3.577624088642612*^9}}],
+
+Cell[BoxData[
+ DynamicBox[ToBoxes[
+   GraphicsGrid[{{
+      ListLogPlot[
+       ReplaceAll[{$CellContext`runsim$maxiter, $CellContext`dd}, \
+$CellContext`dat], PlotLabel -> "tol"], 
+      Plot[
+       ReplaceRepeated[
+        ReplaceAll[
+         ReplaceAll[
+          $CellContext`p3[0], $CellContext`p3sigmoid], $CellContext`Smem[
+          0][$CellContext`t] -> $CellContext`Smem], 
+        Part[$CellContext`dat, 1, 1]], {$CellContext`Smem, 0, 
+        Max[
+         ReplaceAll[
+          $CellContext`Smem[0], $CellContext`dat]]}, PlotRange -> All, 
+       AxesLabel -> {"Smem", "p3[Smem]"}], 
+      Show[
+       ListPlot[$CellContext`datGrad, AxesLabel -> {"grad", "MI"}, 
+        PlotLabel -> $CellContext`errorGrad, PlotRange -> All, PlotStyle -> 
+        PointSize[0.03]], 
+       Plot[$CellContext`equGrad, {$CellContext`x, 0, 1}, PlotRange -> 
+        All]]}, {
+      ListLinePlot[
+       ReplaceAll[{$CellContext`\[Lambda], 
+         $CellContext`Scyto[0]}, $CellContext`dat], PlotLabel -> "Scyto"], 
+      ListLinePlot[
+       ReplaceAll[{$CellContext`\[Lambda], 
+         $CellContext`Smem[0]}, $CellContext`dat], PlotLabel -> "Smem"], 
+      ListLinePlot[
+       ReplaceAll[{$CellContext`\[Lambda], $CellContext`C1[
+          0] + $CellContext`C2[0] + $CellContext`C3[0] + $CellContext`C4[
+          0] + $CellContext`C5[0] + $CellContext`C6[0] + $CellContext`C7[
+          0] + $CellContext`C8[0] + $CellContext`C9[0]}, $CellContext`dat], 
+       PlotLabel -> "Sves"]}, {
+      ListLinePlot[
+       ReplaceAll[{$CellContext`Stot - $CellContext`Smem[
+         0] - $CellContext`Scyto[
+         0], $CellContext`MAPKpp[
+          0]/$CellContext`MAXMAPKPP}, $CellContext`dat], PlotLabel -> 
+       "MAPKpp vs Sves", PlotStyle -> {{Dotted, 
+          Thickness[0.01]}, Thick}, PlotRange -> {0, 1}, 
+       AxesLabel -> {"Sves", "MAPKpp"}], 
+      ListLinePlot[
+       ReplaceAll[{$CellContext`\[Lambda], $CellContext`MAPKpp[
+          0]/$CellContext`MAXMAPKPP}, $CellContext`dat], PlotLabel -> 
+       "MAPKpp", PlotRange -> {0, 1}], 
+      Show[
+       ListPlot[
+        ReplaceAll[{$CellContext`\[Lambda], ($CellContext`MAPKpp[
+            1] - $CellContext`MAPKpp[
+           0])/($CellContext`dX $CellContext`maxdose)}, $CellContext`dat], 
+        PlotRange -> 5 10^0 {-1, 1}, AxesLabel -> {"Dose", "MI"}, PlotLabel -> 
+        ReplaceAll[$CellContext`equNative, Pattern[$CellContext`a, 
+             Blank[]] + Pattern[$CellContext`b, 
+              Blank[]] $CellContext`x -> $CellContext`a]], 
+       Plot[{$CellContext`equNative, $CellContext`equOE}, {$CellContext`x, 0, 
+         1}]]}}, ImageSize -> Full], StandardForm],
+  ImageSizeCache->{1068., {328., 332.}},
+  TrackedSymbols:>{$CellContext`dat}]], "Output",
+ CellChangeTimes->{3.577624090419911*^9, 3.57763924107485*^9, 
+  3.577639286983212*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["vizLossBar"], "Input",
+ CellChangeTimes->{{3.577624639437181*^9, 3.577624641242856*^9}}],
+
+Cell[BoxData[
+ DynamicBox[ToBoxes[
+   BarChart[
+    Reverse[$CellContext`w $CellContext`lossfuncsval], BarOrigin -> Left, 
+    ChartLabels -> Reverse[$CellContext`lossfuncsexp], PlotRange -> All, 
+    AspectRatio -> 0.3, ImageSize -> Full], StandardForm],
+  ImageSizeCache->{1068., {131., 135.}}]], "Output",
+ CellChangeTimes->{3.577624641792824*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"vizLossDiff", "[", "]"}]], "Input",
+ CellChangeTimes->{{3.5776402445038557`*^9, 3.577640247994966*^9}, {
+  3.577640281833234*^9, 3.577640281896658*^9}}],
+
+Cell[BoxData[
+ DynamicBox[ToBoxes[
+   BarChart[
+    Reverse[$CellContext`w $CellContext`lossfuncsval - \
+$CellContext`lossfuncsval\[Theta]0], BarOrigin -> Left, ChartLabels -> 
+    Reverse[$CellContext`lossfuncsexp], PlotRange -> All, AspectRatio -> 0.3, 
+    ImageSize -> Full], StandardForm],
+  ImageSizeCache->{1068., {163., 169.}}]], "Output",
+ CellChangeTimes->{{3.577640276380231*^9, 3.5776402844145613`*^9}, 
+   3.5776429442352333`*^9, 3.577645458014556*^9, 3.5777083130359917`*^9, 
+   3.577708391312739*^9, {3.577710141255866*^9, 3.577710170263774*^9}, 
+   3.577714667541321*^9, 3.57772993456668*^9, 3.577730140145726*^9, 
+   3.57773058715888*^9, 3.577730659000456*^9, {3.5777322594144497`*^9, 
+   3.577732280827094*^9}, 3.577733031455518*^9, 3.57773325046583*^9, 
+   3.577733751580801*^9, 3.577800609544703*^9, 3.577807528528975*^9, 
+   3.5778076461551037`*^9, 3.5778081043710833`*^9, 3.577809605118782*^9, 
+   3.577812536176248*^9, 3.57781567018777*^9, 3.577818281321074*^9, 
+   3.5778187732675056`*^9, 3.57781903685924*^9, 3.57781915855125*^9, 
+   3.578050589778577*^9}]
+}, Open  ]]
+}, Closed]]
+},
+WindowSize->{1200, 1525},
+WindowMargins->{{1200, Automatic}, {0, Automatic}},
+FrontEndVersion->"9.0 for Linux x86 (64-bit) (November 20, 2012)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 97, 1, 82, "Section"],
+Cell[679, 25, 4352, 115, 345, "Input"],
+Cell[5034, 142, 2037, 49, 121, "Input"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[7108, 196, 150, 2, 52, "Section"],
+Cell[CellGroupData[{
+Cell[7283, 202, 204, 6, 45, "Subsection"],
+Cell[7490, 210, 395, 9, 32, "Input"],
+Cell[7888, 221, 419, 9, 32, "Input"],
+Cell[8310, 232, 594, 12, 77, "Input"],
+Cell[8907, 246, 421, 10, 32, "Input"],
+Cell[9331, 258, 615, 13, 77, "Input"],
+Cell[9949, 273, 390, 9, 32, "Input"],
+Cell[10342, 284, 376, 8, 32, "Input"],
+Cell[10721, 294, 578, 12, 77, "Input"],
+Cell[CellGroupData[{
+Cell[11324, 310, 711, 20, 80, "Input"],
+Cell[12038, 332, 579, 11, 24, "Message"],
+Cell[12620, 345, 2260, 49, 256, "Output"]
+}, Open  ]],
+Cell[14895, 397, 144, 3, 32, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15076, 405, 94, 1, 45, "Subsection"],
+Cell[CellGroupData[{
+Cell[15195, 410, 129, 2, 32, "Input"],
+Cell[15327, 414, 16368, 461, 463, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[31732, 880, 1758, 38, 143, "Input"],
+Cell[33493, 920, 599, 11, 690, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[34153, 938, 99, 1, 82, "Section"],
+Cell[CellGroupData[{
+Cell[34277, 943, 97, 1, 32, "Input"],
+Cell[34377, 946, 2824, 61, 675, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[37238, 1012, 102, 1, 32, "Input"],
+Cell[37343, 1015, 350, 7, 281, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[37730, 1027, 176, 3, 32, "Input"],
+Cell[37909, 1032, 1081, 18, 347, "Output"]
+}, Open  ]]
+}, Closed]]
+}
+]
+*)
+
+(* End of internal cache information *)

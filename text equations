@@ -1,0 +1,32 @@
+
+d/dt RAF[t] = -a1 RAF[t] (RAF-Ktot - (RAF RAF-K)[t]) + d1 (RAF RAF-K)[t] +k2 (RAF* RAF-P)[t],
+
+d/dt (RAF RAF-K-GTP)[t] = a1 RAF[t] (RAF-Ktot - (RAF RAF-K) [t]) - (d1+ k1) (RAF RAF-K)[t],
+
+d/dt RAF*[t] = -a2 RAF*[t] (RAF-Ptot - (RAF* RAF-P)[t]) + d2 (RAF* RAF-P)[t] + k1 (RAF RAF-K)[t] + (k3+d3) (MEK RAF*)[t] - a3 RAF*[t] MEK[t] + (k5+ d5) (MEK*RAF*)[t] - a5 MEK*[t] RAF*[t],
+d/dt (RAF* RAF-P)[t] = a2 RAF*[t] (RAF-Ptot - (RAF* RAF-P)[t]) - (d2+ k2) (RAF* RAF-P)[t],
+
+d/dt MEK[t] = -a3 MEK[t] RAF*[t] + d3 (MEK RAF*)[t] + k4 (MEK* MEK-P)[t] + of1 (C2[t] + C6[t] + C9[t]) - on1 MEK[t] (C1[t] + C4[t] + C5[t]),
+d/dt (MEK RAF*)[t] = a3 MEK[t] RAF*[t] - (d3 + k3) (MEK RAF*)[t],
+d/dt MEK*[t] = -a4 MEK*[t] (MEK-Ptot - (MEK* MEK-P)[t] - (MEK** MEK-P)[t]) + d4 (MEK* MEK-P)[t] + k3 (MEK RAF*)[t] + k6 (MEK** MEK-P)[t] + d5 (MEK*RAF*)[t] -a5 MEK*[t] RAF*[t],
+d/dt (MEK* MEK-P)[t] = a4 MEK*[t] (MEK-Ptot - (MEK* MEK-P)[t] - (MEK** MEK-P)[t]) - (d4 + k4) (MEK* MEK-P)[t],
+d/dt (MEK*RAF*)[t] = a5 MEK*[t] RAF*[t] - (d5 + k5) (MEK*RAF*)[t],
+d/dt MEK**[t] = k5 (MEK*RAF*)[t] - a6 MEK**[t] (MEK-Ptot - (MEK* MEK-P)[t] - (MEK** MEK-P)[t]) + d6 (MEK** MEK-P)[t] - a7 MEK**[t] MAPK[t] + (d7 + k7) (MAPK MEK**)[t] + (d9 + k9) (MAPK* MEK**)[t] - a9 MAPK*[t] MEK**[t] + of3 (C3[t] + C7[t] + C8[t]),
+d/dt (MEK** MEK-P)[t] = a6 MEK**[t] (MEK-Ptot - (MEK* MEK-P)[t] - (MEK** MEK-P)[t]) - (d6 + k6) (MEK** MEK-P)[t],
+d/dt MAPK[t] = -a7 MAPK[t] MEK**[t] + d7 (MAPK MEK**)[t] + k8 (MAPK* MAPK-P)[t] + of2 (C4[t] + C6[t] + C7[t]) - on2 MAPK[t] (C1[t] + C2[t] + C3[t]),
+d/dt (MAPK MEK**) [t] = a7 MAPK[t] MEK** [t] - (d7 + k7) (MAPK MEK**) [t],
+d/dt MAPK*[t] = k7 (MAPK MEK**) [t] - a8 MAPK*[t] (MAPK-Ptot - (MAPK* MAPK-P)[t] - (MAPK** MAPK-P)[t]) + d8 (MAPK* MAPK-P) [t] - a9 MAPK*[t] MEK**[t] + d9 (MAPK*MEK**)[t] + k10 (MAPK** MAPK-P)[t],
+d/dt (MAPK*MEK**)[t] = a9 MAPK*[t] MEK**[t] - (d9 + k9) (MAPK*MEK**)[t],
+d/dt MAPK**[t] = -a10 MAPK**[t](MAPK-Ptot - (MAPK* MAPK-P)[t] - (MAPK** MAPK-P)[t]) + d10 (MAPK** MAPK-P)[t] + k9 (MAPK*MEK**)[t] + of4 (C5[t] + C8[t] + C9[t]),
+d/dt (MAPK* MAPK-P)[t] = a8 MAPK*[t] (MAPK-Ptot - (MAPK* MAPK-P)[t] - (MAPK** MAPK-P)[t]) - (d8 + k8) (MAPK* MAPK-P)[t],
+d/dt (MAPK** MAPK-P)[t] = a10 MAPK**[t] (MAPK-Ptot - (MAPK* MAPK-P)[t] - (MAPK** MAPK-P)[t]) - (d10 + k10) (MAPK** MAPK-P)[t],
+
+d/dt C1[t] = -C1[t] (on1 MEK[t] + on2 MAPK[t]) + of1 C2 [t] + of2 C4[t] + of3 C3[t] + of4 C5[t],
+d/dt C2[t] = on1 C1[t] MEK[t] + of2 C6[t] + of4 C9[t] - (of1 + on2 MAPK[t]) C2[t] - kr1 C2[t] RAF*[t],
+d/dt C3[t] = - on2 C3[t] MAPK[t] + of2 C7[t] - of3 C3[t] + of4 C8[t] + kr1 C2[t] RAF*[t],
+d/dt C4[t] = of1 C6[t] + on2 MAPK[t] C1[t] + of3 C7[t] - (of2 + on1 MEK[t]) C4[t],
+d/dt C5[t] = of1 C9[t] + of3 C8[t] - (on1 MEK[t] + of4) C5[t],
+d/dt C6[t] = on1 MEK[t] C4[t] + on2 MAPK[t] C2[t] - (of1 + of2) C6 [t] - kr1 C6[t] RAF*[t],
+d/dt C7[t] = - of3 C7[t] + on2 MAPK[t] C3[t] - kr2 C7[t] + kr1 C6[t] RAF*[t] - of2 C7[t],
+d/dt C8[t] = kr2 C7[t] - (of3 + of4) C8[t] + kr1 RAF*[t] C9[t],
+d/dt C9[t] = on1 MEK[t] C5[t] - (of1 + of4) C9[t] - kr1 RAF*[t] C9[t]

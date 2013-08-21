@@ -1,0 +1,152 @@
+\begin{dgroup*}
+\begin{dmath*}
+S_{\text{cyto}}'(0,t)=p_4(0) C_1(0,t)+\text{Di} (S_{\text{cyto}}(1,t)-S_{\text{cyto}}(0,t))-p_1(0) S_{\text{cyto}}(0,t)+p_2 S_{\text{mem}}(0,t)
+\end{dmath*}
+\begin{dmath*}
+\text{MEK}'(0,t)=-a_3 \text{RAFp} \text{MEK}(0,t)-\text{on}_1 \text{MEK}(0,t) (C_1(0,t)+C_4(0,t)+C_5(0,t))+\text{of}_1 (C_2(0,t)+C_6(0,t)+C_9(0,t))+d_3 \text{MEKRAFp}(0,t)+\text{Di} (\text{MEK}(1,t)-\text{MEK}(0,t))+k_4 \text{MEKpMEKPh}(0,t)
+\end{dmath*}
+\begin{dmath*}
+\text{MEKRAFp}'(0,t)=a_3 \text{RAFp} \text{MEK}(0,t)+(-d_3-k_3) \text{MEKRAFp}(0,t)+\text{Di} (\text{MEKRAFp}(1,t)-\text{MEKRAFp}(0,t))
+\end{dmath*}
+\begin{dmath*}
+\text{MEKp}'(0,t)=-a_4 \text{MEKp}(0,t) (-\text{MEKpMEKPh}(0,t)-\text{MEKppMEKPh}(0,t)+\text{MEKPhtot})-a_5 \text{RAFp} \text{MEKp}(0,t)+d_4 \text{MEKpMEKPh}(0,t)+d_5 \text{MEKpRAFp}(0,t)+\text{Di} (\text{MEKp}(1,t)-\text{MEKp}(0,t))+k_3 \text{MEKRAFp}(0,t)+k_6 \text{MEKppMEKPh}(0,t)
+\end{dmath*}
+\begin{dmath*}
+\text{MEKpMEKPh}'(0,t)=a_4 \text{MEKp}(0,t) (-\text{MEKpMEKPh}(0,t)-\text{MEKppMEKPh}(0,t)+\text{MEKPhtot})+(-d_4-k_4) \text{MEKpMEKPh}(0,t)+\text{Di} (\text{MEKpMEKPh}(1,t)-\text{MEKpMEKPh}(0,t))
+\end{dmath*}
+\begin{dmath*}
+\text{MEKpRAFp}'(0,t)=a_5 \text{RAFp} \text{MEKp}(0,t)+(-d_5-k_5) \text{MEKpRAFp}(0,t)+\text{Di} (\text{MEKpRAFp}(1,t)-\text{MEKpRAFp}(0,t))
+\end{dmath*}
+\begin{dmath*}
+\text{MEKpp}'(0,t)=-a_6 \text{MEKpp}(0,t) (-\text{MEKpMEKPh}(0,t)-\text{MEKppMEKPh}(0,t)+\text{MEKPhtot})-a_7 \text{MAPK}(0,t) \text{MEKpp}(0,t)-a_9 \text{MAPKp}(0,t) \text{MEKpp}(0,t)+\text{of}_3 (C_3(0,t)+C_7(0,t)+C_8(0,t))+d_6 \text{MEKppMEKPh}(0,t)+(d_7+k_7) \text{MAPKMEKpp}(0,t)+(d_9+k_9) \text{MAPKpMEKpp}(0,t)+\text{Di} (\text{MEKpp}(1,t)-\text{MEKpp}(0,t))+k_5 \text{MEKpRAFp}(0,t)
+\end{dmath*}
+\begin{dmath*}
+\text{MEKppMEKPh}'(0,t)=a_6 \text{MEKpp}(0,t) (-\text{MEKpMEKPh}(0,t)-\text{MEKppMEKPh}(0,t)+\text{MEKPhtot})-(d_6+k_6) \text{MEKppMEKPh}(0,t)+\text{Di} (\text{MEKppMEKPh}(1,t)-\text{MEKppMEKPh}(0,t))
+\end{dmath*}
+\begin{dmath*}
+\text{MAPK}'(0,t)=-a_7 \text{MAPK}(0,t) \text{MEKpp}(0,t)-\text{on}_2 \text{MAPK}(0,t) (C_1(0,t)+C_2(0,t)+C_3(0,t))+\text{of}_2 (C_4(0,t)+C_6(0,t)+C_7(0,t))+d_7 \text{MAPKMEKpp}(0,t)+\text{Di} (\text{MAPK}(1,t)-\text{MAPK}(0,t))+k_8 \text{MAPKpMAPKPh}(0,t)
+\end{dmath*}
+\begin{dmath*}
+\text{MAPKMEKpp}'(0,t)=a_7 \text{MAPK}(0,t) \text{MEKpp}(0,t)+(-d_7-k_7) \text{MAPKMEKpp}(0,t)+\text{Di} (\text{MAPKMEKpp}(1,t)-\text{MAPKMEKpp}(0,t))
+\end{dmath*}
+\begin{dmath*}
+\text{MAPKp}'(0,t)=-a_8 \text{MAPKp}(0,t) (-\text{MAPKpMAPKPh}(0,t)-\text{MAPKppMAPKPh}(0,t)+\text{MAPKPhtot})-a_9 \text{MAPKp}(0,t) \text{MEKpp}(0,t)+d_8 \text{MAPKpMAPKPh}(0,t)+d_9 \text{MAPKpMEKpp}(0,t)+\text{Di} (\text{MAPKp}(1,t)-\text{MAPKp}(0,t))+\text{k_10} \text{MAPKppMAPKPh}(0,t)+k_7 \text{MAPKMEKpp}(0,t)
+\end{dmath*}
+\begin{dmath*}
+\text{MAPKpMEKpp}'(0,t)=a_9 \text{MAPKp}(0,t) \text{MEKpp}(0,t)+(-d_9-k_9) \text{MAPKpMEKpp}(0,t)+\text{Di} (\text{MAPKpMEKpp}(1,t)-\text{MAPKpMEKpp}(0,t))
+\end{dmath*}
+\begin{dmath*}
+\text{MAPKpp}'(0,t)=-\text{a_10} \text{MAPKpp}(0,t) (-\text{MAPKpMAPKPh}(0,t)-\text{MAPKppMAPKPh}(0,t)+\text{MAPKPhtot})+\text{of}_4 (C_5(0,t)+C_8(0,t)+C_9(0,t))+\text{d_10} \text{MAPKppMAPKPh}(0,t)+\text{Di} (\text{MAPKpp}(1,t)-\text{MAPKpp}(0,t))+k_9 \text{MAPKpMEKpp}(0,t)
+\end{dmath*}
+\begin{dmath*}
+\text{MAPKpMAPKPh}'(0,t)=a_8 \text{MAPKp}(0,t) (-\text{MAPKpMAPKPh}(0,t)-\text{MAPKppMAPKPh}(0,t)+\text{MAPKPhtot})+(-d_8-k_8) \text{MAPKpMAPKPh}(0,t)+\text{Di} (\text{MAPKpMAPKPh}(1,t)-\text{MAPKpMAPKPh}(0,t))
+\end{dmath*}
+\begin{dmath*}
+\text{MAPKppMAPKPh}'(0,t)=\text{a_10} \text{MAPKpp}(0,t) (-\text{MAPKpMAPKPh}(0,t)-\text{MAPKppMAPKPh}(0,t)+\text{MAPKPhtot})-(\text{d_10}+\text{k_10}) \text{MAPKppMAPKPh}(0,t)+\text{Di} (\text{MAPKppMAPKPh}(1,t)-\text{MAPKppMAPKPh}(0,t))
+\end{dmath*}
+\begin{dmath*}
+C_1'(0,t)=-C_1(0,t) (\text{on}_2 \text{MAPK}(0,t)+\text{on}_1 \text{MEK}(0,t))-p_4(0) C_1(0,t)+\text{of}_1 C_2(0,t)+\text{of}_3 C_3(0,t)+\text{of}_2 C_4(0,t)+\text{of}_4 C_5(0,t)+p_3(0) S_{\text{mem}}(0,t)
+\end{dmath*}
+\begin{dmath*}
+C_2'(0,t)=\text{on}_1 C_1(0,t) \text{MEK}(0,t)-k_5 \text{RAFp} C_2(0,t)-C_2(0,t) (\text{on}_2 \text{MAPK}(0,t)+\text{of}_1)+\text{of}_2 C_6(0,t)+\text{of}_4 C_9(0,t)
+\end{dmath*}
+\begin{dmath*}
+C_3'(0,t)=k_5 \text{RAFp} C_2(0,t)-\text{on}_2 C_3(0,t) \text{MAPK}(0,t)-\text{of}_3 C_3(0,t)+\text{of}_2 C_7(0,t)+\text{of}_4 C_8(0,t)
+\end{dmath*}
+\begin{dmath*}
+C_4'(0,t)=\text{on}_2 C_1(0,t) \text{MAPK}(0,t)-C_4(0,t) (\text{on}_1 \text{MEK}(0,t)+\text{of}_2)+\text{of}_1 C_6(0,t)+\text{of}_3 C_7(0,t)
+\end{dmath*}
+\begin{dmath*}
+C_5'(0,t)=-C_5(0,t) (\text{on}_1 \text{MEK}(0,t)+\text{of}_4)+\text{of}_3 C_8(0,t)+\text{of}_1 C_9(0,t)
+\end{dmath*}
+\begin{dmath*}
+C_6'(0,t)=\text{on}_2 C_2(0,t) \text{MAPK}(0,t)+\text{on}_1 C_4(0,t) \text{MEK}(0,t)-k_5 \text{RAFp} C_6(0,t)+(-\text{of}_1-\text{of}_2) C_6(0,t)
+\end{dmath*}
+\begin{dmath*}
+C_7'(0,t)=\text{on}_2 C_3(0,t) \text{MAPK}(0,t)+k_5 \text{RAFp} C_6(0,t)-k_9 C_7(0,t)-\text{of}_2 C_7(0,t)-\text{of}_3 C_7(0,t)
+\end{dmath*}
+\begin{dmath*}
+C_8'(0,t)=k_9 C_7(0,t)-(\text{of}_3+\text{of}_4) C_8(0,t)+k_5 \text{RAFp} C_9(0,t)
+\end{dmath*}
+\begin{dmath*}
+C_9'(0,t)=\text{on}_1 C_5(0,t) \text{MEK}(0,t)-k_5 \text{RAFp} C_9(0,t)+(-\text{of}_1-\text{of}_4) C_9(0,t)
+\end{dmath*}
+\begin{dmath*}
+S_{\text{mem}}'(0,t)=p_1(0) S_{\text{cyto}}(0,t)-p_2 S_{\text{mem}}(0,t)-p_3(0) S_{\text{mem}}(0,t)
+\end{dmath*}
+\begin{dmath*}
+S_{\text{cyto}}'(1,t)=p_4(1) C_1(1,t)+\text{Di} (S_{\text{cyto}}(0,t)-S_{\text{cyto}}(1,t))-p_1(1) S_{\text{cyto}}(1,t)+p_2 S_{\text{mem}}(1,t)
+\end{dmath*}
+\begin{dmath*}
+\text{MEK}'(1,t)=-a_3 \text{RAFp} \text{MEK}(1,t)-\text{on}_1 \text{MEK}(1,t) (C_1(1,t)+C_4(1,t)+C_5(1,t))+\text{of}_1 (C_2(1,t)+C_6(1,t)+C_9(1,t))+d_3 \text{MEKRAFp}(1,t)+\text{Di} (\text{MEK}(0,t)-\text{MEK}(1,t))+k_4 \text{MEKpMEKPh}(1,t)
+\end{dmath*}
+\begin{dmath*}
+\text{MEKRAFp}'(1,t)=a_3 \text{RAFp} \text{MEK}(1,t)+(-d_3-k_3) \text{MEKRAFp}(1,t)+\text{Di} (\text{MEKRAFp}(0,t)-\text{MEKRAFp}(1,t))
+\end{dmath*}
+\begin{dmath*}
+\text{MEKp}'(1,t)=-a_4 \text{MEKp}(1,t) (-\text{MEKpMEKPh}(1,t)-\text{MEKppMEKPh}(1,t)+\text{MEKPhtot})-a_5 \text{RAFp} \text{MEKp}(1,t)+d_4 \text{MEKpMEKPh}(1,t)+d_5 \text{MEKpRAFp}(1,t)+\text{Di} (\text{MEKp}(0,t)-\text{MEKp}(1,t))+k_3 \text{MEKRAFp}(1,t)+k_6 \text{MEKppMEKPh}(1,t)
+\end{dmath*}
+\begin{dmath*}
+\text{MEKpMEKPh}'(1,t)=a_4 \text{MEKp}(1,t) (-\text{MEKpMEKPh}(1,t)-\text{MEKppMEKPh}(1,t)+\text{MEKPhtot})+(-d_4-k_4) \text{MEKpMEKPh}(1,t)+\text{Di} (\text{MEKpMEKPh}(0,t)-\text{MEKpMEKPh}(1,t))
+\end{dmath*}
+\begin{dmath*}
+\text{MEKpRAFp}'(1,t)=a_5 \text{RAFp} \text{MEKp}(1,t)+(-d_5-k_5) \text{MEKpRAFp}(1,t)+\text{Di} (\text{MEKpRAFp}(0,t)-\text{MEKpRAFp}(1,t))
+\end{dmath*}
+\begin{dmath*}
+\text{MEKpp}'(1,t)=-a_6 \text{MEKpp}(1,t) (-\text{MEKpMEKPh}(1,t)-\text{MEKppMEKPh}(1,t)+\text{MEKPhtot})-a_7 \text{MAPK}(1,t) \text{MEKpp}(1,t)-a_9 \text{MAPKp}(1,t) \text{MEKpp}(1,t)+\text{of}_3 (C_3(1,t)+C_7(1,t)+C_8(1,t))+d_6 \text{MEKppMEKPh}(1,t)+(d_7+k_7) \text{MAPKMEKpp}(1,t)+(d_9+k_9) \text{MAPKpMEKpp}(1,t)+\text{Di} (\text{MEKpp}(0,t)-\text{MEKpp}(1,t))+k_5 \text{MEKpRAFp}(1,t)
+\end{dmath*}
+\begin{dmath*}
+\text{MEKppMEKPh}'(1,t)=a_6 \text{MEKpp}(1,t) (-\text{MEKpMEKPh}(1,t)-\text{MEKppMEKPh}(1,t)+\text{MEKPhtot})-(d_6+k_6) \text{MEKppMEKPh}(1,t)+\text{Di} (\text{MEKppMEKPh}(0,t)-\text{MEKppMEKPh}(1,t))
+\end{dmath*}
+\begin{dmath*}
+\text{MAPK}'(1,t)=-a_7 \text{MAPK}(1,t) \text{MEKpp}(1,t)-\text{on}_2 \text{MAPK}(1,t) (C_1(1,t)+C_2(1,t)+C_3(1,t))+\text{of}_2 (C_4(1,t)+C_6(1,t)+C_7(1,t))+d_7 \text{MAPKMEKpp}(1,t)+\text{Di} (\text{MAPK}(0,t)-\text{MAPK}(1,t))+k_8 \text{MAPKpMAPKPh}(1,t)
+\end{dmath*}
+\begin{dmath*}
+\text{MAPKMEKpp}'(1,t)=a_7 \text{MAPK}(1,t) \text{MEKpp}(1,t)+(-d_7-k_7) \text{MAPKMEKpp}(1,t)+\text{Di} (\text{MAPKMEKpp}(0,t)-\text{MAPKMEKpp}(1,t))
+\end{dmath*}
+\begin{dmath*}
+\text{MAPKp}'(1,t)=-a_8 \text{MAPKp}(1,t) (-\text{MAPKpMAPKPh}(1,t)-\text{MAPKppMAPKPh}(1,t)+\text{MAPKPhtot})-a_9 \text{MAPKp}(1,t) \text{MEKpp}(1,t)+d_8 \text{MAPKpMAPKPh}(1,t)+d_9 \text{MAPKpMEKpp}(1,t)+\text{Di} (\text{MAPKp}(0,t)-\text{MAPKp}(1,t))+\text{k_10} \text{MAPKppMAPKPh}(1,t)+k_7 \text{MAPKMEKpp}(1,t)
+\end{dmath*}
+\begin{dmath*}
+\text{MAPKpMEKpp}'(1,t)=a_9 \text{MAPKp}(1,t) \text{MEKpp}(1,t)+(-d_9-k_9) \text{MAPKpMEKpp}(1,t)+\text{Di} (\text{MAPKpMEKpp}(0,t)-\text{MAPKpMEKpp}(1,t))
+\end{dmath*}
+\begin{dmath*}
+\text{MAPKpp}'(1,t)=-\text{a_10} \text{MAPKpp}(1,t) (-\text{MAPKpMAPKPh}(1,t)-\text{MAPKppMAPKPh}(1,t)+\text{MAPKPhtot})+\text{of}_4 (C_5(1,t)+C_8(1,t)+C_9(1,t))+\text{d_10} \text{MAPKppMAPKPh}(1,t)+\text{Di} (\text{MAPKpp}(0,t)-\text{MAPKpp}(1,t))+k_9 \text{MAPKpMEKpp}(1,t)
+\end{dmath*}
+\begin{dmath*}
+\text{MAPKpMAPKPh}'(1,t)=a_8 \text{MAPKp}(1,t) (-\text{MAPKpMAPKPh}(1,t)-\text{MAPKppMAPKPh}(1,t)+\text{MAPKPhtot})+(-d_8-k_8) \text{MAPKpMAPKPh}(1,t)+\text{Di} (\text{MAPKpMAPKPh}(0,t)-\text{MAPKpMAPKPh}(1,t))
+\end{dmath*}
+\begin{dmath*}
+\text{MAPKppMAPKPh}'(1,t)=\text{a_10} \text{MAPKpp}(1,t) (-\text{MAPKpMAPKPh}(1,t)-\text{MAPKppMAPKPh}(1,t)+\text{MAPKPhtot})-(\text{d_10}+\text{k_10}) \text{MAPKppMAPKPh}(1,t)+\text{Di} (\text{MAPKppMAPKPh}(0,t)-\text{MAPKppMAPKPh}(1,t))
+\end{dmath*}
+\begin{dmath*}
+C_1'(1,t)=-C_1(1,t) (\text{on}_2 \text{MAPK}(1,t)+\text{on}_1 \text{MEK}(1,t))-p_4(1) C_1(1,t)+\text{of}_1 C_2(1,t)+\text{of}_3 C_3(1,t)+\text{of}_2 C_4(1,t)+\text{of}_4 C_5(1,t)+p_3(1) S_{\text{mem}}(1,t)
+\end{dmath*}
+\begin{dmath*}
+C_2'(1,t)=\text{on}_1 C_1(1,t) \text{MEK}(1,t)-k_5 \text{RAFp} C_2(1,t)-C_2(1,t) (\text{on}_2 \text{MAPK}(1,t)+\text{of}_1)+\text{of}_2 C_6(1,t)+\text{of}_4 C_9(1,t)
+\end{dmath*}
+\begin{dmath*}
+C_3'(1,t)=k_5 \text{RAFp} C_2(1,t)-\text{on}_2 C_3(1,t) \text{MAPK}(1,t)-\text{of}_3 C_3(1,t)+\text{of}_2 C_7(1,t)+\text{of}_4 C_8(1,t)
+\end{dmath*}
+\begin{dmath*}
+C_4'(1,t)=\text{on}_2 C_1(1,t) \text{MAPK}(1,t)-C_4(1,t) (\text{on}_1 \text{MEK}(1,t)+\text{of}_2)+\text{of}_1 C_6(1,t)+\text{of}_3 C_7(1,t)
+\end{dmath*}
+\begin{dmath*}
+C_5'(1,t)=-C_5(1,t) (\text{on}_1 \text{MEK}(1,t)+\text{of}_4)+\text{of}_3 C_8(1,t)+\text{of}_1 C_9(1,t)
+\end{dmath*}
+\begin{dmath*}
+C_6'(1,t)=\text{on}_2 C_2(1,t) \text{MAPK}(1,t)+\text{on}_1 C_4(1,t) \text{MEK}(1,t)-k_5 \text{RAFp} C_6(1,t)+(-\text{of}_1-\text{of}_2) C_6(1,t)
+\end{dmath*}
+\begin{dmath*}
+C_7'(1,t)=\text{on}_2 C_3(1,t) \text{MAPK}(1,t)+k_5 \text{RAFp} C_6(1,t)-k_9 C_7(1,t)-\text{of}_2 C_7(1,t)-\text{of}_3 C_7(1,t)
+\end{dmath*}
+\begin{dmath*}
+C_8'(1,t)=k_9 C_7(1,t)-(\text{of}_3+\text{of}_4) C_8(1,t)+k_5 \text{RAFp} C_9(1,t)
+\end{dmath*}
+\begin{dmath*}
+C_9'(1,t)=\text{on}_1 C_5(1,t) \text{MEK}(1,t)-k_5 \text{RAFp} C_9(1,t)+(-\text{of}_1-\text{of}_4) C_9(1,t)
+\end{dmath*}
+\begin{dmath*}
+S_{\text{mem}}'(1,t)=p_1(1) S_{\text{cyto}}(1,t)-p_2 S_{\text{mem}}(1,t)-p_3(1) S_{\text{mem}}(1,t)
+\end{dmath*}
+\end{dgroup*}

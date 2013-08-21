@@ -1,0 +1,117 @@
+%% AMS-LaTeX Created by Wolfram Mathematica 9.0 for Students - Personal Use Only : www.wolfram.com
+
+\documentclass{article}
+\usepackage{amsmath, amssymb, graphics, setspace}
+
+\newcommand{\mathsym}[1]{{}}
+\newcommand{\unicode}[1]{{}}
+
+\newcounter{mathematicapage}
+\begin{document}
+
+\[\begin{array}{c}
+ \text{S_cyto}[0]'[t]==\text{p_4}[0] \text{C_1}(0,t)-\text{p_1}[0] \text{S_cyto}(0,t)+\text{Di} (-\text{S_cyto}(0,t)+\text{S_cyto}(1,t))+\text{p_2} \text{S_mem}(0,t)
+\\
+ \text{MEK}[0]'[t]==\text{of_1} (\text{C_2}(0,t)+\text{C_6}(0,t)+\text{C_9}(0,t))-\text{a_3} \text{RAFp} \text{MEK}(0,t)-\text{on_1} (\text{C_1}(0,t)+\text{C_4}(0,t)+\text{C_5}(0,t))
+\text{MEK}(0,t)+\text{Di} (-\text{MEK}(0,t)+\text{MEK}(1,t))+\text{k_4} \text{MEKpMEKPh}(0,t)+\text{d_3} \text{MEKRAFp}(0,t) \\
+ \text{MEKRAFp}[0]'[t]==\text{a_3} \text{RAFp} \text{MEK}(0,t)+(-\text{d_3}-\text{k_3}) \text{MEKRAFp}(0,t)+\text{Di} (-\text{MEKRAFp}(0,t)+\text{MEKRAFp}(1,t))
+\\
+ \text{MEKp}[0]'[t]==-\text{a_5} \text{RAFp} \text{MEKp}(0,t)+\text{Di} (-\text{MEKp}(0,t)+\text{MEKp}(1,t))+\text{d_4} \text{MEKpMEKPh}(0,t)-\text{a_4}
+\text{MEKp}(0,t) (\text{MEKPhtot}-\text{MEKpMEKPh}(0,t)-\text{MEKppMEKPh}(0,t))+\text{k_6} \text{MEKppMEKPh}(0,t)+\text{d_5} \text{MEKpRAFp}(0,t)+\text{k_3}
+\text{MEKRAFp}(0,t) \\
+ \text{MEKpMEKPh}[0]'[t]==(-\text{d_4}-\text{k_4}) \text{MEKpMEKPh}(0,t)+\text{Di} (-\text{MEKpMEKPh}(0,t)+\text{MEKpMEKPh}(1,t))+\text{a_4} \text{MEKp}(0,t)
+(\text{MEKPhtot}-\text{MEKpMEKPh}(0,t)-\text{MEKppMEKPh}(0,t)) \\
+ \text{MEKpRAFp}[0]'[t]==\text{a_5} \text{RAFp} \text{MEKp}(0,t)+(-\text{d_5}-\text{k_5}) \text{MEKpRAFp}(0,t)+\text{Di} (-\text{MEKpRAFp}(0,t)+\text{MEKpRAFp}(1,t))
+\\
+ \text{MEKpp}[0]'[t]==\text{of_3} (\text{C_3}(0,t)+\text{C_7}(0,t)+\text{C_8}(0,t))+(\text{d_7}+\text{k_7}) \text{MAPKMEKpp}(0,t)+(\text{d_9}+\text{k_9})
+\text{MAPKpMEKpp}(0,t)-\text{a_7} \text{MAPK}(0,t) \text{MEKpp}(0,t)-\text{a_9} \text{MAPKp}(0,t) \text{MEKpp}(0,t)+\text{Di} (-\text{MEKpp}(0,t)+\text{MEKpp}(1,t))-\text{a_6}
+\text{MEKpp}(0,t) (\text{MEKPhtot}-\text{MEKpMEKPh}(0,t)-\text{MEKppMEKPh}(0,t))+\text{d_6} \text{MEKppMEKPh}(0,t)+\text{k_5} \text{MEKpRAFp}(0,t)
+\\
+ \text{MEKppMEKPh}[0]'[t]==\text{a_6} \text{MEKpp}(0,t) (\text{MEKPhtot}-\text{MEKpMEKPh}(0,t)-\text{MEKppMEKPh}(0,t))-(\text{d_6}+\text{k_6}) \text{MEKppMEKPh}(0,t)+\text{Di}
+(-\text{MEKppMEKPh}(0,t)+\text{MEKppMEKPh}(1,t)) \\
+ \text{MAPK}[0]'[t]==\text{of_2} (\text{C_4}(0,t)+\text{C_6}(0,t)+\text{C_7}(0,t))-\text{on_2} (\text{C_1}(0,t)+\text{C_2}(0,t)+\text{C_3}(0,t)) \text{MAPK}(0,t)+\text{Di}
+(-\text{MAPK}(0,t)+\text{MAPK}(1,t))+\text{d_7} \text{MAPKMEKpp}(0,t)+\text{k_8} \text{MAPKpMAPKPh}(0,t)-\text{a_7} \text{MAPK}(0,t) \text{MEKpp}(0,t)
+\\
+ \text{MAPKMEKpp}[0]'[t]==(-\text{d_7}-\text{k_7}) \text{MAPKMEKpp}(0,t)+\text{Di} (-\text{MAPKMEKpp}(0,t)+\text{MAPKMEKpp}(1,t))+\text{a_7} \text{MAPK}(0,t)
+\text{MEKpp}(0,t) \\
+ \text{MAPKp}[0]'[t]==\text{k_7} \text{MAPKMEKpp}(0,t)+\text{Di} (-\text{MAPKp}(0,t)+\text{MAPKp}(1,t))+\text{d_8} \text{MAPKpMAPKPh}(0,t)+\text{d_9}
+\text{MAPKpMEKpp}(0,t)-\text{a_8} \text{MAPKp}(0,t) (\text{MAPKPhtot}-\text{MAPKpMAPKPh}(0,t)-\text{MAPKppMAPKPh}(0,t))+\text{k_10} \text{MAPKppMAPKPh}(0,t)-\text{a_9}
+\text{MAPKp}(0,t) \text{MEKpp}(0,t) \\
+ \text{MAPKpMEKpp}[0]'[t]==(-\text{d_9}-\text{k_9}) \text{MAPKpMEKpp}(0,t)+\text{Di} (-\text{MAPKpMEKpp}(0,t)+\text{MAPKpMEKpp}(1,t))+\text{a_9}
+\text{MAPKp}(0,t) \text{MEKpp}(0,t) \\
+ \text{MAPKpp}[0]'[t]==\text{of_4} (\text{C_5}(0,t)+\text{C_8}(0,t)+\text{C_9}(0,t))+\text{k_9} \text{MAPKpMEKpp}(0,t)+\text{Di} (-\text{MAPKpp}(0,t)+\text{MAPKpp}(1,t))-\text{a_10}
+\text{MAPKpp}(0,t) (\text{MAPKPhtot}-\text{MAPKpMAPKPh}(0,t)-\text{MAPKppMAPKPh}(0,t))+\text{d_10} \text{MAPKppMAPKPh}(0,t) \\
+ \text{MAPKpMAPKPh}[0]'[t]==(-\text{d_8}-\text{k_8}) \text{MAPKpMAPKPh}(0,t)+\text{Di} (-\text{MAPKpMAPKPh}(0,t)+\text{MAPKpMAPKPh}(1,t))+\text{a_8}
+\text{MAPKp}(0,t) (\text{MAPKPhtot}-\text{MAPKpMAPKPh}(0,t)-\text{MAPKppMAPKPh}(0,t)) \\
+ \text{MAPKppMAPKPh}[0]'[t]==\text{a_10} \text{MAPKpp}(0,t) (\text{MAPKPhtot}-\text{MAPKpMAPKPh}(0,t)-\text{MAPKppMAPKPh}(0,t))-(\text{d_10}+\text{k_10})
+\text{MAPKppMAPKPh}(0,t)+\text{Di} (-\text{MAPKppMAPKPh}(0,t)+\text{MAPKppMAPKPh}(1,t)) \\
+ \text{C_1}[0]'[t]==-\text{p_4}[0] \text{C_1}(0,t)+\text{of_1} \text{C_2}(0,t)+\text{of_3} \text{C_3}(0,t)+\text{of_2} \text{C_4}(0,t)+\text{of_4} \text{C_5}(0,t)-\text{C_1}(0,t)
+(\text{on_2} \text{MAPK}(0,t)+\text{on_1} \text{MEK}(0,t))+\text{p_3}[0] \text{S_mem}(0,t) \\
+ \text{C_2}[0]'[t]==-\text{k_5} \text{RAFp} \text{C_2}(0,t)+\text{of_2} \text{C_6}(0,t)+\text{of_4} \text{C_9}(0,t)-\text{C_2}(0,t) (\text{of_1}+\text{on_2}
+\text{MAPK}(0,t))+\text{on_1} \text{C_1}(0,t) \text{MEK}(0,t) \\
+ \text{C_3}[0]'[t]==\text{k_5} \text{RAFp} \text{C_2}(0,t)-\text{of_3} \text{C_3}(0,t)+\text{of_2} \text{C_7}(0,t)+\text{of_4} \text{C_8}(0,t)-\text{on_2}
+\text{C_3}(0,t) \text{MAPK}(0,t) \\
+ \text{C_4}[0]'[t]==\text{of_1} \text{C_6}(0,t)+\text{of_3} \text{C_7}(0,t)+\text{on_2} \text{C_1}(0,t) \text{MAPK}(0,t)-\text{C_4}(0,t) (\text{of_2}+\text{on_1}
+\text{MEK}(0,t)) \\
+ \text{C_5}[0]'[t]==\text{of_3} \text{C_8}(0,t)+\text{of_1} \text{C_9}(0,t)-\text{C_5}(0,t) (\text{of_4}+\text{on_1} \text{MEK}(0,t)) \\
+ \text{C_6}[0]'[t]==(-\text{of_1}-\text{of_2}) \text{C_6}(0,t)-\text{k_5} \text{RAFp} \text{C_6}(0,t)+\text{on_2} \text{C_2}(0,t) \text{MAPK}(0,t)+\text{on_1}
+\text{C_4}(0,t) \text{MEK}(0,t) \\
+ \text{C_7}[0]'[t]==\text{k_5} \text{RAFp} \text{C_6}(0,t)-\text{k_9} \text{C_7}(0,t)-\text{of_2} \text{C_7}(0,t)-\text{of_3} \text{C_7}(0,t)+\text{on_2}
+\text{C_3}(0,t) \text{MAPK}(0,t) \\
+ \text{C_8}[0]'[t]==\text{k_9} \text{C_7}(0,t)-(\text{of_3}+\text{of_4}) \text{C_8}(0,t)+\text{k_5} \text{RAFp} \text{C_9}(0,t) \\
+ \text{C_9}[0]'[t]==(-\text{of_1}-\text{of_4}) \text{C_9}(0,t)-\text{k_5} \text{RAFp} \text{C_9}(0,t)+\text{on_1} \text{C_5}(0,t) \text{MEK}(0,t) \\
+ \text{S_mem}[0]'[t]==\text{p_1}[0] \text{S_cyto}(0,t)-\text{p_2} \text{S_mem}(0,t)-\text{p_3}[0] \text{S_mem}(0,t) \\
+ \text{S_cyto}[1]'[t]==\text{p_4}[1] \text{C_1}(1,t)+\text{Di} (\text{S_cyto}(0,t)-\text{S_cyto}(1,t))-\text{p_1}[1] \text{S_cyto}(1,t)+\text{p_2} \text{S_mem}(1,t)
+\\
+ \text{MEK}[1]'[t]==\text{of_1} (\text{C_2}(1,t)+\text{C_6}(1,t)+\text{C_9}(1,t))+\text{Di} (\text{MEK}(0,t)-\text{MEK}(1,t))-\text{a_3} \text{RAFp}
+\text{MEK}(1,t)-\text{on_1} (\text{C_1}(1,t)+\text{C_4}(1,t)+\text{C_5}(1,t)) \text{MEK}(1,t)+\text{k_4} \text{MEKpMEKPh}(1,t)+\text{d_3} \text{MEKRAFp}(1,t)
+\\
+ \text{MEKRAFp}[1]'[t]==\text{a_3} \text{RAFp} \text{MEK}(1,t)+\text{Di} (\text{MEKRAFp}(0,t)-\text{MEKRAFp}(1,t))+(-\text{d_3}-\text{k_3}) \text{MEKRAFp}(1,t)
+\\
+ \text{MEKp}[1]'[t]==\text{Di} (\text{MEKp}(0,t)-\text{MEKp}(1,t))-\text{a_5} \text{RAFp} \text{MEKp}(1,t)+\text{d_4} \text{MEKpMEKPh}(1,t)-\text{a_4}
+\text{MEKp}(1,t) (\text{MEKPhtot}-\text{MEKpMEKPh}(1,t)-\text{MEKppMEKPh}(1,t))+\text{k_6} \text{MEKppMEKPh}(1,t)+\text{d_5} \text{MEKpRAFp}(1,t)+\text{k_3}
+\text{MEKRAFp}(1,t) \\
+ \text{MEKpMEKPh}[1]'[t]==\text{Di} (\text{MEKpMEKPh}(0,t)-\text{MEKpMEKPh}(1,t))+(-\text{d_4}-\text{k_4}) \text{MEKpMEKPh}(1,t)+\text{a_4} \text{MEKp}(1,t)
+(\text{MEKPhtot}-\text{MEKpMEKPh}(1,t)-\text{MEKppMEKPh}(1,t)) \\
+ \text{MEKpRAFp}[1]'[t]==\text{a_5} \text{RAFp} \text{MEKp}(1,t)+\text{Di} (\text{MEKpRAFp}(0,t)-\text{MEKpRAFp}(1,t))+(-\text{d_5}-\text{k_5}) \text{MEKpRAFp}(1,t)
+\\
+ \text{MEKpp}[1]'[t]==\text{of_3} (\text{C_3}(1,t)+\text{C_7}(1,t)+\text{C_8}(1,t))+(\text{d_7}+\text{k_7}) \text{MAPKMEKpp}(1,t)+(\text{d_9}+\text{k_9})
+\text{MAPKpMEKpp}(1,t)+\text{Di} (\text{MEKpp}(0,t)-\text{MEKpp}(1,t))-\text{a_7} \text{MAPK}(1,t) \text{MEKpp}(1,t)-\text{a_9} \text{MAPKp}(1,t)
+\text{MEKpp}(1,t)-\text{a_6} \text{MEKpp}(1,t) (\text{MEKPhtot}-\text{MEKpMEKPh}(1,t)-\text{MEKppMEKPh}(1,t))+\text{d_6} \text{MEKppMEKPh}(1,t)+\text{k_5}
+\text{MEKpRAFp}(1,t) \\
+ \text{MEKppMEKPh}[1]'[t]==\text{a_6} \text{MEKpp}(1,t) (\text{MEKPhtot}-\text{MEKpMEKPh}(1,t)-\text{MEKppMEKPh}(1,t))+\text{Di} (\text{MEKppMEKPh}(0,t)-\text{MEKppMEKPh}(1,t))-(\text{d_6}+\text{k_6})
+\text{MEKppMEKPh}(1,t) \\
+ \text{MAPK}[1]'[t]==\text{of_2} (\text{C_4}(1,t)+\text{C_6}(1,t)+\text{C_7}(1,t))+\text{Di} (\text{MAPK}(0,t)-\text{MAPK}(1,t))-\text{on_2} (\text{C_1}(1,t)+\text{C_2}(1,t)+\text{C_3}(1,t))
+\text{MAPK}(1,t)+\text{d_7} \text{MAPKMEKpp}(1,t)+\text{k_8} \text{MAPKpMAPKPh}(1,t)-\text{a_7} \text{MAPK}(1,t) \text{MEKpp}(1,t) \\
+ \text{MAPKMEKpp}[1]'[t]==\text{Di} (\text{MAPKMEKpp}(0,t)-\text{MAPKMEKpp}(1,t))+(-\text{d_7}-\text{k_7}) \text{MAPKMEKpp}(1,t)+\text{a_7} \text{MAPK}(1,t)
+\text{MEKpp}(1,t) \\
+ \text{MAPKp}[1]'[t]==\text{k_7} \text{MAPKMEKpp}(1,t)+\text{Di} (\text{MAPKp}(0,t)-\text{MAPKp}(1,t))+\text{d_8} \text{MAPKpMAPKPh}(1,t)+\text{d_9}
+\text{MAPKpMEKpp}(1,t)-\text{a_8} \text{MAPKp}(1,t) (\text{MAPKPhtot}-\text{MAPKpMAPKPh}(1,t)-\text{MAPKppMAPKPh}(1,t))+\text{k_10} \text{MAPKppMAPKPh}(1,t)-\text{a_9}
+\text{MAPKp}(1,t) \text{MEKpp}(1,t) \\
+ \text{MAPKpMEKpp}[1]'[t]==\text{Di} (\text{MAPKpMEKpp}(0,t)-\text{MAPKpMEKpp}(1,t))+(-\text{d_9}-\text{k_9}) \text{MAPKpMEKpp}(1,t)+\text{a_9} \text{MAPKp}(1,t)
+\text{MEKpp}(1,t) \\
+ \text{MAPKpp}[1]'[t]==\text{of_4} (\text{C_5}(1,t)+\text{C_8}(1,t)+\text{C_9}(1,t))+\text{k_9} \text{MAPKpMEKpp}(1,t)+\text{Di} (\text{MAPKpp}(0,t)-\text{MAPKpp}(1,t))-\text{a_10}
+\text{MAPKpp}(1,t) (\text{MAPKPhtot}-\text{MAPKpMAPKPh}(1,t)-\text{MAPKppMAPKPh}(1,t))+\text{d_10} \text{MAPKppMAPKPh}(1,t) \\
+ \text{MAPKpMAPKPh}[1]'[t]==\text{Di} (\text{MAPKpMAPKPh}(0,t)-\text{MAPKpMAPKPh}(1,t))+(-\text{d_8}-\text{k_8}) \text{MAPKpMAPKPh}(1,t)+\text{a_8}
+\text{MAPKp}(1,t) (\text{MAPKPhtot}-\text{MAPKpMAPKPh}(1,t)-\text{MAPKppMAPKPh}(1,t)) \\
+ \text{MAPKppMAPKPh}[1]'[t]==\text{a_10} \text{MAPKpp}(1,t) (\text{MAPKPhtot}-\text{MAPKpMAPKPh}(1,t)-\text{MAPKppMAPKPh}(1,t))+\text{Di} (\text{MAPKppMAPKPh}(0,t)-\text{MAPKppMAPKPh}(1,t))-(\text{d_10}+\text{k_10})
+\text{MAPKppMAPKPh}(1,t) \\
+ \text{C_1}[1]'[t]==-\text{p_4}[1] \text{C_1}(1,t)+\text{of_1} \text{C_2}(1,t)+\text{of_3} \text{C_3}(1,t)+\text{of_2} \text{C_4}(1,t)+\text{of_4} \text{C_5}(1,t)-\text{C_1}(1,t)
+(\text{on_2} \text{MAPK}(1,t)+\text{on_1} \text{MEK}(1,t))+\text{p_3}[1] \text{S_mem}(1,t) \\
+ \text{C_2}[1]'[t]==-\text{k_5} \text{RAFp} \text{C_2}(1,t)+\text{of_2} \text{C_6}(1,t)+\text{of_4} \text{C_9}(1,t)-\text{C_2}(1,t) (\text{of_1}+\text{on_2}
+\text{MAPK}(1,t))+\text{on_1} \text{C_1}(1,t) \text{MEK}(1,t) \\
+ \text{C_3}[1]'[t]==\text{k_5} \text{RAFp} \text{C_2}(1,t)-\text{of_3} \text{C_3}(1,t)+\text{of_2} \text{C_7}(1,t)+\text{of_4} \text{C_8}(1,t)-\text{on_2}
+\text{C_3}(1,t) \text{MAPK}(1,t) \\
+ \text{C_4}[1]'[t]==\text{of_1} \text{C_6}(1,t)+\text{of_3} \text{C_7}(1,t)+\text{on_2} \text{C_1}(1,t) \text{MAPK}(1,t)-\text{C_4}(1,t) (\text{of_2}+\text{on_1}
+\text{MEK}(1,t)) \\
+ \text{C_5}[1]'[t]==\text{of_3} \text{C_8}(1,t)+\text{of_1} \text{C_9}(1,t)-\text{C_5}(1,t) (\text{of_4}+\text{on_1} \text{MEK}(1,t)) \\
+ \text{C_6}[1]'[t]==(-\text{of_1}-\text{of_2}) \text{C_6}(1,t)-\text{k_5} \text{RAFp} \text{C_6}(1,t)+\text{on_2} \text{C_2}(1,t) \text{MAPK}(1,t)+\text{on_1}
+\text{C_4}(1,t) \text{MEK}(1,t) \\
+ \text{C_7}[1]'[t]==\text{k_5} \text{RAFp} \text{C_6}(1,t)-\text{k_9} \text{C_7}(1,t)-\text{of_2} \text{C_7}(1,t)-\text{of_3} \text{C_7}(1,t)+\text{on_2}
+\text{C_3}(1,t) \text{MAPK}(1,t) \\
+ \text{C_8}[1]'[t]==\text{k_9} \text{C_7}(1,t)-(\text{of_3}+\text{of_4}) \text{C_8}(1,t)+\text{k_5} \text{RAFp} \text{C_9}(1,t) \\
+ \text{C_9}[1]'[t]==(-\text{of_1}-\text{of_4}) \text{C_9}(1,t)-\text{k_5} \text{RAFp} \text{C_9}(1,t)+\text{on_1} \text{C_5}(1,t) \text{MEK}(1,t) \\
+ \text{S_mem}[1]'[t]==\text{p_1}[1] \text{S_cyto}(1,t)-\text{p_2} \text{S_mem}(1,t)-\text{p_3}[1] \text{S_mem}(1,t) \\
+\end{array}\]
+
+\end{document}
