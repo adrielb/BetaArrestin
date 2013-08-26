@@ -1,3 +1,11 @@
 *~
-*.swp
+*.sw?
+*.aux
+*.dvi
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.ps
 
