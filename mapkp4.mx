@@ -1,0 +1,314 @@
+MAXMAPKPP = 0.009097444648237724
+ 
+params = {a1 -> 1, a10 -> 5, a2 -> 0.5, a3 -> 3.3, a4 -> 10, a5 -> 3.3, 
+     a6 -> 10, a7 -> 20, a8 -> 5, a9 -> 20, Stot -> 0, d1 -> 0.4, d10 -> 0.4, 
+     d2 -> 0.5, d3 -> 0.42, d4 -> 0.8, d5 -> 0.4, d6 -> 0.8, d7 -> 0.6, 
+     d8 -> 0.4, d9 -> 0.6, k1 -> 0.1, k10 -> 0.1, k2 -> 0.1, k3 -> 0.1, 
+     k4 -> 0.1, k5 -> 0.1, k6 -> 0.1, k7 -> 0.1, k8 -> 0.1, k9 -> 0.1, 
+     MAPKPhtot -> 0.3, MAPKtot -> 0.4, MEKPhtot -> 0.2, MEKtot -> 0.2, 
+     of1 -> 0.05, of2 -> 0.05, of3 -> 0.05, of4 -> 0.5, on1 -> 10, on2 -> 10, 
+     RAFp -> 0.14, RAFPhtot -> 0.3, RAFtot -> 0.3, p2 -> 0.1, Di -> 0.0001, 
+     p1[0] -> 0.1, p3[0] -> 0.1, p4[0] -> 0.1, p1[1] -> 0.1, p3[1] -> 0.1, 
+     p4[1] -> 0.1}
+ 
+equ = {0 == C1[0]*p4[0] - p1[0]*Scyto[0] + Di*(-Scyto[0] + Scyto[1]) + 
+       p2*Smem[0], 0 == a3*RAFp*MEK[0] + (-d3 - k3)*MEKRAFp[0] + 
+       Di*(-MEKRAFp[0] + MEKRAFp[1]), 0 == -(a5*RAFp*MEKp[0]) + 
+       Di*(-MEKp[0] + MEKp[1]) + d4*MEKpMEKPh[0] - 
+       a4*MEKp[0]*(MEKPhtot - MEKpMEKPh[0] - MEKppMEKPh[0]) + 
+       k6*MEKppMEKPh[0] + d5*MEKpRAFp[0] + k3*MEKRAFp[0], 
+     0 == (-d4 - k4)*MEKpMEKPh[0] + Di*(-MEKpMEKPh[0] + MEKpMEKPh[1]) + 
+       a4*MEKp[0]*(MEKPhtot - MEKpMEKPh[0] - MEKppMEKPh[0]), 
+     0 == a5*RAFp*MEKp[0] + (-d5 - k5)*MEKpRAFp[0] + 
+       Di*(-MEKpRAFp[0] + MEKpRAFp[1]), 0 == of3*(C3[0] + C7[0] + C8[0]) + 
+       (d7 + k7)*MAPKMEKpp[0] + (d9 + k9)*MAPKpMEKpp[0] - 
+       a7*MAPK[0]*MEKpp[0] - a9*MAPKp[0]*MEKpp[0] + 
+       Di*(-MEKpp[0] + MEKpp[1]) - a6*MEKpp[0]*(MEKPhtot - MEKpMEKPh[0] - 
+         MEKppMEKPh[0]) + d6*MEKppMEKPh[0] + k5*MEKpRAFp[0], 
+     0 == a6*MEKpp[0]*(MEKPhtot - MEKpMEKPh[0] - MEKppMEKPh[0]) - 
+       (d6 + k6)*MEKppMEKPh[0] + Di*(-MEKppMEKPh[0] + MEKppMEKPh[1]), 
+     0 == (-d7 - k7)*MAPKMEKpp[0] + Di*(-MAPKMEKpp[0] + MAPKMEKpp[1]) + 
+       a7*MAPK[0]*MEKpp[0], 0 == k7*MAPKMEKpp[0] + 
+       Di*(-MAPKp[0] + MAPKp[1]) + d8*MAPKpMAPKPh[0] + d9*MAPKpMEKpp[0] - 
+       a8*MAPKp[0]*(MAPKPhtot - MAPKpMAPKPh[0] - MAPKppMAPKPh[0]) + 
+       k10*MAPKppMAPKPh[0] - a9*MAPKp[0]*MEKpp[0], 
+     0 == (-d9 - k9)*MAPKpMEKpp[0] + Di*(-MAPKpMEKpp[0] + MAPKpMEKpp[1]) + 
+       a9*MAPKp[0]*MEKpp[0], 0 == of4*(C5[0] + C8[0] + C9[0]) + 
+       k9*MAPKpMEKpp[0] + Di*(-MAPKpp[0] + MAPKpp[1]) - 
+       a10*MAPKpp[0]*(MAPKPhtot - MAPKpMAPKPh[0] - MAPKppMAPKPh[0]) + 
+       d10*MAPKppMAPKPh[0], 0 == (-d8 - k8)*MAPKpMAPKPh[0] + 
+       Di*(-MAPKpMAPKPh[0] + MAPKpMAPKPh[1]) + a8*MAPKp[0]*
+        (MAPKPhtot - MAPKpMAPKPh[0] - MAPKppMAPKPh[0]), 
+     0 == a10*MAPKpp[0]*(MAPKPhtot - MAPKpMAPKPh[0] - MAPKppMAPKPh[0]) - 
+       (d10 + k10)*MAPKppMAPKPh[0] + Di*(-MAPKppMAPKPh[0] + MAPKppMAPKPh[1]), 
+     0 == -(k5*RAFp*C2[0]) + of2*C6[0] + of4*C9[0] - 
+       C2[0]*(of1 + on2*MAPK[0]) + on1*C1[0]*MEK[0], 
+     0 == k5*RAFp*C2[0] - of3*C3[0] + of2*C7[0] + of4*C8[0] - 
+       on2*C3[0]*MAPK[0], 0 == of1*C6[0] + of3*C7[0] + on2*C1[0]*MAPK[0] - 
+       C4[0]*(of2 + on1*MEK[0]), 0 == of3*C8[0] + of1*C9[0] - 
+       C5[0]*(of4 + on1*MEK[0]), 0 == (-of1 - of2)*C6[0] - k5*RAFp*C6[0] + 
+       on2*C2[0]*MAPK[0] + on1*C4[0]*MEK[0], 
+     0 == k5*RAFp*C6[0] - k9*C7[0] - of2*C7[0] - of3*C7[0] + 
+       on2*C3[0]*MAPK[0], 0 == k9*C7[0] - (of3 + of4)*C8[0] + k5*RAFp*C9[0], 
+     0 == (-of1 - of4)*C9[0] - k5*RAFp*C9[0] + on1*C5[0]*MEK[0], 
+     0 == p1[0]*Scyto[0] - p2*Smem[0] - p3[0]*Smem[0], 
+     0 == C1[1]*p4[1] + Di*(Scyto[0] - Scyto[1]) - p1[1]*Scyto[1] + 
+       p2*Smem[1], 0 == of1*(C2[1] + C6[1] + C9[1]) + Di*(MEK[0] - MEK[1]) - 
+       a3*RAFp*MEK[1] - on1*(C1[1] + C4[1] + C5[1])*MEK[1] + 
+       k4*MEKpMEKPh[1] + d3*MEKRAFp[1], 
+     0 == a3*RAFp*MEK[1] + Di*(MEKRAFp[0] - MEKRAFp[1]) + 
+       (-d3 - k3)*MEKRAFp[1], 0 == Di*(MEKp[0] - MEKp[1]) - a5*RAFp*MEKp[1] + 
+       d4*MEKpMEKPh[1] - a4*MEKp[1]*(MEKPhtot - MEKpMEKPh[1] - 
+         MEKppMEKPh[1]) + k6*MEKppMEKPh[1] + d5*MEKpRAFp[1] + k3*MEKRAFp[1], 
+     0 == Di*(MEKpMEKPh[0] - MEKpMEKPh[1]) + (-d4 - k4)*MEKpMEKPh[1] + 
+       a4*MEKp[1]*(MEKPhtot - MEKpMEKPh[1] - MEKppMEKPh[1]), 
+     0 == a5*RAFp*MEKp[1] + Di*(MEKpRAFp[0] - MEKpRAFp[1]) + 
+       (-d5 - k5)*MEKpRAFp[1], 0 == of3*(C3[1] + C7[1] + C8[1]) + 
+       (d7 + k7)*MAPKMEKpp[1] + (d9 + k9)*MAPKpMEKpp[1] + 
+       Di*(MEKpp[0] - MEKpp[1]) - a7*MAPK[1]*MEKpp[1] - 
+       a9*MAPKp[1]*MEKpp[1] - a6*MEKpp[1]*(MEKPhtot - MEKpMEKPh[1] - 
+         MEKppMEKPh[1]) + d6*MEKppMEKPh[1] + k5*MEKpRAFp[1], 
+     0 == a6*MEKpp[1]*(MEKPhtot - MEKpMEKPh[1] - MEKppMEKPh[1]) + 
+       Di*(MEKppMEKPh[0] - MEKppMEKPh[1]) - (d6 + k6)*MEKppMEKPh[1], 
+     0 == of2*(C4[1] + C6[1] + C7[1]) + Di*(MAPK[0] - MAPK[1]) - 
+       on2*(C1[1] + C2[1] + C3[1])*MAPK[1] + d7*MAPKMEKpp[1] + 
+       k8*MAPKpMAPKPh[1] - a7*MAPK[1]*MEKpp[1], 
+     0 == Di*(MAPKMEKpp[0] - MAPKMEKpp[1]) + (-d7 - k7)*MAPKMEKpp[1] + 
+       a7*MAPK[1]*MEKpp[1], 0 == k7*MAPKMEKpp[1] + Di*(MAPKp[0] - MAPKp[1]) + 
+       d8*MAPKpMAPKPh[1] + d9*MAPKpMEKpp[1] - a8*MAPKp[1]*
+        (MAPKPhtot - MAPKpMAPKPh[1] - MAPKppMAPKPh[1]) + 
+       k10*MAPKppMAPKPh[1] - a9*MAPKp[1]*MEKpp[1], 
+     0 == Di*(MAPKpMEKpp[0] - MAPKpMEKpp[1]) + (-d9 - k9)*MAPKpMEKpp[1] + 
+       a9*MAPKp[1]*MEKpp[1], 0 == of4*(C5[1] + C8[1] + C9[1]) + 
+       k9*MAPKpMEKpp[1] + Di*(MAPKpp[0] - MAPKpp[1]) - 
+       a10*MAPKpp[1]*(MAPKPhtot - MAPKpMAPKPh[1] - MAPKppMAPKPh[1]) + 
+       d10*MAPKppMAPKPh[1], 0 == Di*(MAPKpMAPKPh[0] - MAPKpMAPKPh[1]) + 
+       (-d8 - k8)*MAPKpMAPKPh[1] + a8*MAPKp[1]*(MAPKPhtot - MAPKpMAPKPh[1] - 
+         MAPKppMAPKPh[1]), 0 == a10*MAPKpp[1]*(MAPKPhtot - MAPKpMAPKPh[1] - 
+         MAPKppMAPKPh[1]) + Di*(MAPKppMAPKPh[0] - MAPKppMAPKPh[1]) - 
+       (d10 + k10)*MAPKppMAPKPh[1], 0 == of1*C2[1] + of3*C3[1] + of2*C4[1] + 
+       of4*C5[1] - C1[1]*(on2*MAPK[1] + on1*MEK[1]) - C1[1]*p4[1] + 
+       p3[1]*Smem[1], 0 == -(k5*RAFp*C2[1]) + of2*C6[1] + of4*C9[1] - 
+       C2[1]*(of1 + on2*MAPK[1]) + on1*C1[1]*MEK[1], 
+     0 == k5*RAFp*C2[1] - of3*C3[1] + of2*C7[1] + of4*C8[1] - 
+       on2*C3[1]*MAPK[1], 0 == of1*C6[1] + of3*C7[1] + on2*C1[1]*MAPK[1] - 
+       C4[1]*(of2 + on1*MEK[1]), 0 == of3*C8[1] + of1*C9[1] - 
+       C5[1]*(of4 + on1*MEK[1]), 0 == (-of1 - of2)*C6[1] - k5*RAFp*C6[1] + 
+       on2*C2[1]*MAPK[1] + on1*C4[1]*MEK[1], 
+     0 == k5*RAFp*C6[1] - k9*C7[1] - of2*C7[1] - of3*C7[1] + 
+       on2*C3[1]*MAPK[1], 0 == k9*C7[1] - (of3 + of4)*C8[1] + k5*RAFp*C9[1], 
+     0 == (-of1 - of4)*C9[1] - k5*RAFp*C9[1] + on1*C5[1]*MEK[1], 
+     0 == p1[1]*Scyto[1] - p2*Smem[1] - p3[1]*Smem[1], 
+     2*MEKtot == C2[0] + C2[1] + C3[0] + C3[1] + C6[0] + C6[1] + C7[0] + 
+       C7[1] + C8[0] + C8[1] + C9[0] + C9[1] + MAPKMEKpp[0] + MAPKMEKpp[1] + 
+       MAPKpMEKpp[0] + MAPKpMEKpp[1] + MEK[0] + MEK[1] + MEKp[0] + MEKp[1] + 
+       MEKpMEKPh[0] + MEKpMEKPh[1] + MEKpp[0] + MEKpp[1] + MEKppMEKPh[0] + 
+       MEKppMEKPh[1] + MEKpRAFp[0] + MEKpRAFp[1] + MEKRAFp[0] + MEKRAFp[1], 
+     2*MAPKtot == C4[0] + C4[1] + C5[0] + C5[1] + C6[0] + C6[1] + C7[0] + 
+       C7[1] + C8[0] + C8[1] + C9[0] + C9[1] + MAPK[0] + MAPK[1] + 
+       MAPKMEKpp[0] + MAPKMEKpp[1] + MAPKp[0] + MAPKp[1] + MAPKpMAPKPh[0] + 
+       MAPKpMAPKPh[1] + MAPKpMEKpp[0] + MAPKpMEKpp[1] + MAPKpp[0] + 
+       MAPKpp[1] + MAPKppMAPKPh[0] + MAPKppMAPKPh[1], 
+     2*Stot == C1[0] + C1[1] + C2[0] + C2[1] + C3[0] + C3[1] + C4[0] + 
+       C4[1] + C5[0] + C5[1] + C6[0] + C6[1] + C7[0] + C7[1] + C8[0] + 
+       C8[1] + C9[0] + C9[1] + Scyto[0] + Scyto[1] + Smem[0] + Smem[1]}
+ 
+vars = {Scyto[0], MEK[0], MEKRAFp[0], MEKp[0], MEKpMEKPh[0], MEKpRAFp[0], 
+     MEKpp[0], MEKppMEKPh[0], MAPK[0], MAPKMEKpp[0], MAPKp[0], MAPKpMEKpp[0], 
+     MAPKpp[0], MAPKpMAPKPh[0], MAPKppMAPKPh[0], C1[0], C2[0], C3[0], C4[0], 
+     C5[0], C6[0], C7[0], C8[0], C9[0], Smem[0], Scyto[1], MEK[1], 
+     MEKRAFp[1], MEKp[1], MEKpMEKPh[1], MEKpRAFp[1], MEKpp[1], MEKppMEKPh[1], 
+     MAPK[1], MAPKMEKpp[1], MAPKp[1], MAPKpMEKpp[1], MAPKpp[1], 
+     MAPKpMAPKPh[1], MAPKppMAPKPh[1], C1[1], C2[1], C3[1], C4[1], C5[1], 
+     C6[1], C7[1], C8[1], C9[1], Smem[1]}
+ 
+runsim[pp___] := Block[{sol}, sol = runsimODE[pp]; 
+      sol /. f_InterpolatingFunction -> f[tend]]
+ 
+runsimODE[pp___] := Block[{sol, p = Flatten[{pp}], ic = icODE, dtzero, 
+      tol = 10^(-8), maxiter = 30, iter}, 
+     iter = Catch[Do[sol = NDSolve[Join[equODE, ic] //. p /. params, varODE, 
+             {t, 0, tend}][[1]]; dtzero = 
+           Max[Abs[equODE[[All,2]] //. p /. t -> tend /. sol /. params]]; 
+          If[dtzero < tol, Throw[i]]; ic = vars /. (x_)[s_] :> 
+             x[s][0] == (x[s][tend] /. sol); , {i, maxiter}]]; 
+      Join[{dd -> dtzero, runsim$maxiter -> (iter /. Null -> maxiter)}, p, 
+       sol]]
+ 
+ic = {RAF[-1000] == RAFtot, RAFRAFKi[-1000] == 0, RAFp[-1000] == 0, 
+     RAFpRAFPh[-1000] == 0, MEK[-1000] == MEKtot, MEKRAFp[-1000] == 0, 
+     MEKp[-1000] == 0, MEKpMEKPh[-1000] == 0, MEKpRAFp[-1000] == 0, 
+     MEKpp[-1000] == 0, MEKppMEKPh[-1000] == 0, MAPK[-1000] == MAPKtot, 
+     MAPKMEKpp[-1000] == 0, MAPKp[-1000] == 0, MAPKpMEKpp[-1000] == 0, 
+     MAPKpp[-1000] == 0, MAPKpMAPKPh[-1000] == 0, MAPKppMAPKPh[-1000] == 0, 
+     C1[-1000] == C1tot, C2[-1000] == 0, C3[-1000] == 0, C4[-1000] == 0, 
+     C5[-1000] == 0, C6[-1000] == 0, C7[-1000] == 0, C8[-1000] == 0, 
+     C9[-1000] == 0}
+ 
+icODE = {Scyto[0][0] == Stot, MEK[0][0] == MEKtot, MEKRAFp[0][0] == 0, 
+     MEKp[0][0] == 0, MEKpMEKPh[0][0] == 0, MEKpRAFp[0][0] == 0, 
+     MEKpp[0][0] == 0, MEKppMEKPh[0][0] == 0, MAPK[0][0] == MAPKtot, 
+     MAPKMEKpp[0][0] == 0, MAPKp[0][0] == 0, MAPKpMEKpp[0][0] == 0, 
+     MAPKpp[0][0] == 0, MAPKpMAPKPh[0][0] == 0, MAPKppMAPKPh[0][0] == 0, 
+     C1[0][0] == 0, C2[0][0] == 0, C3[0][0] == 0, C4[0][0] == 0, 
+     C5[0][0] == 0, C6[0][0] == 0, C7[0][0] == 0, C8[0][0] == 0, 
+     C9[0][0] == 0, Smem[0][0] == 0, Scyto[1][0] == Stot, 
+     MEK[1][0] == MEKtot, MEKRAFp[1][0] == 0, MEKp[1][0] == 0, 
+     MEKpMEKPh[1][0] == 0, MEKpRAFp[1][0] == 0, MEKpp[1][0] == 0, 
+     MEKppMEKPh[1][0] == 0, MAPK[1][0] == MAPKtot, MAPKMEKpp[1][0] == 0, 
+     MAPKp[1][0] == 0, MAPKpMEKpp[1][0] == 0, MAPKpp[1][0] == 0, 
+     MAPKpMAPKPh[1][0] == 0, MAPKppMAPKPh[1][0] == 0, C1[1][0] == 0, 
+     C2[1][0] == 0, C3[1][0] == 0, C4[1][0] == 0, C5[1][0] == 0, 
+     C6[1][0] == 0, C7[1][0] == 0, C8[1][0] == 0, C9[1][0] == 0, 
+     Smem[1][0] == 0}
+ 
+equODE = {Derivative[1][Scyto[0]][t] == p4[0]*C1[0][t] - p1[0]*Scyto[0][t] + 
+       Di*(-Scyto[0][t] + Scyto[1][t]) + p2*Smem[0][t], 
+     Derivative[1][MEK[0]][t] == of1*(C2[0][t] + C6[0][t] + C9[0][t]) - 
+       a3*RAFp*MEK[0][t] - on1*(C1[0][t] + C4[0][t] + C5[0][t])*MEK[0][t] + 
+       Di*(-MEK[0][t] + MEK[1][t]) + k4*MEKpMEKPh[0][t] + d3*MEKRAFp[0][t], 
+     Derivative[1][MEKRAFp[0]][t] == a3*RAFp*MEK[0][t] + 
+       (-d3 - k3)*MEKRAFp[0][t] + Di*(-MEKRAFp[0][t] + MEKRAFp[1][t]), 
+     Derivative[1][MEKp[0]][t] == -(a5*RAFp*MEKp[0][t]) + 
+       Di*(-MEKp[0][t] + MEKp[1][t]) + d4*MEKpMEKPh[0][t] - 
+       a4*MEKp[0][t]*(MEKPhtot - MEKpMEKPh[0][t] - MEKppMEKPh[0][t]) + 
+       k6*MEKppMEKPh[0][t] + d5*MEKpRAFp[0][t] + k3*MEKRAFp[0][t], 
+     Derivative[1][MEKpMEKPh[0]][t] == (-d4 - k4)*MEKpMEKPh[0][t] + 
+       Di*(-MEKpMEKPh[0][t] + MEKpMEKPh[1][t]) + a4*MEKp[0][t]*
+        (MEKPhtot - MEKpMEKPh[0][t] - MEKppMEKPh[0][t]), 
+     Derivative[1][MEKpRAFp[0]][t] == a5*RAFp*MEKp[0][t] + 
+       (-d5 - k5)*MEKpRAFp[0][t] + Di*(-MEKpRAFp[0][t] + MEKpRAFp[1][t]), 
+     Derivative[1][MEKpp[0]][t] == of3*(C3[0][t] + C7[0][t] + C8[0][t]) + 
+       (d7 + k7)*MAPKMEKpp[0][t] + (d9 + k9)*MAPKpMEKpp[0][t] - 
+       a7*MAPK[0][t]*MEKpp[0][t] - a9*MAPKp[0][t]*MEKpp[0][t] + 
+       Di*(-MEKpp[0][t] + MEKpp[1][t]) - a6*MEKpp[0][t]*
+        (MEKPhtot - MEKpMEKPh[0][t] - MEKppMEKPh[0][t]) + 
+       d6*MEKppMEKPh[0][t] + k5*MEKpRAFp[0][t], 
+     Derivative[1][MEKppMEKPh[0]][t] == 
+      a6*MEKpp[0][t]*(MEKPhtot - MEKpMEKPh[0][t] - MEKppMEKPh[0][t]) - 
+       (d6 + k6)*MEKppMEKPh[0][t] + Di*(-MEKppMEKPh[0][t] + 
+         MEKppMEKPh[1][t]), Derivative[1][MAPK[0]][t] == 
+      of2*(C4[0][t] + C6[0][t] + C7[0][t]) - 
+       on2*(C1[0][t] + C2[0][t] + C3[0][t])*MAPK[0][t] + 
+       Di*(-MAPK[0][t] + MAPK[1][t]) + d7*MAPKMEKpp[0][t] + 
+       k8*MAPKpMAPKPh[0][t] - a7*MAPK[0][t]*MEKpp[0][t], 
+     Derivative[1][MAPKMEKpp[0]][t] == (-d7 - k7)*MAPKMEKpp[0][t] + 
+       Di*(-MAPKMEKpp[0][t] + MAPKMEKpp[1][t]) + a7*MAPK[0][t]*MEKpp[0][t], 
+     Derivative[1][MAPKp[0]][t] == k7*MAPKMEKpp[0][t] + 
+       Di*(-MAPKp[0][t] + MAPKp[1][t]) + d8*MAPKpMAPKPh[0][t] + 
+       d9*MAPKpMEKpp[0][t] - a8*MAPKp[0][t]*(MAPKPhtot - MAPKpMAPKPh[0][t] - 
+         MAPKppMAPKPh[0][t]) + k10*MAPKppMAPKPh[0][t] - 
+       a9*MAPKp[0][t]*MEKpp[0][t], Derivative[1][MAPKpMEKpp[0]][t] == 
+      (-d9 - k9)*MAPKpMEKpp[0][t] + Di*(-MAPKpMEKpp[0][t] + 
+         MAPKpMEKpp[1][t]) + a9*MAPKp[0][t]*MEKpp[0][t], 
+     Derivative[1][MAPKpp[0]][t] == of4*(C5[0][t] + C8[0][t] + C9[0][t]) + 
+       k9*MAPKpMEKpp[0][t] + Di*(-MAPKpp[0][t] + MAPKpp[1][t]) - 
+       a10*MAPKpp[0][t]*(MAPKPhtot - MAPKpMAPKPh[0][t] - 
+         MAPKppMAPKPh[0][t]) + d10*MAPKppMAPKPh[0][t], 
+     Derivative[1][MAPKpMAPKPh[0]][t] == (-d8 - k8)*MAPKpMAPKPh[0][t] + 
+       Di*(-MAPKpMAPKPh[0][t] + MAPKpMAPKPh[1][t]) + 
+       a8*MAPKp[0][t]*(MAPKPhtot - MAPKpMAPKPh[0][t] - MAPKppMAPKPh[0][t]), 
+     Derivative[1][MAPKppMAPKPh[0]][t] == 
+      a10*MAPKpp[0][t]*(MAPKPhtot - MAPKpMAPKPh[0][t] - MAPKppMAPKPh[0][t]) - 
+       (d10 + k10)*MAPKppMAPKPh[0][t] + Di*(-MAPKppMAPKPh[0][t] + 
+         MAPKppMAPKPh[1][t]), Derivative[1][C1[0]][t] == 
+      -(p4[0]*C1[0][t]) + of1*C2[0][t] + of3*C3[0][t] + of2*C4[0][t] + 
+       of4*C5[0][t] - C1[0][t]*(on2*MAPK[0][t] + on1*MEK[0][t]) + 
+       p3[0]*Smem[0][t], Derivative[1][C2[0]][t] == -(k5*RAFp*C2[0][t]) + 
+       of2*C6[0][t] + of4*C9[0][t] - C2[0][t]*(of1 + on2*MAPK[0][t]) + 
+       on1*C1[0][t]*MEK[0][t], Derivative[1][C3[0]][t] == 
+      k5*RAFp*C2[0][t] - of3*C3[0][t] + of2*C7[0][t] + of4*C8[0][t] - 
+       on2*C3[0][t]*MAPK[0][t], Derivative[1][C4[0]][t] == 
+      of1*C6[0][t] + of3*C7[0][t] + on2*C1[0][t]*MAPK[0][t] - 
+       C4[0][t]*(of2 + on1*MEK[0][t]), Derivative[1][C5[0]][t] == 
+      of3*C8[0][t] + of1*C9[0][t] - C5[0][t]*(of4 + on1*MEK[0][t]), 
+     Derivative[1][C6[0]][t] == (-of1 - of2)*C6[0][t] - k5*RAFp*C6[0][t] + 
+       on2*C2[0][t]*MAPK[0][t] + on1*C4[0][t]*MEK[0][t], 
+     Derivative[1][C7[0]][t] == k5*RAFp*C6[0][t] - k9*C7[0][t] - 
+       of2*C7[0][t] - of3*C7[0][t] + on2*C3[0][t]*MAPK[0][t], 
+     Derivative[1][C8[0]][t] == k9*C7[0][t] - (of3 + of4)*C8[0][t] + 
+       k5*RAFp*C9[0][t], Derivative[1][C9[0]][t] == (-of1 - of4)*C9[0][t] - 
+       k5*RAFp*C9[0][t] + on1*C5[0][t]*MEK[0][t], 
+     Derivative[1][Smem[0]][t] == p1[0]*Scyto[0][t] - p2*Smem[0][t] - 
+       p3[0]*Smem[0][t], Derivative[1][Scyto[1]][t] == 
+      p4[1]*C1[1][t] + Di*(Scyto[0][t] - Scyto[1][t]) - p1[1]*Scyto[1][t] + 
+       p2*Smem[1][t], Derivative[1][MEK[1]][t] == 
+      of1*(C2[1][t] + C6[1][t] + C9[1][t]) + Di*(MEK[0][t] - MEK[1][t]) - 
+       a3*RAFp*MEK[1][t] - on1*(C1[1][t] + C4[1][t] + C5[1][t])*MEK[1][t] + 
+       k4*MEKpMEKPh[1][t] + d3*MEKRAFp[1][t], Derivative[1][MEKRAFp[1]][t] == 
+      a3*RAFp*MEK[1][t] + Di*(MEKRAFp[0][t] - MEKRAFp[1][t]) + 
+       (-d3 - k3)*MEKRAFp[1][t], Derivative[1][MEKp[1]][t] == 
+      Di*(MEKp[0][t] - MEKp[1][t]) - a5*RAFp*MEKp[1][t] + 
+       d4*MEKpMEKPh[1][t] - a4*MEKp[1][t]*(MEKPhtot - MEKpMEKPh[1][t] - 
+         MEKppMEKPh[1][t]) + k6*MEKppMEKPh[1][t] + d5*MEKpRAFp[1][t] + 
+       k3*MEKRAFp[1][t], Derivative[1][MEKpMEKPh[1]][t] == 
+      Di*(MEKpMEKPh[0][t] - MEKpMEKPh[1][t]) + (-d4 - k4)*MEKpMEKPh[1][t] + 
+       a4*MEKp[1][t]*(MEKPhtot - MEKpMEKPh[1][t] - MEKppMEKPh[1][t]), 
+     Derivative[1][MEKpRAFp[1]][t] == a5*RAFp*MEKp[1][t] + 
+       Di*(MEKpRAFp[0][t] - MEKpRAFp[1][t]) + (-d5 - k5)*MEKpRAFp[1][t], 
+     Derivative[1][MEKpp[1]][t] == of3*(C3[1][t] + C7[1][t] + C8[1][t]) + 
+       (d7 + k7)*MAPKMEKpp[1][t] + (d9 + k9)*MAPKpMEKpp[1][t] + 
+       Di*(MEKpp[0][t] - MEKpp[1][t]) - a7*MAPK[1][t]*MEKpp[1][t] - 
+       a9*MAPKp[1][t]*MEKpp[1][t] - a6*MEKpp[1][t]*
+        (MEKPhtot - MEKpMEKPh[1][t] - MEKppMEKPh[1][t]) + 
+       d6*MEKppMEKPh[1][t] + k5*MEKpRAFp[1][t], 
+     Derivative[1][MEKppMEKPh[1]][t] == 
+      a6*MEKpp[1][t]*(MEKPhtot - MEKpMEKPh[1][t] - MEKppMEKPh[1][t]) + 
+       Di*(MEKppMEKPh[0][t] - MEKppMEKPh[1][t]) - (d6 + k6)*MEKppMEKPh[1][t], 
+     Derivative[1][MAPK[1]][t] == of2*(C4[1][t] + C6[1][t] + C7[1][t]) + 
+       Di*(MAPK[0][t] - MAPK[1][t]) - on2*(C1[1][t] + C2[1][t] + C3[1][t])*
+        MAPK[1][t] + d7*MAPKMEKpp[1][t] + k8*MAPKpMAPKPh[1][t] - 
+       a7*MAPK[1][t]*MEKpp[1][t], Derivative[1][MAPKMEKpp[1]][t] == 
+      Di*(MAPKMEKpp[0][t] - MAPKMEKpp[1][t]) + (-d7 - k7)*MAPKMEKpp[1][t] + 
+       a7*MAPK[1][t]*MEKpp[1][t], Derivative[1][MAPKp[1]][t] == 
+      k7*MAPKMEKpp[1][t] + Di*(MAPKp[0][t] - MAPKp[1][t]) + 
+       d8*MAPKpMAPKPh[1][t] + d9*MAPKpMEKpp[1][t] - 
+       a8*MAPKp[1][t]*(MAPKPhtot - MAPKpMAPKPh[1][t] - MAPKppMAPKPh[1][t]) + 
+       k10*MAPKppMAPKPh[1][t] - a9*MAPKp[1][t]*MEKpp[1][t], 
+     Derivative[1][MAPKpMEKpp[1]][t] == 
+      Di*(MAPKpMEKpp[0][t] - MAPKpMEKpp[1][t]) + 
+       (-d9 - k9)*MAPKpMEKpp[1][t] + a9*MAPKp[1][t]*MEKpp[1][t], 
+     Derivative[1][MAPKpp[1]][t] == of4*(C5[1][t] + C8[1][t] + C9[1][t]) + 
+       k9*MAPKpMEKpp[1][t] + Di*(MAPKpp[0][t] - MAPKpp[1][t]) - 
+       a10*MAPKpp[1][t]*(MAPKPhtot - MAPKpMAPKPh[1][t] - 
+         MAPKppMAPKPh[1][t]) + d10*MAPKppMAPKPh[1][t], 
+     Derivative[1][MAPKpMAPKPh[1]][t] == 
+      Di*(MAPKpMAPKPh[0][t] - MAPKpMAPKPh[1][t]) + 
+       (-d8 - k8)*MAPKpMAPKPh[1][t] + a8*MAPKp[1][t]*
+        (MAPKPhtot - MAPKpMAPKPh[1][t] - MAPKppMAPKPh[1][t]), 
+     Derivative[1][MAPKppMAPKPh[1]][t] == 
+      a10*MAPKpp[1][t]*(MAPKPhtot - MAPKpMAPKPh[1][t] - MAPKppMAPKPh[1][t]) + 
+       Di*(MAPKppMAPKPh[0][t] - MAPKppMAPKPh[1][t]) - 
+       (d10 + k10)*MAPKppMAPKPh[1][t], Derivative[1][C1[1]][t] == 
+      -(p4[1]*C1[1][t]) + of1*C2[1][t] + of3*C3[1][t] + of2*C4[1][t] + 
+       of4*C5[1][t] - C1[1][t]*(on2*MAPK[1][t] + on1*MEK[1][t]) + 
+       p3[1]*Smem[1][t], Derivative[1][C2[1]][t] == -(k5*RAFp*C2[1][t]) + 
+       of2*C6[1][t] + of4*C9[1][t] - C2[1][t]*(of1 + on2*MAPK[1][t]) + 
+       on1*C1[1][t]*MEK[1][t], Derivative[1][C3[1]][t] == 
+      k5*RAFp*C2[1][t] - of3*C3[1][t] + of2*C7[1][t] + of4*C8[1][t] - 
+       on2*C3[1][t]*MAPK[1][t], Derivative[1][C4[1]][t] == 
+      of1*C6[1][t] + of3*C7[1][t] + on2*C1[1][t]*MAPK[1][t] - 
+       C4[1][t]*(of2 + on1*MEK[1][t]), Derivative[1][C5[1]][t] == 
+      of3*C8[1][t] + of1*C9[1][t] - C5[1][t]*(of4 + on1*MEK[1][t]), 
+     Derivative[1][C6[1]][t] == (-of1 - of2)*C6[1][t] - k5*RAFp*C6[1][t] + 
+       on2*C2[1][t]*MAPK[1][t] + on1*C4[1][t]*MEK[1][t], 
+     Derivative[1][C7[1]][t] == k5*RAFp*C6[1][t] - k9*C7[1][t] - 
+       of2*C7[1][t] - of3*C7[1][t] + on2*C3[1][t]*MAPK[1][t], 
+     Derivative[1][C8[1]][t] == k9*C7[1][t] - (of3 + of4)*C8[1][t] + 
+       k5*RAFp*C9[1][t], Derivative[1][C9[1]][t] == (-of1 - of4)*C9[1][t] - 
+       k5*RAFp*C9[1][t] + on1*C5[1][t]*MEK[1][t], 
+     Derivative[1][Smem[1]][t] == p1[1]*Scyto[1][t] - p2*Smem[1][t] - 
+       p3[1]*Smem[1][t]}
+ 
+Attributes[Derivative] = {NHoldAll, ReadProtected}
+ 
+varODE = {Scyto[0], MEK[0], MEKRAFp[0], MEKp[0], MEKpMEKPh[0], MEKpRAFp[0], 
+     MEKpp[0], MEKppMEKPh[0], MAPK[0], MAPKMEKpp[0], MAPKp[0], MAPKpMEKpp[0], 
+     MAPKpp[0], MAPKpMAPKPh[0], MAPKppMAPKPh[0], C1[0], C2[0], C3[0], C4[0], 
+     C5[0], C6[0], C7[0], C8[0], C9[0], Smem[0], Scyto[1], MEK[1], 
+     MEKRAFp[1], MEKp[1], MEKpMEKPh[1], MEKpRAFp[1], MEKpp[1], MEKppMEKPh[1], 
+     MAPK[1], MAPKMEKpp[1], MAPKp[1], MAPKpMEKpp[1], MAPKpp[1], 
+     MAPKpMAPKPh[1], MAPKppMAPKPh[1], C1[1], C2[1], C3[1], C4[1], C5[1], 
+     C6[1], C7[1], C8[1], C9[1], Smem[1]}
+ 
+tend = 5000
