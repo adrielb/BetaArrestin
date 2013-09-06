@@ -1,5 +1,5 @@
 
-[
+rhs = [
   C1[0]*p4[0] - p1[0]*Scyto[0] + Di*(-Scyto[0] + Scyto[1]) + p2*Smem[0],
   of1*(C2[0] + C6[0] + C9[0]) - a3*RAFp*MEK[0] - on1*(C1[0] + C4[0] + C5[0])*MEK[0] + Di*(-MEK[0] + MEK[1]) + k4*MEKpMEKPh[0] + d3*MEKRAFp[0],
   a3*RAFp*MEK[0] + (-d3 - k3)*MEKRAFp[0] + Di*(-MEKRAFp[0] + MEKRAFp[1]),
@@ -39,7 +39,7 @@
   Di*(MAPKpMEKpp[0] - MAPKpMEKpp[1]) + (-d9 - k9)*MAPKpMEKpp[1] + a9*MAPKp[1]*MEKpp[1],
   of4*(C5[1] + C8[1] + C9[1]) + k9*MAPKpMEKpp[1] + Di*(MAPKpp[0] - MAPKpp[1]) - a10*MAPKpp[1]*(MAPKPhtot - MAPKpMAPKPh[1] - MAPKppMAPKPh[1]) + d10*MAPKppMAPKPh[1],
   Di*(MAPKpMAPKPh[0] - MAPKpMAPKPh[1]) + (-d8 - k8)*MAPKpMAPKPh[1] + a8*MAPKp[1]*(MAPKPhtot - MAPKpMAPKPh[1] - MAPKppMAPKPh[1]),
-  a10*MAPKpp[1]*(MAPKPhtot - MAPKpMAPKPh[1] - MAPKppMAPKPh[1]) + Di*(MAPKppMAPKPh[0] - MAPKppMAPKPh[1]) - (d10 + k10)*MAPKppMAPKPh[1],
+  a10*MAPKpp[1]*(MAPKPhtot - MAPKpMAPKPh[1] - MAPKppMAPKPh[1]) + Di*(MAPKppMAPKPh[0]- MAPKppMAPKPh[1]) - (d10 + k10)*MAPKppMAPKPh[1],
   of1*C2[1] + of3*C3[1] + of2*C4[1] + of4*C5[1] - C1[1]*(on2*MAPK[1] + on1*MEK[1]) - C1[1]*p4[1] + p3[1]*Smem[1],
   -(k5*RAFp*C2[1]) + of2*C6[1] + of4*C9[1] - C2[1]*(of1 + on2*MAPK[1]) + on1*C1[1]*MEK[1],
   k5*RAFp*C2[1] - of3*C3[1] + of2*C7[1] + of4*C8[1] - on2*C3[1]*MAPK[1],
