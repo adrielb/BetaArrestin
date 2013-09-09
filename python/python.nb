@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[    146521,       4212]
-NotebookOptionsPosition[    145618,       4177]
-NotebookOutlinePosition[    145958,       4192]
-CellTagsIndexPosition[    145915,       4189]
+NotebookDataLength[    164607,       4819]
+NotebookOptionsPosition[    163441,       4775]
+NotebookOutlinePosition[    163802,       4791]
+CellTagsIndexPosition[    163759,       4788]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -26,7 +26,7 @@ Cell[BoxData[
  CellChangeTimes->{{3.5867938520940943`*^9, 3.586793875719789*^9}}],
 
 Cell[BoxData["5000"], "Output",
- CellChangeTimes->{3.586793877284604*^9}]
+ CellChangeTimes->{3.586793877284604*^9, 3.5876767540192957`*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -4173,10 +4173,609 @@ Cell[BoxData["\<\"equ.rhs.py\"\>"], "Output",
  CellChangeTimes->{
   3.5867175588779097`*^9, {3.586717775748158*^9, 3.586717784006988*^9}, 
    3.58671787095277*^9, 3.586721553517762*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"TableForm", "[", "icODE", "]"}]], "Input",
+ CellChangeTimes->{{3.587676777739849*^9, 3.587676797533373*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  TagBox[GridBox[{
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"Scyto", "[", "0", "]"}], "[", "0", "]"}], "\[Equal]", 
+       "Stot"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"MEK", "[", "0", "]"}], "[", "0", "]"}], "\[Equal]", 
+       "MEKtot"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"MEKRAFp", "[", "0", "]"}], "[", "0", "]"}], "\[Equal]", 
+       "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"MEKp", "[", "0", "]"}], "[", "0", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"MEKpMEKPh", "[", "0", "]"}], "[", "0", "]"}], "\[Equal]", 
+       "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"MEKpRAFp", "[", "0", "]"}], "[", "0", "]"}], "\[Equal]", 
+       "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"MEKpp", "[", "0", "]"}], "[", "0", "]"}], "\[Equal]", 
+       "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"MEKppMEKPh", "[", "0", "]"}], "[", "0", "]"}], "\[Equal]", 
+       "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"MAPK", "[", "0", "]"}], "[", "0", "]"}], "\[Equal]", 
+       "MAPKtot"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"MAPKMEKpp", "[", "0", "]"}], "[", "0", "]"}], "\[Equal]", 
+       "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"MAPKp", "[", "0", "]"}], "[", "0", "]"}], "\[Equal]", 
+       "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"MAPKpMEKpp", "[", "0", "]"}], "[", "0", "]"}], "\[Equal]", 
+       "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"MAPKpp", "[", "0", "]"}], "[", "0", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"MAPKpMAPKPh", "[", "0", "]"}], "[", "0", "]"}], "\[Equal]", 
+       "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"MAPKppMAPKPh", "[", "0", "]"}], "[", "0", "]"}], "\[Equal]", 
+       "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"C1", "[", "0", "]"}], "[", "0", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"C2", "[", "0", "]"}], "[", "0", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"C3", "[", "0", "]"}], "[", "0", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"C4", "[", "0", "]"}], "[", "0", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"C5", "[", "0", "]"}], "[", "0", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"C6", "[", "0", "]"}], "[", "0", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"C7", "[", "0", "]"}], "[", "0", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"C8", "[", "0", "]"}], "[", "0", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"C9", "[", "0", "]"}], "[", "0", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"Smem", "[", "0", "]"}], "[", "0", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"Scyto", "[", "1", "]"}], "[", "0", "]"}], "\[Equal]", 
+       "Stot"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"MEK", "[", "1", "]"}], "[", "0", "]"}], "\[Equal]", 
+       "MEKtot"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"MEKRAFp", "[", "1", "]"}], "[", "0", "]"}], "\[Equal]", 
+       "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"MEKp", "[", "1", "]"}], "[", "0", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"MEKpMEKPh", "[", "1", "]"}], "[", "0", "]"}], "\[Equal]", 
+       "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"MEKpRAFp", "[", "1", "]"}], "[", "0", "]"}], "\[Equal]", 
+       "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"MEKpp", "[", "1", "]"}], "[", "0", "]"}], "\[Equal]", 
+       "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"MEKppMEKPh", "[", "1", "]"}], "[", "0", "]"}], "\[Equal]", 
+       "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"MAPK", "[", "1", "]"}], "[", "0", "]"}], "\[Equal]", 
+       "MAPKtot"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"MAPKMEKpp", "[", "1", "]"}], "[", "0", "]"}], "\[Equal]", 
+       "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"MAPKp", "[", "1", "]"}], "[", "0", "]"}], "\[Equal]", 
+       "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"MAPKpMEKpp", "[", "1", "]"}], "[", "0", "]"}], "\[Equal]", 
+       "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"MAPKpp", "[", "1", "]"}], "[", "0", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"MAPKpMAPKPh", "[", "1", "]"}], "[", "0", "]"}], "\[Equal]", 
+       "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"MAPKppMAPKPh", "[", "1", "]"}], "[", "0", "]"}], "\[Equal]", 
+       "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"C1", "[", "1", "]"}], "[", "0", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"C2", "[", "1", "]"}], "[", "0", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"C3", "[", "1", "]"}], "[", "0", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"C4", "[", "1", "]"}], "[", "0", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"C5", "[", "1", "]"}], "[", "0", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"C6", "[", "1", "]"}], "[", "0", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"C7", "[", "1", "]"}], "[", "0", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"C8", "[", "1", "]"}], "[", "0", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"C9", "[", "1", "]"}], "[", "0", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"Smem", "[", "1", "]"}], "[", "0", "]"}], "\[Equal]", "0"}]}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.5599999999999999]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}],
+   Column],
+  Function[BoxForm`e$, 
+   TableForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{3.5876767979556293`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"equODE", "/.", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"icODE", "/.", 
+       RowBox[{"Equal", "\[Rule]", "Rule"}]}], "/.", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"x_", "[", "_", "]"}], "[", "0", "]"}], "\[Rule]", 
+       RowBox[{
+        RowBox[{"x", "[", "_", "]"}], "[", "t", "]"}]}]}], ")"}]}], "/.", 
+   "params"}], "//", "TableForm"}]], "Input",
+ CellChangeTimes->{{3.5876770757865753`*^9, 3.5876770926921453`*^9}, {
+   3.587677194482298*^9, 3.587677195970745*^9}, 3.5876772382909603`*^9, {
+   3.587677377232089*^9, 3.5876774105176373`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  TagBox[GridBox[{
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"Scyto", "[", "0", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", "0.`"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"MEK", "[", "0", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", 
+       RowBox[{"-", "0.09240000000000001`"}]}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"MEKRAFp", "[", "0", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", 
+       "0.09240000000000001`"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"MEKp", "[", "0", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"MEKpMEKPh", "[", "0", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"MEKpRAFp", "[", "0", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"MEKpp", "[", "0", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"MEKppMEKPh", "[", "0", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"MAPK", "[", "0", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"MAPKMEKpp", "[", "0", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"MAPKp", "[", "0", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"MAPKpMEKpp", "[", "0", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"MAPKpp", "[", "0", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"MAPKpMAPKPh", "[", "0", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"MAPKppMAPKPh", "[", "0", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"C1", "[", "0", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"C2", "[", "0", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"C3", "[", "0", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"C4", "[", "0", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"C5", "[", "0", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"C6", "[", "0", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"C7", "[", "0", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"C8", "[", "0", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"C9", "[", "0", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"Smem", "[", "0", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", "0.`"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"Scyto", "[", "1", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", "0.`"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"MEK", "[", "1", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", 
+       RowBox[{"-", "0.09240000000000001`"}]}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"MEKRAFp", "[", "1", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", 
+       "0.09240000000000001`"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"MEKp", "[", "1", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"MEKpMEKPh", "[", "1", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"MEKpRAFp", "[", "1", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"MEKpp", "[", "1", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"MEKppMEKPh", "[", "1", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"MAPK", "[", "1", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"MAPKMEKpp", "[", "1", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"MAPKp", "[", "1", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"MAPKpMEKpp", "[", "1", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"MAPKpp", "[", "1", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"MAPKpMAPKPh", "[", "1", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"MAPKppMAPKPh", "[", "1", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"C1", "[", "1", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"C2", "[", "1", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"C3", "[", "1", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"C4", "[", "1", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"C5", "[", "1", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"C6", "[", "1", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"C7", "[", "1", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"C8", "[", "1", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"C9", "[", "1", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", "0"}]},
+     {
+      RowBox[{
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"Smem", "[", "1", "]"}], "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "\[Equal]", "0.`"}]}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.5599999999999999]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}],
+   Column],
+  Function[BoxForm`e$, 
+   TableForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{{3.58767707788386*^9, 3.587677093024871*^9}, 
+   3.587677196386722*^9, 3.587677239261835*^9, {3.587677379948861*^9, 
+   3.587677410739242*^9}}]
 }, Open  ]]
 },
 WindowSize->{1196, 1521},
 WindowMargins->{{1200, Automatic}, {0, Automatic}},
+ShowSelection->True,
 FrontEndVersion->"9.0 for Linux x86 (64-bit) (November 20, 2012)",
 StyleDefinitions->"Default.nb"
 ]
@@ -4193,26 +4792,34 @@ CellTagsIndex->{}
 Notebook[{
 Cell[CellGroupData[{
 Cell[579, 22, 177, 3, 32, "Input"],
-Cell[759, 27, 73, 1, 32, "Output"]
+Cell[759, 27, 97, 1, 32, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[869, 33, 180, 3, 32, "Input"],
-Cell[1052, 38, 54912, 1564, 926, "Output"],
-Cell[55967, 1604, 54932, 1564, 912, "Output"]
+Cell[893, 33, 180, 3, 32, "Input"],
+Cell[1076, 38, 54912, 1564, 912, "Output"],
+Cell[55991, 1604, 54932, 1564, 912, "Output"]
 }, Open  ]],
-Cell[110914, 3171, 171, 3, 32, "Input"],
+Cell[110938, 3171, 171, 3, 32, "Input"],
 Cell[CellGroupData[{
-Cell[111110, 3178, 296, 6, 32, "Input"],
-Cell[111409, 3186, 192, 2, 32, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[111638, 3193, 738, 20, 77, "Input"],
-Cell[112379, 3215, 214, 3, 32, "Output"]
+Cell[111134, 3178, 296, 6, 32, "Input"],
+Cell[111433, 3186, 192, 2, 32, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[112630, 3223, 722, 19, 99, "Input"],
-Cell[113355, 3244, 32059, 925, 904, "Output"],
-Cell[145417, 4171, 185, 3, 32, "Output"]
+Cell[111662, 3193, 738, 20, 77, "Input"],
+Cell[112403, 3215, 214, 3, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[112654, 3223, 722, 19, 99, "Input"],
+Cell[113379, 3244, 32059, 925, 904, "Output"],
+Cell[145441, 4171, 185, 3, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[145663, 4179, 132, 2, 32, "Input"],
+Cell[145798, 4183, 6674, 243, 876, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[152509, 4431, 610, 16, 32, "Input"],
+Cell[153122, 4449, 10303, 323, 926, "Output"]
 }, Open  ]]
 }
 ]

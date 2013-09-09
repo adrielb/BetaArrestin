@@ -1,2 +1,2 @@
 all:
-	python equ.rhs.py
+	python equ.py
