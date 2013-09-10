@@ -3,7 +3,7 @@ from scipy.integrate import odeint
 
 d = 2
 
-# state variables
+# state variables#{{{
 MEK          = zeros(d)
 MEKRAFp      = zeros(d)
 MEKp         = zeros(d)
@@ -29,8 +29,8 @@ C8           = zeros(d)
 C9           = zeros(d)
 Smem         = zeros(d)
 Scyto        = zeros(d)
-
-# parameters
+#}}}
+# parameters#{{{
 a1 = 1
 a10 = 5
 a2 = 0.5
@@ -85,68 +85,25 @@ p3[0] = 0.1
 p4[0] = 0.1
 p1[1] = 0.1
 p3[1] = 0.1
-p4[1] = 0.1
+p4[1] = 0.1#}}}
 
-# initial conditions
+# initial conditions#{{{
 for i in xrange(d):
     Scyto[i] = Stot
     MEK[i] = MEKtot
     MAPK[i] = MAPKtot
 
+ic = [
+        Scyto[0], MEK[0], MEKRAFp[0], MEKp[0], MEKpMEKPh[0], MEKpRAFp[0], MEKpp[0], MEKppMEKPh[0], MAPK[0], MAPKMEKpp[0], MAPKp[0], MAPKpMEKpp[0], MAPKpp[0], MAPKpMAPKPh[0], MAPKppMAPKPh[0], C1[0], C2[0], C3[0], C4[0], C5[0], C6[0], C7[0], C8[0], C9[0], Smem[0],
+        Scyto[1], MEK[1], MEKRAFp[1], MEKp[1], MEKpMEKPh[1], MEKpRAFp[1], MEKpp[1], MEKppMEKPh[1], MAPK[1], MAPKMEKpp[1], MAPKp[1], MAPKpMEKpp[1], MAPKpp[1], MAPKpMAPKPh[1], MAPKppMAPKPh[1], C1[1], C2[1], C3[1], C4[1], C5[1], C6[1], C7[1], C8[1], C9[1], Smem[1]
+    ] #}}}
+
 def dX_dt( X ):
     [
-        Scyto[0],
-        MEK[0],
-        MEKRAFp[0],
-        MEKp[0],
-        MEKpMEKPh[0],
-        MEKpRAFp[0],
-        MEKpp[0],
-        MEKppMEKPh[0],
-        MAPK[0],
-        MAPKMEKpp[0],
-        MAPKp[0],
-        MAPKpMEKpp[0],
-        MAPKpp[0],
-        MAPKpMAPKPh[0],
-        MAPKppMAPKPh[0],
-        C1[0],
-        C2[0],
-        C3[0],
-        C4[0],
-        C5[0],
-        C6[0],
-        C7[0],
-        C8[0],
-        C9[0],
-        Smem[0],
-        Scyto[1],
-        MEK[1],
-        MEKRAFp[1],
-        MEKp[1],
-        MEKpMEKPh[1],
-        MEKpRAFp[1],
-        MEKpp[1],
-        MEKppMEKPh[1],
-        MAPK[1],
-        MAPKMEKpp[1],
-        MAPKp[1],
-        MAPKpMEKpp[1],
-        MAPKpp[1],
-        MAPKpMAPKPh[1],
-        MAPKppMAPKPh[1],
-        C1[1],
-        C2[1],
-        C3[1],
-        C4[1],
-        C5[1],
-        C6[1],
-        C7[1],
-        C8[1],
-        C9[1],
-        Smem[1]
+        Scyto[0], MEK[0], MEKRAFp[0], MEKp[0], MEKpMEKPh[0], MEKpRAFp[0], MEKpp[0], MEKppMEKPh[0], MAPK[0], MAPKMEKpp[0], MAPKp[0], MAPKpMEKpp[0], MAPKpp[0], MAPKpMAPKPh[0], MAPKppMAPKPh[0], C1[0], C2[0], C3[0], C4[0], C5[0], C6[0], C7[0], C8[0], C9[0], Smem[0],
+        Scyto[1], MEK[1], MEKRAFp[1], MEKp[1], MEKpMEKPh[1], MEKpRAFp[1], MEKpp[1], MEKppMEKPh[1], MAPK[1], MAPKMEKpp[1], MAPKp[1], MAPKpMEKpp[1], MAPKpp[1], MAPKpMAPKPh[1], MAPKppMAPKPh[1], C1[1], C2[1], C3[1], C4[1], C5[1], C6[1], C7[1], C8[1], C9[1], Smem[1]
     ] = X
-    rhs = [
+    rhs = [#{{{
         C1[0]*p4[0] - p1[0]*Scyto[0] + Di*(-Scyto[0] + Scyto[1]) + p2*Smem[0],
         of1*(C2[0] + C6[0] + C9[0]) - a3*RAFp*MEK[0] - on1*(C1[0] + C4[0] + C5[0])*MEK[0] + Di*(-MEK[0] + MEK[1]) + k4*MEKpMEKPh[0] + d3*MEKRAFp[0],
         a3*RAFp*MEK[0] + (-d3 - k3)*MEKRAFp[0] + Di*(-MEKRAFp[0] + MEKRAFp[1]),
@@ -197,10 +154,14 @@ def dX_dt( X ):
         k9*C7[1] - (of3 + of4)*C8[1] + k5*RAFp*C9[1],
         (-of1 - of4)*C9[1] - k5*RAFp*C9[1] + on1*C5[1]*MEK[1],
         p1[1]*Scyto[1] - p2*Smem[1] - p3[1]*Smem[1]
-    ]
+    ]#}}}
     return rhs
 
-odeint( f, ic, tspan)
+tspan = linspace(0, 10000, 10000)
+sol = odeint( dX_dt, ic, tspan)
+
+print sol.shape
+
+
 
 print "Finished"
-

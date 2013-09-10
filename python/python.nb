@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[    164607,       4819]
-NotebookOptionsPosition[    163441,       4775]
-NotebookOutlinePosition[    163802,       4791]
-CellTagsIndexPosition[    163759,       4788]
+NotebookDataLength[    164969,       4833]
+NotebookOptionsPosition[    163687,       4785]
+NotebookOutlinePosition[    164048,       4801]
+CellTagsIndexPosition[    164005,       4798]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -26,7 +26,8 @@ Cell[BoxData[
  CellChangeTimes->{{3.5867938520940943`*^9, 3.586793875719789*^9}}],
 
 Cell[BoxData["5000"], "Output",
- CellChangeTimes->{3.586793877284604*^9, 3.5876767540192957`*^9}]
+ CellChangeTimes->{3.586793877284604*^9, 3.5876767540192957`*^9, 
+  3.587748745034799*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -3167,7 +3168,7 @@ Cell[BoxData[
   Function[BoxForm`e$, 
    TableForm[BoxForm`e$]]]], "Output",
  CellChangeTimes->{3.586717317596086*^9, 3.586717463084453*^9}]
-}, Open  ]],
+}, Closed]],
 
 Cell[BoxData[
  RowBox[{"SetDirectory", "[", "\"\<~/projects/barrestin/python/\>\"", 
@@ -4173,7 +4174,7 @@ Cell[BoxData["\<\"equ.rhs.py\"\>"], "Output",
  CellChangeTimes->{
   3.5867175588779097`*^9, {3.586717775748158*^9, 3.586717784006988*^9}, 
    3.58671787095277*^9, 3.586721553517762*^9}]
-}, Open  ]],
+}, Closed]],
 
 Cell[CellGroupData[{
 
@@ -4425,7 +4426,7 @@ Cell[BoxData[
   Function[BoxForm`e$, 
    TableForm[BoxForm`e$]]]], "Output",
  CellChangeTimes->{3.5876767979556293`*^9}]
-}, Open  ]],
+}, Closed]],
 
 Cell[CellGroupData[{
 
@@ -4771,6 +4772,15 @@ Cell[BoxData[
  CellChangeTimes->{{3.58767707788386*^9, 3.587677093024871*^9}, 
    3.587677196386722*^9, 3.587677239261835*^9, {3.587677379948861*^9, 
    3.587677410739242*^9}}]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["runsimODE"], "Input",
+ CellChangeTimes->{{3.5877487868444242`*^9, 3.587748791238038*^9}}],
+
+Cell[BoxData["runsimODE"], "Output",
+ CellChangeTimes->{3.587748791532498*^9}]
 }, Open  ]]
 },
 WindowSize->{1196, 1521},
@@ -4792,34 +4802,38 @@ CellTagsIndex->{}
 Notebook[{
 Cell[CellGroupData[{
 Cell[579, 22, 177, 3, 32, "Input"],
-Cell[759, 27, 97, 1, 32, "Output"]
+Cell[759, 27, 122, 2, 32, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[893, 33, 180, 3, 32, "Input"],
-Cell[1076, 38, 54912, 1564, 912, "Output"],
-Cell[55991, 1604, 54932, 1564, 912, "Output"]
-}, Open  ]],
-Cell[110938, 3171, 171, 3, 32, "Input"],
+Cell[918, 34, 180, 3, 32, "Input"],
+Cell[1101, 39, 54912, 1564, 912, "Output"],
+Cell[56016, 1605, 54932, 1564, 912, "Output"]
+}, Closed]],
+Cell[110963, 3172, 171, 3, 26, "Input"],
 Cell[CellGroupData[{
-Cell[111134, 3178, 296, 6, 32, "Input"],
-Cell[111433, 3186, 192, 2, 32, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[111662, 3193, 738, 20, 77, "Input"],
-Cell[112403, 3215, 214, 3, 32, "Output"]
+Cell[111159, 3179, 296, 6, 32, "Input"],
+Cell[111458, 3187, 192, 2, 32, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[112654, 3223, 722, 19, 99, "Input"],
-Cell[113379, 3244, 32059, 925, 904, "Output"],
-Cell[145441, 4171, 185, 3, 32, "Output"]
+Cell[111687, 3194, 738, 20, 77, "Input"],
+Cell[112428, 3216, 214, 3, 32, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[145663, 4179, 132, 2, 32, "Input"],
-Cell[145798, 4183, 6674, 243, 876, "Output"]
-}, Open  ]],
+Cell[112679, 3224, 722, 19, 99, "Input"],
+Cell[113404, 3245, 32059, 925, 904, "Output"],
+Cell[145466, 4172, 185, 3, 32, "Output"]
+}, Closed]],
 Cell[CellGroupData[{
-Cell[152509, 4431, 610, 16, 32, "Input"],
-Cell[153122, 4449, 10303, 323, 926, "Output"]
+Cell[145688, 4180, 132, 2, 26, "Input"],
+Cell[145823, 4184, 6674, 243, 862, "Output"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[152534, 4432, 610, 16, 26, "Input"],
+Cell[153147, 4450, 10303, 323, 912, "Output"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[163487, 4778, 103, 1, 26, "Input"],
+Cell[163593, 4781, 78, 1, 32, "Output"]
 }, Open  ]]
 }
 ]
