@@ -10,6 +10,7 @@ def f( val ):
   return a
 
 if __name__ == '__main__':
-    x = 1e7*numpy.ones((16))
+    x = 5e7*numpy.ones((16))
     pool = Pool(processes=16)
     result = pool.map(f, x)
+
