@@ -1,17 +1,31 @@
 from numpy import *
 from scipy.integrate import odeint
+from multiprocessing import Pool
 
 class BetaArrestin:
     """
     doc string
     """
     def __init__(self):
-        self.nproc = 1
+        self.nproc = 16
+        self.pool = Pool(processes=self.nproc)
         self.d = 2
 
     def gen_equ(self, newparams={} ):
         # parameters
         # {{{
+        Stot = newparams.get( 'Stot', 0 )
+        p2 = 0.1
+        p1 = zeros(self.d)
+        p3 = zeros(self.d)
+        p4 = zeros(self.d)
+        p1[0] = 0.1
+        p3[0] = 0.1
+        p4[0] = 0.1
+        p1[1] = 0.1
+        p3[1] = 0.1
+        p4[1] = 0.1
+        Di = 0.0001
         a1 = 1
         a10 = 5
         a2 = 0.5
@@ -22,7 +36,6 @@ class BetaArrestin:
         a7 = 20
         a8 = 5
         a9 = 20
-        Stot = 0
         d1 = 0.4
         d10 = 0.4
         d2 = 0.5
@@ -56,17 +69,6 @@ class BetaArrestin:
         RAFp = 0.14
         RAFPhtot = 0.3
         RAFtot = 0.3
-        p2 = 0.1
-        Di = 0.0001
-        p1 = zeros(self.d)
-        p3 = zeros(self.d)
-        p4 = zeros(self.d)
-        p1[0] = 0.1
-        p3[0] = 0.1
-        p4[0] = 0.1
-        p1[1] = 0.1
-        p3[1] = 0.1
-        p4[1] = 0.1
         #}}}
         # state variables
         #{{{
@@ -210,10 +212,11 @@ class BetaArrestin:
     def runsim( self, param_list=[{}] ):
         if self.nproc == 1:
             return map( self.solve_to_steady_state, param_list )
-        return pool.map( self.solve_to_steady_state, param_list )
+        return self.pool.map( self.solve_to_steady_state, param_list )
 
 if __name__ == "__main__":
     ba = BetaArrestin()
-    sim = ba.runsim()
+    p = [ {'Stot' : s} for s in arange(0, 2, 0.01) ]
+    sim = ba.runsim(p)
     print "Finished"
 
