@@ -8,8 +8,6 @@ class BetaArrestin:
     def __init__(self):
         self.nproc = 1
         self.d = 2
-        self.ic = []
-
 
     def gen_equ(self, newparams={} ):
         # parameters
@@ -105,19 +103,19 @@ class BetaArrestin:
             MEK[i] = MEKtot
             MAPK[i] = MAPKtot
 
-        self.ic = array([
+        ic = array([
                 Scyto[0], MEK[0], MEKRAFp[0], MEKp[0], MEKpMEKPh[0], MEKpRAFp[0], MEKpp[0], MEKppMEKPh[0], MAPK[0], MAPKMEKpp[0], MAPKp[0], MAPKpMEKpp[0], MAPKpp[0], MAPKpMAPKPh[0], MAPKppMAPKPh[0], C1[0], C2[0], C3[0], C4[0], C5[0], C6[0], C7[0], C8[0], C9[0], Smem[0],
                 Scyto[1], MEK[1], MEKRAFp[1], MEKp[1], MEKpMEKPh[1], MEKpRAFp[1], MEKpp[1], MEKppMEKPh[1], MAPK[1], MAPKMEKpp[1], MAPKp[1], MAPKpMEKpp[1], MAPKpp[1], MAPKpMAPKPh[1], MAPKppMAPKPh[1], C1[1], C2[1], C3[1], C4[1], C5[1], C6[1], C7[1], C8[1], C9[1], Smem[1]
             ])
         #}}}
         def dX_dt( X, t ):
             # unpack X into components
-            # {{{
             (   #      0,      1,          2,       3,            4,           5,        6,             7,       8,            9,       10,            11,        12,             13,              14,    15,    16,    17,    18,    19,    20,    21,    22,    23,      24,
+            # {{{
                 Scyto[0], MEK[0], MEKRAFp[0], MEKp[0], MEKpMEKPh[0], MEKpRAFp[0], MEKpp[0], MEKppMEKPh[0], MAPK[0], MAPKMEKpp[0], MAPKp[0], MAPKpMEKpp[0], MAPKpp[0], MAPKpMAPKPh[0], MAPKppMAPKPh[0], C1[0], C2[0], C3[0], C4[0], C5[0], C6[0], C7[0], C8[0], C9[0], Smem[0],
                 Scyto[1], MEK[1], MEKRAFp[1], MEKp[1], MEKpMEKPh[1], MEKpRAFp[1], MEKpp[1], MEKppMEKPh[1], MAPK[1], MAPKMEKpp[1], MAPKp[1], MAPKpMEKpp[1], MAPKpp[1], MAPKpMAPKPh[1], MAPKppMAPKPh[1], C1[1], C2[1], C3[1], C4[1], C5[1], C6[1], C7[1], C8[1], C9[1], Smem[1]
-            ) = X
             # }}}
+            ) = X
             rhs = array( [
                 #{{{
                 C1[0]*p4[0] - p1[0]*Scyto[0] + Di*(-Scyto[0] + Scyto[1]) + p2*Smem[0],
@@ -173,39 +171,49 @@ class BetaArrestin:
             #}}}
             ])
             return rhs
-        return dX_dt
+        return ic, dX_dt
+
+    def state_to_vec(self):
+        pass
+
+    def vec_to_state(self, vec):
+        return dict( zip( [
+            "Scyto[0]", "MEK[0]", "MEKRAFp[0]", "MEKp[0]", "MEKpMEKPh[0]", "MEKpRAFp[0]", "MEKpp[0]", "MEKppMEKPh[0]", "MAPK[0]", "MAPKMEKpp[0]", "MAPKp[0]", "MAPKpMEKpp[0]", "MAPKpp[0]", "MAPKpMAPKPh[0]", "MAPKppMAPKPh[0]", "C1[0]", "C2[0]", "C3[0]", "C4[0]", "C5[0]", "C6[0]", "C7[0]", "C8[0]", "C9[0]", "Smem[0]",
+            "Scyto[1]", "MEK[1]", "MEKRAFp[1]", "MEKp[1]", "MEKpMEKPh[1]", "MEKpRAFp[1]", "MEKpp[1]", "MEKppMEKPh[1]", "MAPK[1]", "MAPKMEKpp[1]", "MAPKp[1]", "MAPKpMEKpp[1]", "MAPKpp[1]", "MAPKpMAPKPh[1]", "MAPKppMAPKPh[1]", "C1[1]", "C2[1]", "C3[1]", "C4[1]", "C5[1]", "C6[1]", "C7[1]", "C8[1]", "C9[1]", "Smem[1]"
+        ], vec ) )
 
     def solve_to_steady_state( self, newparams={} ):
         tend = 1000
+        MAXITER = 30
+        TOL = 1e-8
+        dtzero = 2*TOL
         tspan = linspace(0, tend, 100)
-        maxiter = 30
-        tol = 1e-8
-        dtzero = 2*tol
 
-        equ = self.gen_equ( newparams)
+        ic, equ = self.gen_equ( newparams )
 
         numiter = 0
-        tendtotal = 0
-        tsol = [self.ic]
-        while dtzero > tol:
+        tsol = [ic]
+        while dtzero > TOL:
             tsol = odeint( equ, tsol[-1], tspan )
             ss = equ( tsol[-1], tend )
             dtzero = amax( abs( ss ) )
             numiter += 1
-            if numiter >= maxiter:
+            if numiter >= MAXITER:
                 break
 
-        print "numiter: ", numiter
-        print "dtzero: ", dtzero
+        sol = self.vec_to_state( tsol[-1] )
+        sol.update( newparams )
+        sol['numiter'] = numiter
+        sol['dtzero'] = dtzero
+        return sol
 
     def runsim( self, param_list=[{}] ):
         if self.nproc == 1:
             return map( self.solve_to_steady_state, param_list )
         return pool.map( self.solve_to_steady_state, param_list )
 
-
 if __name__ == "__main__":
     ba = BetaArrestin()
-    ba.runsim()
+    sim = ba.runsim()
     print "Finished"
 
