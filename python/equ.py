@@ -2,17 +2,18 @@ from numpy import *
 from scipy.integrate import odeint
 from multiprocessing import Pool
 
-d = 2
 nproc = 16
 pool = Pool(processes=nproc)
 
 def setNProc( np ):
+    global nproc, pool
     nproc = np
     pool = Pool(processes=nproc)
 
 def gen_equ( newparams={} ):
     # parameters
     # {{{
+    d = 2
     Stot = newparams.get( 'Stot', 0 )
     p2 = 0.1
     p1 = zeros(d)
