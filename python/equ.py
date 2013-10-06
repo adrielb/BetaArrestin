@@ -1,8 +1,9 @@
 from numpy import *
+import pandas as pd
 from scipy.integrate import odeint
 from multiprocessing import Pool
 
-nproc = 16
+nproc = 1
 pool = Pool(processes=nproc)
 
 def setNProc( np ):
@@ -210,12 +211,11 @@ def solve_to_steady_state( newparams={} ):
     return sol
 
 def runsim( param_list=[{}] ):
-    if nproc == 1:
-        return map( solve_to_steady_state, param_list )
-    return pool.map( solve_to_steady_state, param_list )
+    sim = pool.map( solve_to_steady_state, param_list )
+    return pd.DataFrame.from_dict( sim )
 
 if __name__ == "__main__":
-    p = [ {'Stot' : s} for s in arange(0, 2, 0.1) ]
+    p = [ {'Stot' : s} for s in arange(0, 2, 0.01) ]
     sim = runsim(p)
     print "Finished"
 
