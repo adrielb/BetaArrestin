@@ -1,4 +1,4 @@
-from numpy import *
+import numpy  as np
 import pandas as pd
 from scipy.integrate import odeint
 from multiprocessing import Pool
@@ -17,9 +17,9 @@ def gen_equ( newparams={} ):
     d = 2
     Stot = newparams.get( 'Stot', 0 )
     p2 = 0.1
-    p1 = zeros(d)
-    p3 = zeros(d)
-    p4 = zeros(d)
+    p1 = np.zeros(d)
+    p3 = np.zeros(d)
+    p4 = np.zeros(d)
     p1[0] = 0.1
     p3[0] = 0.1
     p4[0] = 0.1
@@ -73,31 +73,31 @@ def gen_equ( newparams={} ):
     #}}}
     # state variables
     #{{{
-    MEK          = zeros(d)
-    MEKRAFp      = zeros_like(MEK)
-    MEKp         = zeros_like(MEK)
-    MEKpMEKPh    = zeros_like(MEK)
-    MEKpRAFp     = zeros_like(MEK)
-    MEKpp        = zeros_like(MEK)
-    MEKppMEKPh   = zeros_like(MEK)
-    MAPK         = zeros_like(MEK)
-    MAPKMEKpp    = zeros_like(MEK)
-    MAPKp        = zeros_like(MEK)
-    MAPKpMEKpp   = zeros_like(MEK)
-    MAPKpp       = zeros_like(MEK)
-    MAPKpMAPKPh  = zeros_like(MEK)
-    MAPKppMAPKPh = zeros_like(MEK)
-    C1           = zeros_like(MEK)
-    C2           = zeros_like(MEK)
-    C3           = zeros_like(MEK)
-    C4           = zeros_like(MEK)
-    C5           = zeros_like(MEK)
-    C6           = zeros_like(MEK)
-    C7           = zeros_like(MEK)
-    C8           = zeros_like(MEK)
-    C9           = zeros_like(MEK)
-    Smem         = zeros_like(MEK)
-    Scyto        = zeros_like(MEK)
+    MEK          = np.zeros(d)
+    MEKRAFp      = np.zeros_like(MEK)
+    MEKp         = np.zeros_like(MEK)
+    MEKpMEKPh    = np.zeros_like(MEK)
+    MEKpRAFp     = np.zeros_like(MEK)
+    MEKpp        = np.zeros_like(MEK)
+    MEKppMEKPh   = np.zeros_like(MEK)
+    MAPK         = np.zeros_like(MEK)
+    MAPKMEKpp    = np.zeros_like(MEK)
+    MAPKp        = np.zeros_like(MEK)
+    MAPKpMEKpp   = np.zeros_like(MEK)
+    MAPKpp       = np.zeros_like(MEK)
+    MAPKpMAPKPh  = np.zeros_like(MEK)
+    MAPKppMAPKPh = np.zeros_like(MEK)
+    C1           = np.zeros_like(MEK)
+    C2           = np.zeros_like(MEK)
+    C3           = np.zeros_like(MEK)
+    C4           = np.zeros_like(MEK)
+    C5           = np.zeros_like(MEK)
+    C6           = np.zeros_like(MEK)
+    C7           = np.zeros_like(MEK)
+    C8           = np.zeros_like(MEK)
+    C9           = np.zeros_like(MEK)
+    Smem         = np.zeros_like(MEK)
+    Scyto        = np.zeros_like(MEK)
     #}}}
     # initial conditions
     #{{{
@@ -106,7 +106,7 @@ def gen_equ( newparams={} ):
         MEK[i] = MEKtot
         MAPK[i] = MAPKtot
 
-    ic = array([
+    ic = np.array([
             Scyto[0], MEK[0], MEKRAFp[0], MEKp[0], MEKpMEKPh[0], MEKpRAFp[0], MEKpp[0], MEKppMEKPh[0], MAPK[0], MAPKMEKpp[0], MAPKp[0], MAPKpMEKpp[0], MAPKpp[0], MAPKpMAPKPh[0], MAPKppMAPKPh[0], C1[0], C2[0], C3[0], C4[0], C5[0], C6[0], C7[0], C8[0], C9[0], Smem[0],
             Scyto[1], MEK[1], MEKRAFp[1], MEKp[1], MEKpMEKPh[1], MEKpRAFp[1], MEKpp[1], MEKppMEKPh[1], MAPK[1], MAPKMEKpp[1], MAPKp[1], MAPKpMEKpp[1], MAPKpp[1], MAPKpMAPKPh[1], MAPKppMAPKPh[1], C1[1], C2[1], C3[1], C4[1], C5[1], C6[1], C7[1], C8[1], C9[1], Smem[1]
         ])
@@ -119,7 +119,7 @@ def gen_equ( newparams={} ):
             Scyto[1], MEK[1], MEKRAFp[1], MEKp[1], MEKpMEKPh[1], MEKpRAFp[1], MEKpp[1], MEKppMEKPh[1], MAPK[1], MAPKMEKpp[1], MAPKp[1], MAPKpMEKpp[1], MAPKpp[1], MAPKpMAPKPh[1], MAPKppMAPKPh[1], C1[1], C2[1], C3[1], C4[1], C5[1], C6[1], C7[1], C8[1], C9[1], Smem[1]
         # }}}
         ) = X
-        rhs = array( [
+        rhs = np.array( [
             #{{{
             C1[0]*p4[0] - p1[0]*Scyto[0] + Di*(-Scyto[0] + Scyto[1]) + p2*Smem[0],
             of1*(C2[0] + C6[0] + C9[0]) - a3*RAFp*MEK[0] - on1*(C1[0] + C4[0] + C5[0])*MEK[0] + Di*(-MEK[0] + MEK[1]) + k4*MEKpMEKPh[0] + d3*MEKRAFp[0],
@@ -190,7 +190,7 @@ def solve_to_steady_state( newparams={} ):
     MAXITER = 30
     TOL = 1e-8
     dtzero = 2*TOL
-    tspan = linspace(0, tend, 100)
+    tspan = np.linspace(0, tend, 100)
 
     ic, equ = gen_equ( newparams )
 
@@ -199,7 +199,7 @@ def solve_to_steady_state( newparams={} ):
     while dtzero > TOL:
         tsol = odeint( equ, tsol[-1], tspan )
         ss = equ( tsol[-1], tend )
-        dtzero = amax( abs( ss ) )
+        dtzero = np.amax( abs( ss ) )
         numiter += 1
         if numiter >= MAXITER:
             break
@@ -215,7 +215,7 @@ def runsim( param_list=[{}] ):
     return pd.DataFrame.from_dict( sim )
 
 if __name__ == "__main__":
-    p = [ {'Stot' : s} for s in arange(0, 2, 0.01) ]
+    p = [ {'Stot' : s} for s in np.arange(0, 2, 0.01) ]
     sim = runsim(p)
     print "Finished"
 
