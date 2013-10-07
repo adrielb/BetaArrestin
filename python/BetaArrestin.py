@@ -3,13 +3,7 @@ import pandas as pd
 from scipy.integrate import odeint
 from multiprocessing import Pool
 
-nproc = 1
-pool = Pool(processes=nproc)
-
-def setNProc( np ):
-    global nproc, pool
-    nproc = np
-    pool = Pool(processes=nproc)
+nproc = 16
 
 def gen_equ( newparams={} ):
     # parameters
@@ -211,11 +205,9 @@ def solve_to_steady_state( newparams={} ):
     return sol
 
 def runsim( param_list=[{}] ):
+    pool = Pool(processes=nproc)
     sim = pool.map( solve_to_steady_state, param_list )
+    pool.close()
     return pd.DataFrame.from_dict( sim )
 
-if __name__ == "__main__":
-    p = [ {'Stot' : s} for s in np.arange(0, 2, 0.01) ]
-    sim = runsim(p)
-    print "Finished"
 
