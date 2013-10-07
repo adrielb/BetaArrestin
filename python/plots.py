@@ -1,5 +1,4 @@
 import matplotlib.pyplot as plt
-from numpy import *
 
 x = linspace( 0, pi, 100)
 y = sin( x )
@@ -36,17 +35,6 @@ ax.set_title("ode info")
 ax.plot( info['nst'] )
 fig.canvas.draw()
 fig.show()
-
-ax.clear()
-ax.set_xlabel("Stot")
-ax.set_ylabel("MAPKpp")
-ax.set_xlim(auto=True)
-ax.set_ylim(auto=True)
-ax.set_title("Scaffold dose response")
-ax.plot( sim['Stot'], sim['MAPKpp[0]'] )
-fig.canvas.draw()
-fig.show()
-
 
 
 

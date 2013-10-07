@@ -1,8 +1,10 @@
 import numpy  as np
 import pandas as pd
+import matplotlib.pyplot as plt
 from scipy.integrate import odeint
 from multiprocessing import Pool
 
+# Model {{{
 nproc = 16
 
 def gen_equ( newparams={} ):
@@ -10,16 +12,16 @@ def gen_equ( newparams={} ):
     # {{{
     d = 2
     Stot = newparams.get( 'Stot', 0 )
-    p2 = 0.1
     p1 = np.zeros(d)
     p3 = np.zeros(d)
     p4 = np.zeros(d)
-    p1[0] = 0.1
-    p3[0] = 0.1
-    p4[0] = 0.1
-    p1[1] = 0.1
-    p3[1] = 0.1
-    p4[1] = 0.1
+    p1[0] = newparams.get( 'p1', 0.1 )
+    p1[1] = newparams.get( 'p1', 0.1 )
+    p2    = newparams.get( 'p2', 0.1 )
+    p3[0] = newparams.get( 'p3', 0.1 )
+    p3[1] = newparams.get( 'p3', 0.1 )
+    p4[0] = newparams.get( 'p4', 0.1 )
+    p4[1] = newparams.get( 'p4', 0.1 )
     Di = 0.0001
     a1 = 1
     a10 = 5
@@ -210,4 +212,37 @@ def runsim( param_list=[{}] ):
     pool.close()
     return pd.DataFrame.from_dict( sim )
 
+# }}}
+
+def genfig():
+    fig = plt.figure()
+    ax = fig.add_axes()
+    ax = fig.add_subplot(1,1,1) # (nrows, ncols, axnum)
+    fig.tight_layout()
+    fig.show()
+    return fig, ax
+
+def max_mapk():
+    p = [ {'Stot' : s, 'p1' : 100, 'p2' : 0, 'p4' : 0} for s in np.arange(0.192, .202, 0.0001) ]
+    sim = runsim( p )
+    MAXMAPKPP = sim['MAPKpp[0]'].max()
+    return MAXMAPKPP
+
+MAXMAPKPP = 0.0090974446462870496
+
+def dose_response():
+    p = [ {'Stot' : s, 'p1' : 100, 'p2' : 0, 'p4' : 0} for s in np.arange(0, 2, 0.01) ]
+    sim = runsim( p )
+    sim['MAPKpp'] = sim['MAPKpp[0]'] / MAXMAPKPP
+
+    fig, ax = genfig()
+    ax.clear()
+    ax.set_xlabel("Stot")
+    ax.set_ylabel("MAPKpp")
+    ax.set_xlim(auto=True)
+    ax.set_ylim(auto=True)
+    ax.set_title("Scaffold dose response")
+    ax.plot( sim['Stot'], sim['MAPKpp'] )
+    fig.canvas.draw()
+    fig.show()
 
