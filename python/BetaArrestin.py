@@ -3,26 +3,64 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from scipy.integrate import odeint
 from multiprocessing import Pool
+from math import exp
 
-# Model {{{
-nproc = 16
+# model {{{
+nproc = 1
 
-def gen_equ( newparams={} ):
-    # parameters
-    # {{{
+DEFAULT_PARAMS = {
+    'grad'    : 1.0 ,
+    'maxdose' : 0.0085 ,
+    'l'       : 1.0 ,
+    'dX'      : 0.0001,
+    'Stot'    : 0.0 ,
+    'p1'      : 0.1 ,
+    'p2'      : 0.89 ,
+    'p3'      : 0.1 ,
+    'p4'      : 0.1 ,
+    'p5'      : 7.7 ,
+    'p3a'     : 0.00088 ,
+    'p3b'     : 0.48 ,
+    'p3c'     : 110.0 ,
+    'p3d'     : 0.02 ,
+    'p3e'     : 1.5 ,
+    'p3f'     : 2.1 ,
+    'p4a'     : 0.01 ,
+    'p4b'     : 6.5 ,
+    'Di'      : 0.0001
+}
+
+def gen_equ( params={} ):
     d = 2
-    Stot = newparams.get( 'Stot', 0 )
+    x = np.arange(0,d)
     p1 = np.zeros(d)
     p3 = np.zeros(d)
     p4 = np.zeros(d)
-    p1[0] = newparams.get( 'p1', 0.1 )
-    p1[1] = newparams.get( 'p1', 0.1 )
-    p2    = newparams.get( 'p2', 0.1 )
-    p3[0] = newparams.get( 'p3', 0.1 )
-    p3[1] = newparams.get( 'p3', 0.1 )
-    p4[0] = newparams.get( 'p4', 0.1 )
-    p4[1] = newparams.get( 'p4', 0.1 )
+    dose = np.zeros(d)
+    grad = params['grad']
+    maxdose = params['maxdose']
+    l = params['l']
+    dX = params['dX']
+    Stot = params['Stot']
+    p1[0] = params['p1']
+    p1[1] = params['p1']
+    p2    = params['p2']
+    p3[0] = params['p3']
+    p3[1] = params['p3']
+    p4[0] = params['p4']
+    p4[1] = params['p4']
+    p5    = params['p5']
+    p3a = params['p3a']
+    p3b = params['p3b']
+    p3c = params['p3c']
+    p3d = params['p3d']
+    p3e = params['p3e']
+    p3f = params['p3f']
+    p4a = params['p4a']
+    p4b = params['p4b']
     Di = 0.0001
+    # mapk scaffold parameters
+    # {{{
     a1 = 1
     a10 = 5
     a2 = 0.5
@@ -115,6 +153,12 @@ def gen_equ( newparams={} ):
             Scyto[1], MEK[1], MEKRAFp[1], MEKp[1], MEKpMEKPh[1], MEKpRAFp[1], MEKpp[1], MEKppMEKPh[1], MAPK[1], MAPKMEKpp[1], MAPKp[1], MAPKpMEKpp[1], MAPKpp[1], MAPKpMAPKPh[1], MAPKppMAPKPh[1], C1[1], C2[1], C3[1], C4[1], C5[1], C6[1], C7[1], C8[1], C9[1], Smem[1]
         # }}}
         ) = X
+
+        dose = grad * maxdose * (l + dX * x)
+        p1 = p5 * dose
+        p3 = p3_func( Smem, p3a, p3b, p3c, p3d, p3e, p3f )
+        p4 = p4_func( x, p4a, p4b)
+
         rhs = np.array( [
             #{{{
             C1[0]*p4[0] - p1[0]*Scyto[0] + Di*(-Scyto[0] + Scyto[1]) + p2*Smem[0],
@@ -172,6 +216,12 @@ def gen_equ( newparams={} ):
         return rhs
     return ic, dX_dt
 
+def p3_func( Smem, a, b, c, d, e, f ):
+    return (a + b * Smem) * ( (1-d) / (1 + np.exp( (Smem - e) * f) ) + d )
+
+def p4_func( x, a, b ):
+    return b - a * x
+
 def state_to_vec():
     pass
 
@@ -188,7 +238,9 @@ def solve_to_steady_state( newparams={} ):
     dtzero = 2*TOL
     tspan = np.linspace(0, tend, 100)
 
-    ic, equ = gen_equ( newparams )
+    params = DEFAULT_PARAMS.copy()
+    params.update( newparams )
+    ic, equ = gen_equ( params )
 
     numiter = 0
     tsol = [ic]
@@ -201,16 +253,31 @@ def solve_to_steady_state( newparams={} ):
             break
 
     sol = vec_to_state( tsol[-1] )
-    sol.update( newparams )
+    sol.update( params )
     sol['numiter'] = numiter
     sol['dtzero'] = dtzero
+    gdm = ( sol['grad'] * sol['dX'] * sol['maxdose'] )
+    if gdm == 0.0:
+        sol['MI'] = 0
+    else:
+        sol['MI'] = (sol['MAPKpp[1]'] - sol['MAPKpp[0]']) / gdm
     return sol
 
 def runsim( param_list=[{}] ):
-    pool = Pool(processes=nproc)
-    sim = pool.map( solve_to_steady_state, param_list )
-    pool.close()
+    if nproc == 1:
+        sim = map( solve_to_steady_state, param_list )
+    else:
+        pool = Pool(processes=nproc)
+        sim = pool.map( solve_to_steady_state, param_list )
+        pool.close()
     return pd.DataFrame.from_dict( sim )
+
+def dose_response( newparams={} ):
+    lenX = np.arange( 0.01, 1.05, 0.05)
+    param_list = [ { 'l' : l } for l in lenX ]
+    for p in param_list:
+        p.update( newparams )
+    runsim( newparams )
 
 # }}}
 
@@ -229,20 +296,4 @@ def max_mapk():
     return MAXMAPKPP
 
 MAXMAPKPP = 0.0090974446462870496
-
-def dose_response():
-    p = [ {'Stot' : s, 'p1' : 100, 'p2' : 0, 'p4' : 0} for s in np.arange(0, 2, 0.01) ]
-    sim = runsim( p )
-    sim['MAPKpp'] = sim['MAPKpp[0]'] / MAXMAPKPP
-
-    fig, ax = genfig()
-    ax.clear()
-    ax.set_xlabel("Stot")
-    ax.set_ylabel("MAPKpp")
-    ax.set_xlim(auto=True)
-    ax.set_ylim(auto=True)
-    ax.set_title("Scaffold dose response")
-    ax.plot( sim['Stot'], sim['MAPKpp'] )
-    fig.canvas.draw()
-    fig.show()
 

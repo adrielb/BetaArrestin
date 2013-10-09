@@ -1,5 +1,5 @@
 all:
-	python equ.py
+	python BetaArrestin.py
 
 clean:
 	rm *.pyc
