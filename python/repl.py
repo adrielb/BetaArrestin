@@ -40,3 +40,30 @@ ax.plot( Smem, p3 )
 fig.canvas.draw()
 fig.show()
 
+
+# MAPKpp vs dose
+fig, ax = genfig()
+
+sim = dose_response({'Stot' : 42.0})
+sim.MAPKpp
+
+ax.clear()
+ax.set_xlabel("Input")
+ax.set_ylabel("MAPKpp")
+ax.set_xlim(auto=True)
+ax.set_ylim(auto=True)
+ax.set_title("Input dose response")
+ax.plot( sim['l'], sim['MAPKpp'] )
+fig.canvas.draw()
+fig.show()
+
+ax.clear()
+ax.set_xlabel("Input")
+ax.set_ylabel("MI")
+ax.set_xlim(auto=True)
+ax.set_ylim(auto=True)
+ax.set_title("Input dose response")
+ax.plot( sim['l'], sim['MI'] )
+fig.canvas.draw()
+fig.show()
+

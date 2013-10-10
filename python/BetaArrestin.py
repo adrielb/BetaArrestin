@@ -5,19 +5,17 @@ from scipy.integrate import odeint
 from multiprocessing import Pool
 from math import exp
 
-# model {{{
-nproc = 1
+# Model {{{
+nproc = 16
 
+# DEFAULT_PARAMS {{{
 DEFAULT_PARAMS = {
     'grad'    : 1.0 ,
     'maxdose' : 0.0085 ,
     'l'       : 1.0 ,
     'dX'      : 0.0001,
     'Stot'    : 0.0 ,
-    'p1'      : 0.1 ,
     'p2'      : 0.89 ,
-    'p3'      : 0.1 ,
-    'p4'      : 0.1 ,
     'p5'      : 7.7 ,
     'p3a'     : 0.00088 ,
     'p3b'     : 0.48 ,
@@ -29,8 +27,11 @@ DEFAULT_PARAMS = {
     'p4b'     : 6.5 ,
     'Di'      : 0.0001
 }
+# }}}
 
 def gen_equ( params={} ):
+    # Transport parameters
+    # {{{
     d = 2
     x = np.arange(0,d)
     p1 = np.zeros(d)
@@ -42,13 +43,7 @@ def gen_equ( params={} ):
     l = params['l']
     dX = params['dX']
     Stot = params['Stot']
-    p1[0] = params['p1']
-    p1[1] = params['p1']
     p2    = params['p2']
-    p3[0] = params['p3']
-    p3[1] = params['p3']
-    p4[0] = params['p4']
-    p4[1] = params['p4']
     p5    = params['p5']
     p3a = params['p3a']
     p3b = params['p3b']
@@ -58,7 +53,8 @@ def gen_equ( params={} ):
     p3f = params['p3f']
     p4a = params['p4a']
     p4b = params['p4b']
-    Di = 0.0001
+    Di = params['Di']
+    # }}}
     # mapk scaffold parameters
     # {{{
     a1 = 1
@@ -106,7 +102,7 @@ def gen_equ( params={} ):
     RAFtot = 0.3
     #}}}
     # state variables
-    #{{{
+    # {{{
     MEK          = np.zeros(d)
     MEKRAFp      = np.zeros_like(MEK)
     MEKp         = np.zeros_like(MEK)
@@ -132,7 +128,7 @@ def gen_equ( params={} ):
     C9           = np.zeros_like(MEK)
     Smem         = np.zeros_like(MEK)
     Scyto        = np.zeros_like(MEK)
-    #}}}
+    # }}}
     # initial conditions
     #{{{
     for i in xrange(d):
@@ -145,6 +141,10 @@ def gen_equ( params={} ):
             Scyto[1], MEK[1], MEKRAFp[1], MEKp[1], MEKpMEKPh[1], MEKpRAFp[1], MEKpp[1], MEKppMEKPh[1], MAPK[1], MAPKMEKpp[1], MAPKp[1], MAPKpMEKpp[1], MAPKpp[1], MAPKpMAPKPh[1], MAPKppMAPKPh[1], C1[1], C2[1], C3[1], C4[1], C5[1], C6[1], C7[1], C8[1], C9[1], Smem[1]
         ])
     #}}}
+    dose = grad * maxdose * (l + dX * x)
+    params['dose'] = dose
+    p1 = p5 * dose
+    params['p1'] = p1
     def dX_dt( X, t ):
         # unpack X into components
         (   #      0,      1,          2,       3,            4,           5,        6,             7,       8,            9,       10,            11,        12,             13,              14,    15,    16,    17,    18,    19,    20,    21,    22,    23,      24,
@@ -154,8 +154,6 @@ def gen_equ( params={} ):
         # }}}
         ) = X
 
-        dose = grad * maxdose * (l + dX * x)
-        p1 = p5 * dose
         p3 = p3_func( Smem, p3a, p3b, p3c, p3d, p3e, p3f )
         p4 = p4_func( x, p4a, p4b)
 
@@ -256,6 +254,7 @@ def solve_to_steady_state( newparams={} ):
     sol.update( params )
     sol['numiter'] = numiter
     sol['dtzero'] = dtzero
+    sol['MAPKpp'] = (sol['MAPKpp[0]'] + sol['MAPKpp[1]']) / (2 * MAXMAPKPP)
     gdm = ( sol['grad'] * sol['dX'] * sol['maxdose'] )
     if gdm == 0.0:
         sol['MI'] = 0
@@ -277,7 +276,7 @@ def dose_response( newparams={} ):
     param_list = [ { 'l' : l } for l in lenX ]
     for p in param_list:
         p.update( newparams )
-    runsim( newparams )
+    return runsim( param_list )
 
 # }}}
 
