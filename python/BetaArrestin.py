@@ -15,6 +15,9 @@ DEFAULT_PARAMS = {
     'l'       : 1.0 ,
     'dX'      : 0.0001,
     'Stot'    : 0.0 ,
+    'StotNative' : 1.5,
+    'StotOpt' : 3.3 ,
+    'StotOE'  : 42.0 ,
     'p2'      : 0.89 ,
     'p5'      : 7.7 ,
     'p3a'     : 0.00088 ,
@@ -220,9 +223,6 @@ def p3_func( Smem, a, b, c, d, e, f ):
 def p4_func( x, a, b ):
     return b - a * x
 
-def state_to_vec():
-    pass
-
 def vec_to_state(vec):
     return dict( zip( [
         "Scyto[0]", "MEK[0]", "MEKRAFp[0]", "MEKp[0]", "MEKpMEKPh[0]", "MEKpRAFp[0]", "MEKpp[0]", "MEKppMEKPh[0]", "MAPK[0]", "MAPKMEKpp[0]", "MAPKp[0]", "MAPKpMEKpp[0]", "MAPKpp[0]", "MAPKpMAPKPh[0]", "MAPKppMAPKPh[0]", "C1[0]", "C2[0]", "C3[0]", "C4[0]", "C5[0]", "C6[0]", "C7[0]", "C8[0]", "C9[0]", "Smem[0]",
@@ -230,7 +230,7 @@ def vec_to_state(vec):
     ], vec ) )
 
 def solve_to_steady_state( newparams={} ):
-    tend = 1000
+    tend = 10000
     MAXITER = 30
     TOL = 1e-8
     dtzero = 2*TOL
@@ -278,13 +278,24 @@ def dose_response( newparams={} ):
         p.update( newparams )
     return runsim( param_list )
 
+def scaffold_response( newparams={} ):
+    lenX = np.linspace( 0.2, 1.0, 25)
+    slevel = np.linspace( DEFAULT_PARAMS['StotNative'], DEFAULT_PARAMS['StotOE'], 250 )
+    param_list = [ { 'l' : l, 'Stot' : s } for l in lenX for s in slevel]
+    for p in param_list:
+        p.update( newparams )
+    return runsim( param_list )
+
 # }}}
 
 def genfig():
     fig = plt.figure()
     ax = fig.add_axes()
     ax = fig.add_subplot(1,1,1) # (nrows, ncols, axnum)
-    fig.tight_layout()
+    ax.title.set_fontsize( 20 )
+    ax.xaxis.label.set_fontweight( 'bold' )
+    ax.yaxis.label.set_fontweight( 'bold' )
+    #fig.tight_layout()
     fig.show()
     return fig, ax
 

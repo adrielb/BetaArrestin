@@ -1,3 +1,5 @@
+import pandas as pd
+
 # Single run
 p = [{}]
 sim = runsim( p )
@@ -66,4 +68,35 @@ ax.set_title("Input dose response")
 ax.plot( sim['l'], sim['MI'] )
 fig.canvas.draw()
 fig.show()
+
+# MI vs Scaffold
+sim = scaffold_response( )
+
+sim.to_csv( '/tmp/scaffold_response.csv', index=False )
+
+sim = pd.read_csv( '/tmp/scaffold_response.csv' )
+
+simStot = sim.groupby( 'Stot' ).mean()
+simStot['MAPKpp_Norm'] = simStot['MAPKpp'] / simStot['MAPKpp'].max()
+simStot['MI_Norm']     = simStot['MI']     / simStot['MI'].max()
+simStot.index = simStot.index / simStot['StotNative']
+
+fig, ax = genfig()
+
+ax.clear()
+ax.set_xlabel("Relative Scaffold")
+ax.set_ylabel("AU")
+ax.set_xlim(auto=True)
+ax.set_ylim(-0.3,1.05)
+ax.set_title("Scaffold repsonse, avg across dose")
+ax.plot( simStot.index, simStot['MAPKpp_Norm'], linewidth=4, color='blue', label='MAPKpp' )
+ax.plot( simStot.index, simStot['MI_Norm'],     linewidth=4, color='black', label='MI' )
+ax.legend()
+fig.canvas.draw()
+fig.show()
+fig.savefig( "ScaffoldVsMAPKppMI.pdf", transparent=True )
+
+
+
+# MI vs Gradient
 

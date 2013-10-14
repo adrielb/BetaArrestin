@@ -1,12 +1,12 @@
 \documentclass{beamer}
-\graphicspath{{../figs/}}
+\graphicspath{{../python/}}
 \mode<presentation>
 {
   \usetheme{Boadilla}
   %\usetheme{Warsaw}
   \setbeamercovered{transparent}
   \setbeamertemplate{navigation symbols}{}
-  \setbeamertemplate{background canvas}[vertical shading][bottom=red!10,top=blue!15]
+  \setbeamertemplate{background canvas}[vertical shading][bottom=brown!10,top=yellow!10]
   \setbeamertemplate{footline}{}
 }
 \usepackage[english]{babel}
@@ -14,12 +14,15 @@
 \usepackage{times}
 \usepackage[T1]{fontenc}
 
+\newcommand{\plotslide}[2]{
+  \begin{frame}
+    \frametitle{#1}
+    \includegraphics[width=\textwidth]{#2}
+  \end{frame}
+}
 \begin{document}
 
-\begin{frame}
-  \frametitle{Graph import ttest}
-  \includegraphics[width=\textwidth]{/tmp/out.png}
-\end{frame}
+\plotslide{Scaffold}{ScaffoldVsMAPKppMI.pdf}
 
 \end{document}
 

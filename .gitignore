@@ -10,3 +10,5 @@
 *.ps
 
 *.pyc
+*.fls
+*.fdb_latexmk
