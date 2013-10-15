@@ -286,6 +286,19 @@ def scaffold_response( newparams={} ):
         p.update( newparams )
     return runsim( param_list )
 
+def gradient_response( newparams={} ):
+    lenX = np.linspace( 0.2, 1.0, 25 )
+    grad = np.linspace( 0.0, 1.0, 40 )
+    slevel = [ 'StotNative', 'StotOpt' ]
+    param_list = [ {'grad' : g,
+                    'l' : l,
+                    'Stot' : DEFAULT_PARAMS[s],
+                    'slevel' : s }
+                  for g in grad for l in lenX for s in slevel ]
+    for p in param_list:
+        p.update( newparams )
+    return runsim( param_list )
+
 # }}}
 
 def genfig():
