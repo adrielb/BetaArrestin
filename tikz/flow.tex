@@ -1,0 +1,36 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usetikzlibrary{decorations.pathreplacing}
+\begin{document}
+
+
+\tikzstyle{Scyto} = [draw,thick,rounded corners=1mm]
+\tikzstyle{MAPKpp} = [draw,thick,  fill=green!20]
+\tikzstyle{arrow} = [->,thick,font=\footnotesize]
+
+\begin{tikzpicture}[inner sep=2mm,>=stealth']
+  %\draw[help lines] (-4,-4) grid (4,1);
+  %\fill (0,0) circle (2pt) {};
+
+  \node[Scyto, fill=blue!10] at (-3,0)  (Scyto) {Scyto};
+  \node[Scyto, fill=blue!10] at ( 3, 0) (Smem)  {Smem};
+  \node[Scyto, fill=blue!30] at ( 0,-2) (Sves) {Sves};
+  \node[MAPKpp] at ( 0,-3.5) (MAPKpp) {MAPKpp};
+
+  \draw[arrow] (Scyto.10) -- (Smem.170) node[midway,above] {$
+    \begin{aligned} 
+      dose &= grad*maxdose*(l+dX *x) \\
+      p_1  &= p_5 * dose
+    \end{aligned}
+      $}; 
+  \draw[arrow] (Smem.190) -- (Scyto.350) node[midway,below] {$p_2$}; 
+  \draw[arrow] (Smem) .. controls +(down:1.0cm) and +(right:1.0cm) ..  (Sves.east) node[auto,midway] {$p_3(\mathit{Smem})$};
+  \draw[arrow] (Sves.west) .. controls +(left:1.0cm) and +(down:1.0cm) ..  (Scyto) node[midway,auto] {$p_4$};
+  \draw[arrow] (Sves) -- (MAPKpp);
+\end{tikzpicture}
+
+
+\end{document}
+
