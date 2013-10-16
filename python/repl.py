@@ -1,5 +1,8 @@
 import pandas as pd
 
+import matplotlib as mpl
+mpl.rcParams['lines.linewidth'] = 4
+
 # Single run
 p = [{}]
 sim = runsim( p )
@@ -56,28 +59,35 @@ fig.savefig( "SmemVsp3.pdf", transparent=True )
 # MAPKpp vs dose
 fig, ax = genfig()
 
-sim = dose_response({'Stot' : DEFAULT_PARAMS['StotNative'] })
-sim.MAPKpp
+simN = dose_response({'Stot' : DEFAULT_PARAMS['StotNative'] })
+simOE = dose_response({'Stot' : DEFAULT_PARAMS['StotOE'] })
+simOE.MAPKpp
 
 ax.clear()
 ax.set_xlabel("Input")
 ax.set_ylabel("MAPKpp")
 ax.set_xlim(auto=True)
 ax.set_ylim(0, 1.01)
-ax.set_title("Input dose response")
-ax.plot( sim['l'], sim['MAPKpp'] )
+ax.set_title("MAPKpp input response")
+ax.plot( simN.index, simN['MAPKpp'], label='Native' )
+ax.plot( simOE.index, simOE['MAPKpp'], label='Overexpressed' )
+ax.legend()
 fig.canvas.draw()
 fig.show()
+fig.savefig( "InputVsMAPKpp.pdf", transparent=True )
 
 ax.clear()
 ax.set_xlabel("Input")
 ax.set_ylabel("MI")
 ax.set_xlim(auto=True)
 ax.set_ylim(auto=True)
-ax.set_title("Input dose response")
-ax.plot( sim['l'], sim['MI'] )
+ax.set_title("MI input response")
+ax.plot( simN.index, simN['MI'], label='Native' )
+ax.plot( simOE.index, simOE['MI'], label='Overexpressed' )
+ax.legend()
 fig.canvas.draw()
 fig.show()
+fig.savefig( "InputVsMI.pdf", transparent=True )
 
 # MI vs Scaffold
 sim = scaffold_response( )

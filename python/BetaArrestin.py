@@ -270,11 +270,12 @@ def runsim( param_list=[{}] ):
     return pd.DataFrame.from_dict( sim )
 
 def dose_response( newparams={} ):
-    lenX = np.arange( 0.01, 1.05, 0.05)
+    lenX = np.linspace( 0.01, 1.0, 50)
     param_list = [ { 'l' : l } for l in lenX ]
     for p in param_list:
         p.update( newparams )
-    return runsim( param_list )
+    sim = runsim( param_list )
+    return sim.set_index( 'l' )
 
 def scaffold_response( newparams={} ):
     lenX = np.linspace( 0.2, 1.0, 25)
