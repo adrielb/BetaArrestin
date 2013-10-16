@@ -5,21 +5,32 @@ p = [{}]
 sim = runsim( p )
 sim
 
-p = [ {'Stot' : s, 'p1' : 100, 'p2' : 0, 'p4' : 0} for s in np.arange(0, 2, 0.01) ]
+#
+# Steady state MAPKpp vs free scaffold
+#
+Stot = np.arange(0, 2, 0.01)
+p = [ { 'Stot': s,
+        'p2'  : 0,
+        'p4a' : 0,
+        'p4b' : 0,
+        'p3a' : 10,
+        'p3b' : 0,
+        'p3d' : 1 } for s in Stot ]
 sim = runsim( p )
-sim['MAPKpp'] = sim['MAPKpp[0]'] / sim['MAPKpp[0]'].max()
+sim
 
 fig, ax = genfig()
+
 ax.clear()
 ax.set_xlabel("Stot")
 ax.set_ylabel("MAPKpp")
 ax.set_xlim(auto=True)
-ax.set_ylim(auto=True)
-ax.set_title("Scaffold dose response")
-ax.plot( sim['Stot'], sim['MAPKpp'] )
+ax.set_ylim(0,1.01)
+ax.set_title("Open loop scaffold response")
+ax.plot( sim['Stot'], sim['MAPKpp'], linewidth=4)
 fig.canvas.draw()
 fig.show()
-
+fig.savefig( "StotVsMAPKpp.pdf", transparent=True )
 
 # Smem vs p3 transport function
 fig, ax = genfig()
@@ -29,31 +40,30 @@ p3b = DEFAULT_PARAMS['p3b']
 p3c = DEFAULT_PARAMS['p3c']
 p3d = DEFAULT_PARAMS['p3d']
 p3e = DEFAULT_PARAMS['p3e']
-p3f = DEFAULT_PARAMS['p3f']
 Smem = np.arange( 0, 3, 0.01)
-p3 = p3_func( Smem, p3a, p3b, p3c, p3d, p3e, p3f )
+p3 = p3_func( Smem, p3a, p3b, p3c, p3d, p3e )
 ax.clear()
 ax.set_xlabel("Smem")
 ax.set_ylabel("p3")
 ax.set_xlim(auto=True)
 ax.set_ylim(0, 0.4)
-ax.set_title("p3: Smem to Sves")
-ax.plot( Smem, p3 )
+ax.set_title("p3: Smem to Sves transport")
+ax.plot( Smem, p3, linewidth=4, color='lime' )
 fig.canvas.draw()
 fig.show()
-
+fig.savefig( "SmemVsp3.pdf", transparent=True )
 
 # MAPKpp vs dose
 fig, ax = genfig()
 
-sim = dose_response({'Stot' : 42.0})
+sim = dose_response({'Stot' : DEFAULT_PARAMS['StotNative'] })
 sim.MAPKpp
 
 ax.clear()
 ax.set_xlabel("Input")
 ax.set_ylabel("MAPKpp")
 ax.set_xlim(auto=True)
-ax.set_ylim(auto=True)
+ax.set_ylim(0, 1.01)
 ax.set_title("Input dose response")
 ax.plot( sim['l'], sim['MAPKpp'] )
 fig.canvas.draw()

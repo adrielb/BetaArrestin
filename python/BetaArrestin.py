@@ -22,10 +22,9 @@ DEFAULT_PARAMS = {
     'p5'      : 7.7 ,
     'p3a'     : 0.00088 ,
     'p3b'     : 0.48 ,
-    'p3c'     : 110.0 ,
+    'p3c'     : 2.1 ,
     'p3d'     : 0.02 ,
     'p3e'     : 1.5 ,
-    'p3f'     : 2.1 ,
     'p4a'     : 0.01 ,
     'p4b'     : 6.5 ,
     'Di'      : 0.0001
@@ -53,7 +52,6 @@ def gen_equ( params={} ):
     p3c = params['p3c']
     p3d = params['p3d']
     p3e = params['p3e']
-    p3f = params['p3f']
     p4a = params['p4a']
     p4b = params['p4b']
     Di = params['Di']
@@ -157,7 +155,7 @@ def gen_equ( params={} ):
         # }}}
         ) = X
 
-        p3 = p3_func( Smem, p3a, p3b, p3c, p3d, p3e, p3f )
+        p3 = p3_func( Smem, p3a, p3b, p3c, p3d, p3e )
         p4 = p4_func( x, p4a, p4b)
 
         rhs = np.array( [
@@ -217,8 +215,8 @@ def gen_equ( params={} ):
         return rhs
     return ic, dX_dt
 
-def p3_func( Smem, a, b, c, d, e, f ):
-    return (a + b * Smem) * ( (1-d) / (1 + np.exp( (Smem - e) * f) ) + d )
+def p3_func( Smem, a, b, c, d, e ):
+    return (a + b * Smem) * ( (1-d) / (1 + np.exp( (Smem - e) * c) ) + d )
 
 def p4_func( x, a, b ):
     return b - a * x
@@ -290,9 +288,9 @@ def gradient_response( newparams={} ):
     lenX = np.linspace( 0.2, 1.0, 25 )
     grad = np.linspace( 0.0, 1.0, 40 )
     slevel = [ 'StotNative', 'StotOpt' ]
-    param_list = [ {'grad' : g,
-                    'l' : l,
-                    'Stot' : DEFAULT_PARAMS[s],
+    param_list = [ {'grad'   : g,
+                    'l'      : l,
+                    'Stot'   : DEFAULT_PARAMS[s],
                     'slevel' : s }
                   for g in grad for l in lenX for s in slevel ]
     for p in param_list:
