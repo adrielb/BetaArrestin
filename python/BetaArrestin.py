@@ -304,11 +304,8 @@ def genfig():
     fig = plt.figure()
     ax = fig.add_axes()
     ax = fig.add_subplot(1,1,1) # (nrows, ncols, axnum)
-    ax.title.set_fontsize( 20 )
-    ax.xaxis.label.set_fontweight( 'bold' )
-    ax.yaxis.label.set_fontweight( 'bold' )
-    #fig.tight_layout()
     fig.show()
+    fig.canvas.manager.window.move(1200,0)
     return fig, ax
 
 def max_mapk():
@@ -318,4 +315,5 @@ def max_mapk():
     return MAXMAPKPP
 
 MAXMAPKPP = 0.0090974446462870496
+
 
