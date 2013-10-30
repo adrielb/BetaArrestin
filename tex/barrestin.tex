@@ -9,7 +9,9 @@
   \setbeamertemplate{background canvas}[vertical shading][bottom=brown!10,top=yellow!10]
   \setbeamertemplate{footline}{}
   \setbeamertemplate{frametitle}[default][center]
-  %\setbeamertemplate{frametitle}{\bfseries\insertframetitle}
+  \setbeamerfont{frametitle}{size=\LARGE,series=\bfseries}
+  %\setsansfont[BoldFont={Droid Sans Bold}]{Droid Sans}
+  %\setbeamerfont{frametitle}{
 }
 \usepackage[english]{babel}
 \usepackage[latin1]{inputenc}
@@ -19,7 +21,8 @@
 \newcommand{\plotslide}[2]{
   \begin{frame}
     \frametitle{#1}
-    \includegraphics[width=\textwidth]{#2}
+    \centering
+    \includegraphics[height=\textheight,width=0.9\textwidth,keepaspectratio=true]{#2}
   \end{frame}
 }
 \begin{document}
@@ -30,13 +33,26 @@
 
 \plotslide{}{SmemVsp3.pdf}
 
+\plotslide{}{../hao/dose_response_ERK_t.png}
 \plotslide{}{InputVsMAPKpp.pdf}
 
+\plotslide{}{../hao/dose_response_MI_t.png}
 \plotslide{}{InputVsMI.pdf}
 
+\plotslide{}{../hao/exp-MIvsS_t.png}
 \plotslide{}{ScaffoldVsMAPKppMI.pdf}
 
+\plotslide{}{../hao/gradient_response_t.png}
 \plotslide{}{GradientVsMI.pdf}
+
+\plotslide{Nocodazole treatment}{../hao/noco_t.png}
+\plotslide{}{noco.pdf}
+
+\plotslide{Rab11-DN}{../hao/Rab11DN_t.png}
+\plotslide{Rab11-DN}{rab11dn.pdf}
+
+
+\plotslide{}{../hao/drugs_t.png}
 
 \end{document}
 

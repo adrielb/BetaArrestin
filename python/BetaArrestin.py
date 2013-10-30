@@ -14,7 +14,9 @@ DEFAULT_PARAMS = {
     'maxdose' : 0.0085 ,
     'l'       : 1.0 ,
     'dX'      : 0.0001,
+    'slevel'  : 'StotNone' ,
     'Stot'    : 0.0 ,
+    'StotNone': 0.0 ,
     'StotNative' : 1.5,
     'StotOpt' : 3.3 ,
     'StotOE'  : 42.0 ,
@@ -44,7 +46,9 @@ def gen_equ( params={} ):
     maxdose = params['maxdose']
     l = params['l']
     dX = params['dX']
-    Stot = params['Stot']
+    slevel = params['slevel']
+    Stot = params[slevel]
+    params['Stot'] = Stot
     p2    = params['p2']
     p5    = params['p5']
     p3a = params['p3a']
