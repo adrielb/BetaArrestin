@@ -227,7 +227,7 @@ lines.linewidth   : 4.0     # line width in points
 #axes.hold           : True    # whether to clear the axes by default on
 #axes.facecolor      : white   # axes background color
 #axes.edgecolor      : black   # axes edge color
-aaxes.linewidthxes.linewidth      : 2.0     # edge linewidth
+axes.linewidth      : 2.0     # edge linewidth
 axes.grid           : True   # display grid or not
 axes.titlesize      : xx-large   # fontsize of the axes title
 #axes.labelsize      : medium  # fontsize of the x any y labels

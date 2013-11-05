@@ -226,10 +226,13 @@ def p4_func( x, a, b ):
     return b - a * x
 
 def vec_to_state(vec):
-    return dict( zip( [
+    allstates = dict( zip( [
         "Scyto[0]", "MEK[0]", "MEKRAFp[0]", "MEKp[0]", "MEKpMEKPh[0]", "MEKpRAFp[0]", "MEKpp[0]", "MEKppMEKPh[0]", "MAPK[0]", "MAPKMEKpp[0]", "MAPKp[0]", "MAPKpMEKpp[0]", "MAPKpp[0]", "MAPKpMAPKPh[0]", "MAPKppMAPKPh[0]", "C1[0]", "C2[0]", "C3[0]", "C4[0]", "C5[0]", "C6[0]", "C7[0]", "C8[0]", "C9[0]", "Smem[0]",
         "Scyto[1]", "MEK[1]", "MEKRAFp[1]", "MEKp[1]", "MEKpMEKPh[1]", "MEKpRAFp[1]", "MEKpp[1]", "MEKppMEKPh[1]", "MAPK[1]", "MAPKMEKpp[1]", "MAPKp[1]", "MAPKpMEKpp[1]", "MAPKpp[1]", "MAPKpMAPKPh[1]", "MAPKppMAPKPh[1]", "C1[1]", "C2[1]", "C3[1]", "C4[1]", "C5[1]", "C6[1]", "C7[1]", "C8[1]", "C9[1]", "Smem[1]"
     ], vec ) )
+    return dict( (c, allstates[c]) for c in
+                ('Scyto[0]','Smem[0]','MAPKpp[0]',
+                 'Scyto[1]','Smem[1]','MAPKpp[1]') )
 
 def solve_to_steady_state( newparams={} ):
     tend = 10000
@@ -262,6 +265,12 @@ def solve_to_steady_state( newparams={} ):
         sol['MI'] = 0
     else:
         sol['MI'] = (sol['MAPKpp[1]'] - sol['MAPKpp[0]']) / gdm
+
+    if dtzero > TOL:
+        sol['MI'] = np.NaN
+        sol['MAPKpp[0]'] = np.NaN
+        sol['MAPKpp[1]'] = np.NaN
+
     return sol
 
 def runsim( param_list=[{}] ):
@@ -304,13 +313,22 @@ def gradient_response( newparams={} ):
 
 # }}}
 
-def genfig():
-    fig = plt.figure()
-    ax = fig.add_axes()
-    ax = fig.add_subplot(1,1,1) # (nrows, ncols, axnum)
+def genfig( idx=1 ):
+    fig = plt.figure(idx)
+    fig.clear()
+    ax = fig.gca()
     fig.show()
-    fig.canvas.manager.window.move(1200,0)
     return fig, ax
+
+def showfig( idx=1 ):
+    fig = plt.figure( idx )
+    fig.canvas.draw()
+    fig.canvas.manager.window.move(1200,0)
+    #plt.ion()
+    #plt.get_current_fig_manager().window.activateWindow()
+    plt.get_current_fig_manager().window.raise_()
+    fig.show()
+
 
 def max_mapk():
     p = [ {'Stot' : s, 'p1' : 100, 'p2' : 0, 'p4' : 0} for s in np.arange(0.192, .202, 0.0001) ]
