@@ -215,3 +215,13 @@ def popwindow():
     plt.get_current_fig_manager().window.raise_()
 
 
+sim =             dose_response( { 'slevel' : 'StotOE', 'p4a':0, 'tp':1e0 } )
+sim = sim.append( dose_response( { 'slevel' : 'StotOE', 'p4a':0, 'tp':1e-1} ))
+sim = sim.append( dose_response( { 'slevel' : 'StotOE', 'p4a':0, 'tp':1e-2} ))
+sim = sim.pivot( sim.index, 'tp' )
+
+fig, ax = genfig(1)
+ax = sim['MI'].plot()
+ax.set_ylim(-2,2)
+ax.get_figure().show()
+showfig(1)

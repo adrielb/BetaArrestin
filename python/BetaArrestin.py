@@ -29,13 +29,15 @@ DEFAULT_PARAMS = {
     'p3e'     : 1.5 ,
     'p4a'     : 0.01 ,
     'p4b'     : 6.5 ,
-    'Di'      : 0.0001
+    'Di'      : 0.0001,
+    'tp'      : 1.0
 }
 # }}}
 
 def gen_equ( params={} ):
     # Transport parameters
     # {{{
+    tp = params['tp']
     d = 2
     x = np.arange(0,d)
     p1 = np.zeros(d)
@@ -149,6 +151,8 @@ def gen_equ( params={} ):
     dose = grad * maxdose * (l + dX * x)
     params['dose'] = dose
     p1 = p5 * dose
+    p1 = tp * p1
+    p2 = tp * p2
     params['p1'] = p1
     def dX_dt( X, t ):
         # unpack X into components
@@ -161,6 +165,9 @@ def gen_equ( params={} ):
 
         p3 = p3_func( Smem, p3a, p3b, p3c, p3d, p3e )
         p4 = p4_func( x, p4a, p4b)
+
+        p3 = tp * p3
+        p4 = tp * p4
 
         rhs = np.array( [
             #{{{
