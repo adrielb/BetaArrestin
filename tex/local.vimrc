@@ -16,5 +16,4 @@ set formatoptions=nt1
 set textwidth=78
 set relativenumber
 
-
 let g:LatexBox_latexmk_preview_continuously=1

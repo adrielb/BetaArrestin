@@ -27,7 +27,7 @@ DEFAULT_PARAMS = {
     'p3c'     : 2.1 ,
     'p3d'     : 0.02 ,
     'p3e'     : 1.5 ,
-    'p4a'     : 0.01 ,
+    'p4a'     : 0.005 ,
     'p4b'     : 6.5 ,
     'Di'      : 0.0001,
     'tp'      : 1.0
@@ -164,7 +164,10 @@ def gen_equ( params={} ):
         ) = X
 
         p3 = p3_func( Smem, p3a, p3b, p3c, p3d, p3e )
-        p4 = p4_func( x, p4a, p4b)
+
+        gdm = ( grad * dX * maxdose )
+        MI = (MAPKpp[1] - MAPKpp[0]) / gdm
+        p4 = p4_func( x, p4a, p4b, MI )
 
         p3 = tp * p3
         p4 = tp * p4
@@ -229,8 +232,9 @@ def gen_equ( params={} ):
 def p3_func( Smem, a, b, c, d, e ):
     return (a + b * Smem) * ( (1-d) / (1 + np.exp( (Smem - e) * c) ) + d )
 
-def p4_func( x, a, b ):
-    return b - a * x
+def p4_func( x, a, b, MI ):
+    A = a * sig(MI)
+    return x * (b-A) + (1-x) * (b+A)
 
 def vec_to_state(vec):
     allstates = dict( zip( [
@@ -345,4 +349,37 @@ def max_mapk():
 
 MAXMAPKPP = 0.0090974446462870496
 
+# REPL
+sig = lambda x: 1
 
+fig, ax = genfig()
+mi = np.linspace(-2,2,num=100)
+sig = lambda x: ((2 / (1 + np.exp(x*2.))) - 1.0)
+ax.plot( mi, sig(mi) )
+ax.set_xlabel( 'MI' )
+ax.set_ylabel( 'sigmoid' )
+ax.set_title('polarity indicator')
+showfig()
+fig.savefig( "polarity_indicator_1.pdf", transparent=True )
+
+fig, ax = genfig()
+sig0= lambda x,x1,k: 1 / (1+np.exp(k*(x-x1)))
+sig2= lambda x,x1,k: sig0(x,-x1, k) + sig0( x, x1, k) - 1
+sig = lambda x: sig2(x,1.0,4)
+mi = np.linspace(-2,2,num=300)
+ax.plot( mi, sig(mi))
+ax.set_title('polarity indicator')
+ax.set_xlabel( 'MI' )
+ax.set_ylabel( 'sigmoid' )
+showfig()
+fig.savefig( "polarity_indicator_2.pdf", transparent=True )
+
+fig, ax = genfig()
+x = np.linspace(0,1,100)
+ax.plot(x,p4_func(x,5,11,0))
+ax.plot(x,p4_func(x,5,11,1))
+ax.plot(x,p4_func(x,5,11,-1))
+ax.set_title('p4()')
+ax.set_xlabel('cell length')
+ax.set_ylabel('p4')
+showfig()
