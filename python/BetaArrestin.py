@@ -27,8 +27,10 @@ DEFAULT_PARAMS = {
     'p3c'     : 2.1 ,
     'p3d'     : 0.02 ,
     'p3e'     : 1.5 ,
-    'p4a'     : 0.005 ,
+    'p4a'     : 0.008 ,
     'p4b'     : 6.5 ,
+    'p4n'     : 0 ,
+    'p4o'     : 0.3 ,
     'Di'      : 0.0001,
     'tp'      : 1.0
 }
@@ -135,6 +137,7 @@ def gen_equ( params={} ):
     C9           = np.zeros_like(MEK)
     Smem         = np.zeros_like(MEK)
     Scyto        = np.zeros_like(MEK)
+    Sves         = np.zeros_like(MEK)
     # }}}
     # initial conditions
     #{{{
@@ -164,10 +167,9 @@ def gen_equ( params={} ):
         ) = X
 
         p3 = p3_func( Smem, p3a, p3b, p3c, p3d, p3e )
-
-        gdm = ( grad * dX * maxdose )
-        MI = (MAPKpp[1] - MAPKpp[0]) / gdm
-        p4 = p4_func( x, p4a, p4b, MI )
+        Sves[0] = C1[0] + C2[0] + C3[0] + C4[0] + C5[0] + C6[0] + C7[0] + C8[0] + C9[0]
+        Sves[1] = C1[1] + C2[1] + C3[1] + C4[1] + C5[1] + C6[1] + C7[1] + C8[1] + C9[1]
+        p4 = p4_func( x, p4a, p4b, p4n, p4o, Sves)
 
         p3 = tp * p3
         p4 = tp * p4
@@ -232,8 +234,8 @@ def gen_equ( params={} ):
 def p3_func( Smem, a, b, c, d, e ):
     return (a + b * Smem) * ( (1-d) / (1 + np.exp( (Smem - e) * c) ) + d )
 
-def p4_func( x, a, b, MI ):
-    A = a * sig(MI)
+def p4_func( x, a, b, Sn, So, Sves ):
+    A = -a * (Sves - Sn) / (So - Sn) + a * (Sves - So) / (Sn - So)
     return x * (b-A) + (1-x) * (b+A)
 
 def vec_to_state(vec):
@@ -241,9 +243,11 @@ def vec_to_state(vec):
         "Scyto[0]", "MEK[0]", "MEKRAFp[0]", "MEKp[0]", "MEKpMEKPh[0]", "MEKpRAFp[0]", "MEKpp[0]", "MEKppMEKPh[0]", "MAPK[0]", "MAPKMEKpp[0]", "MAPKp[0]", "MAPKpMEKpp[0]", "MAPKpp[0]", "MAPKpMAPKPh[0]", "MAPKppMAPKPh[0]", "C1[0]", "C2[0]", "C3[0]", "C4[0]", "C5[0]", "C6[0]", "C7[0]", "C8[0]", "C9[0]", "Smem[0]",
         "Scyto[1]", "MEK[1]", "MEKRAFp[1]", "MEKp[1]", "MEKpMEKPh[1]", "MEKpRAFp[1]", "MEKpp[1]", "MEKppMEKPh[1]", "MAPK[1]", "MAPKMEKpp[1]", "MAPKp[1]", "MAPKpMEKpp[1]", "MAPKpp[1]", "MAPKpMAPKPh[1]", "MAPKppMAPKPh[1]", "C1[1]", "C2[1]", "C3[1]", "C4[1]", "C5[1]", "C6[1]", "C7[1]", "C8[1]", "C9[1]", "Smem[1]"
     ], vec ) )
+    allstates['Sves[0]'] = allstates['C1[0]'] + allstates['C2[0]'] + allstates['C3[0]'] + allstates['C4[0]'] + allstates['C5[0]'] + allstates['C6[0]'] + allstates['C7[0]'] + allstates['C8[0]'] + allstates['C9[0]']
+    allstates['Sves[1]'] = allstates['C1[1]'] + allstates['C2[1]'] + allstates['C3[1]'] + allstates['C4[1]'] + allstates['C5[1]'] + allstates['C6[1]'] + allstates['C7[1]'] + allstates['C8[1]'] + allstates['C9[1]']
     return dict( (c, allstates[c]) for c in
-                ('Scyto[0]','Smem[0]','MAPKpp[0]',
-                 'Scyto[1]','Smem[1]','MAPKpp[1]') )
+                ('Scyto[0]','Smem[0]','Sves[0]','MAPKpp[0]',
+                 'Scyto[1]','Smem[1]','Sves[1]','MAPKpp[1]') )
 
 def solve_to_steady_state( newparams={} ):
     tend = 10000
@@ -271,11 +275,11 @@ def solve_to_steady_state( newparams={} ):
     sol['numiter'] = numiter
     sol['dtzero'] = dtzero
     sol['MAPKpp'] = (sol['MAPKpp[0]'] + sol['MAPKpp[1]']) / (2 * MAXMAPKPP)
-    gdm = ( sol['grad'] * sol['dX'] * sol['maxdose'] )
-    if gdm == 0.0:
+    sol['gdm'] = sol['grad'] * sol['dX'] * sol['maxdose']
+    if sol['gdm'] == 0.0:
         sol['MI'] = 0
     else:
-        sol['MI'] = (sol['MAPKpp[1]'] - sol['MAPKpp[0]']) / gdm
+        sol['MI'] = (sol['MAPKpp[1]'] - sol['MAPKpp[0]']) / sol['gdm']
 
     if dtzero > TOL:
         sol['MI'] = np.NaN
@@ -304,7 +308,7 @@ def dose_response( newparams={} ):
 def scaffold_response( newparams={} ):
     lenX = np.linspace( 0.2, 1.0, 25)
     slevel = np.linspace( DEFAULT_PARAMS['StotNative'], DEFAULT_PARAMS['StotOE'], 250 )
-    param_list = [ { 'l' : l, 'Stot' : s } for l in lenX for s in slevel]
+    param_list = [ { 'l' : l, 'slevel' : 'StotOpt', 'StotOpt' : s } for l in lenX for s in slevel]
     for p in param_list:
         p.update( newparams )
     return runsim( param_list )
@@ -315,7 +319,6 @@ def gradient_response( newparams={} ):
     slevel = [ 'StotNative', 'StotOpt' ]
     param_list = [ {'grad'   : g,
                     'l'      : l,
-                    'Stot'   : DEFAULT_PARAMS[s],
                     'slevel' : s }
                   for g in grad for l in lenX for s in slevel ]
     for p in param_list:
@@ -332,9 +335,10 @@ def genfig( idx=1 ):
     return fig, ax
 
 def showfig( idx=1 ):
-    fig = plt.figure( idx )
+    #fig = plt.figure( idx )
+    fig = plt.gcf()
     fig.canvas.draw()
-    fig.canvas.manager.window.move(1200,0)
+    #fig.canvas.manager.window.move(1200,(idx-1) * 544)
     #plt.ion()
     #plt.get_current_fig_manager().window.activateWindow()
     plt.get_current_fig_manager().window.raise_()
@@ -349,37 +353,3 @@ def max_mapk():
 
 MAXMAPKPP = 0.0090974446462870496
 
-# REPL
-sig = lambda x: 1
-
-fig, ax = genfig()
-mi = np.linspace(-2,2,num=100)
-sig = lambda x: ((2 / (1 + np.exp(x*2.))) - 1.0)
-ax.plot( mi, sig(mi) )
-ax.set_xlabel( 'MI' )
-ax.set_ylabel( 'sigmoid' )
-ax.set_title('polarity indicator')
-showfig()
-fig.savefig( "polarity_indicator_1.pdf", transparent=True )
-
-fig, ax = genfig()
-sig0= lambda x,x1,k: 1 / (1+np.exp(k*(x-x1)))
-sig2= lambda x,x1,k: sig0(x,-x1, k) + sig0( x, x1, k) - 1
-sig = lambda x: sig2(x,1.0,4)
-mi = np.linspace(-2,2,num=300)
-ax.plot( mi, sig(mi))
-ax.set_title('polarity indicator')
-ax.set_xlabel( 'MI' )
-ax.set_ylabel( 'sigmoid' )
-showfig()
-fig.savefig( "polarity_indicator_2.pdf", transparent=True )
-
-fig, ax = genfig()
-x = np.linspace(0,1,100)
-ax.plot(x,p4_func(x,5,11,0))
-ax.plot(x,p4_func(x,5,11,1))
-ax.plot(x,p4_func(x,5,11,-1))
-ax.set_title('p4()')
-ax.set_xlabel('cell length')
-ax.set_ylabel('p4')
-showfig()

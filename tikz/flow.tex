@@ -30,13 +30,7 @@
   \draw[arrow] (Scyto.10) -- (Smem.170)  node[midway,above] {$p_1  = p_1(\mathit{Input})$}; 
   \draw[arrow] (Smem.190) -- (Scyto.350) node[midway,below] {$p_2$}; 
   \draw[arrow] (Smem)      .. controls +(down:1.3cm) and +(right:1.0cm) .. (Sves.east) node[auto,midway] {$p_3 = p_3(\mathit{S_{mem}})$};
-  \draw[arrow] (Sves.west) .. controls +(left:1.0cm) and +( down:1.3cm)  .. (Scyto) node[midway,auto,rectangle,fill=red!10] {$
-    \begin{aligned}
-      p_4 &= const \\
-      p_4 &= p_4(\mathit{Input}) \\
-          &or \\
-      p_4 &= p_4(\mathit{MI})
-    \end{aligned}$};
+  \draw[arrow] (Sves.west) .. controls +(left:1.0cm) and +( down:1.3cm)  .. (Scyto) node[midway,auto,fill=red!10] {$p_4 = p_4(x, \mathit{S_{ves}})$};
   \draw[arrow] (Sves) -- (MAPKpp);
 \end{tikzpicture}
 
