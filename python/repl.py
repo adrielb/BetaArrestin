@@ -424,6 +424,32 @@ ax.plot( sim.index , sim['MI']['On'] , label='Neg Amp Overexpressed'  , color=co
 ax.legend(loc='upper right')
 showfig()
 fig.savefig( "p4a_sign_change_MI.pdf", transparent=True )
+
+# Diff Sves {{{
+dsves = ( sim['Sves[1]'] - sim['Sves[0]'] ) / sim['gdm']
+p1 = np.array( sim['p1']['Nz'].tolist()).transpose()
+dp1 =( p1[1] - p1[0]) / sim['gdm']['Nz']
+fig, ax = genfig(5)
+ax.set_title("Diff Sves input response")
+ax.set_xlabel("Input")
+ax.set_ylabel("Diff (Front - Back)")
+ax.set_xlim(auto=True)
+ax.set_ylim(auto=True)
+ax.axhline( 0      , None        , None                           , color='black'      , lw=1 )
+ax.plot( sim.index , dp1         , label='Input p1'               , color='green'      , lw=5 )
+ax.plot( sim.index , dsves['Nz'] , label='Zero Amp Native'        , color=color_native , linestyle='solid' )
+ax.plot( sim.index , dsves['Np'] , label='Pos Amp Native'         , color=color_native , linestyle='dashed' )
+ax.plot( sim.index , dsves['Nn'] , label='Neg Amp Native'         , color=color_native , linestyle='dotted' )
+ax.plot( sim.index , dsves['Oz'] , label='Zero Amp Overexpressed' , color=color_oe     , linestyle='solid')
+ax.plot( sim.index , dsves['Op'] , label='Pos Amp Overexpressed'  , color=color_oe     , linestyle='dashed' )
+ax.plot( sim.index , dsves['On'] , label='Neg Amp Overexpressed'  , color=color_oe     , linestyle='dotted' )
+box = ax.get_position()
+ax.set_position( [box.x0, box.y0, box.width*0.6, box.height] )
+ax.legend(loc='upper right', bbox_to_anchor=(1.8,1) )
+showfig()
+fig.savefig( "p4a_InputVsSvesDiff.png", transparent=True )
+#}}}
+
 # }}}
 
 # coupled p4
