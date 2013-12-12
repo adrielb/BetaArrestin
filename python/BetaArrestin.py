@@ -27,12 +27,11 @@ DEFAULT_PARAMS = {
     'p3c'     : 2.1 ,
     'p3d'     : 0.02 ,
     'p3e'     : 1.5 ,
-    'p4a'     : 0.008 ,
+    'p4a'     : 0.001 ,
     'p4b'     : 6.5 ,
-    'p4n'     : 0 ,
-    'p4o'     : 0.3 ,
+    'p4n'     : 50 ,
     'Di'      : 0.0001,
-    'tp'      : 1.0
+    'tp'      : 5e-1
 }
 # }}}
 
@@ -62,6 +61,7 @@ def gen_equ( params={} ):
     p3e = params['p3e']
     p4a = params['p4a']
     p4b = params['p4b']
+    p4n = params['p4n']
     Di = params['Di']
     # }}}
     # mapk scaffold parameters
@@ -167,9 +167,12 @@ def gen_equ( params={} ):
         ) = X
 
         p3 = p3_func( Smem, p3a, p3b, p3c, p3d, p3e )
+
+        gdm = ( grad * dX * maxdose )
         Sves[0] = C1[0] + C2[0] + C3[0] + C4[0] + C5[0] + C6[0] + C7[0] + C8[0] + C9[0]
         Sves[1] = C1[1] + C2[1] + C3[1] + C4[1] + C5[1] + C6[1] + C7[1] + C8[1] + C9[1]
-        p4 = p4_func( x, p4a, p4b, p4n, p4o, Sves)
+        dSves = (Sves[1]-Sves[0]) / gdm
+        p4 = p4_func( x, p4a, p4b, p4n, dSves  )
 
         p3 = tp * p3
         p4 = tp * p4
@@ -234,9 +237,13 @@ def gen_equ( params={} ):
 def p3_func( Smem, a, b, c, d, e ):
     return (a + b * Smem) * ( (1-d) / (1 + np.exp( (Smem - e) * c) ) + d )
 
-def p4_func( x, a, b, Sn, So, Sves ):
-    A = -a * (Sves - Sn) / (So - Sn) + a * (Sves - So) / (Sn - So)
+def p4_func( x, a, b, Sn, dSves ):
+    A = a * np.tanh( dSves / Sn )
     return x * (b-A) + (1-x) * (b+A)
+
+def sigmoid( x ):
+    return 1 / ( 1 + np.exp( -x ) )
+
 
 def vec_to_state(vec):
     allstates = dict( zip( [

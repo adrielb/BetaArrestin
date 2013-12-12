@@ -356,38 +356,35 @@ showfig(1)
 
 # p4 func {{{
 x = np.array( [0,1] )
-p4a = DEFAULT_PARAMS['p4a']
+#p4a = DEFAULT_PARAMS['p4a']
 p4b = DEFAULT_PARAMS['p4b']
-p4n = DEFAULT_PARAMS['p4n']
-p4o = DEFAULT_PARAMS['p4o']
-p4o = 1e10
-maxsves = 0.5
-sves = np.linspace( 0, maxsves, 100 )
-p4 = np.array( [ p4_func( x, p4a, p4b, p4n, p4o, s ) for s in sves ] )
+#p4n = DEFAULT_PARAMS['p4n']
+w=600
+dsves = np.linspace( -w, w, 100 )
+p4 = np.array( [ p4_func( x, p4a, p4b, p4n, s ) for s in dsves ] )
 p4 = p4.transpose()
 fig, ax = genfig(1)
-ax.plot( sves , p4[0] , label='x = Back'  , color='black'  )
-ax.plot( sves , p4[1] , label='x = Front' , color='blue' )
-ax.set_title("p4( x, Sves)")
-ax.set_xlabel("Sves Level")
+ax.plot( dsves , p4[0] , label='x = Back'  , color='black'  )
+ax.plot( dsves , p4[1] , label='x = Front' , color='blue' )
+ax.set_title("p4( x, dSves)")
+ax.set_xlabel("dSves Level")
 ax.set_ylabel("p4")
-w=0.01
-ax.set_xlim(-w, maxsves+w)
+w=600
+#ax.set_xlim(-w, w)
 w=0.01
 ax.set_ylim(p4b-p4a-w, p4b+p4a+w)
 ax.legend(loc='center right')
 showfig()
-fig.savefig( "constant_p4_func.pdf", transparent=True )
+fig.savefig( pre+"constant_p4_func.pdf", transparent=True )
 # }}}
 
 # p4a zero / pos / neg {{{
-p4a = DEFAULT_PARAMS['p4a']
-sim = dose_response({'lbl' : 'Nz' , 'slevel' : 'StotNative' , 'p4o' : 1e10 , 'p4a' : 0 }).append(
-      dose_response({'lbl' : 'Oz' , 'slevel' : 'StotOE'     , 'p4o' : 1e10 , 'p4a' : 0 })).append(
-      dose_response({'lbl' : 'Np' , 'slevel' : 'StotNative' , 'p4o' : 1e10 , 'p4a' : p4a })).append(
-      dose_response({'lbl' : 'Op' , 'slevel' : 'StotOE'     , 'p4o' : 1e10 , 'p4a' : p4a })).append(
-      dose_response({'lbl' : 'Nn' , 'slevel' : 'StotNative' , 'p4o' : 1e10 , 'p4a' :-p4a })).append(
-      dose_response({'lbl' : 'On' , 'slevel' : 'StotOE'     , 'p4o' : 1e10 , 'p4a' :-p4a }))
+sim = dose_response({'lbl' : 'Nz' , 'slevel' : 'StotNative' , 'p4a' : 0 }).append(
+      dose_response({'lbl' : 'Oz' , 'slevel' : 'StotOE'     , 'p4a' : 0 })).append(
+      dose_response({'lbl' : 'Np' , 'slevel' : 'StotNative' , 'p4a' : p4a })).append(
+      dose_response({'lbl' : 'Op' , 'slevel' : 'StotOE'     , 'p4a' : p4a })).append(
+      dose_response({'lbl' : 'Nn' , 'slevel' : 'StotNative' , 'p4a' :-p4a })).append(
+      dose_response({'lbl' : 'On' , 'slevel' : 'StotOE'     , 'p4a' :-p4a }))
 sim = sim.pivot( sim.index        , 'lbl' )
 
 
@@ -425,7 +422,7 @@ ax.legend(loc='upper right')
 showfig()
 fig.savefig( "p4a_sign_change_MI.pdf", transparent=True )
 
-# Diff Sves {{{
+# Diff Sves
 dsves = ( sim['Sves[1]'] - sim['Sves[0]'] ) / sim['gdm']
 p1 = np.array( sim['p1']['Nz'].tolist()).transpose()
 dp1 =( p1[1] - p1[0]) / sim['gdm']['Nz']
@@ -447,47 +444,53 @@ box = ax.get_position()
 ax.set_position( [box.x0, box.y0, box.width*0.6, box.height] )
 ax.legend(loc='upper right', bbox_to_anchor=(1.8,1) )
 showfig()
-fig.savefig( "p4a_InputVsSvesDiff.png", transparent=True )
-#}}}
+fig.savefig( "p4a_InputVsSvesDiff.pdf", transparent=True )
+
 
 # }}}
 
 # coupled p4
 
+
+# p4a zero / pos {{{
+simz= dose_response({'lbl' : 'Nz' , 'slevel' : 'StotNative' , 'p4a' : 0 }).append(
+      dose_response({'lbl' : 'Oz' , 'slevel' : 'StotOE'     , 'p4a' : 0 }))
+
+p4a = 0.003
+p4n = 2
+pre = 'n_'
+# sim and plots #{{{
+sim = simz.append(
+        dose_response({'lbl' : 'Np' , 'slevel' : 'StotNative' , 'p4a' : p4a , 'p4n' : p4n })).append(
+        dose_response({'lbl' : 'Op' , 'slevel' : 'StotOE'     , 'p4a' : p4a , 'p4n' : p4n }))
+sim = sim.pivot( sim.index, 'lbl' )
+
 # p4 func {{{
 x = np.array( [0,1] )
-p4a = DEFAULT_PARAMS['p4a']
+#p4a = DEFAULT_PARAMS['p4a']
 p4b = DEFAULT_PARAMS['p4b']
-p4n = DEFAULT_PARAMS['p4n']
-p4o = DEFAULT_PARAMS['p4o']
-maxsves = 0.5
-sves = np.linspace( 0, maxsves, 100 )
-p4 = np.array( [ p4_func( x, p4a, p4b, p4n, p4o, s ) for s in sves ] )
+#p4n = DEFAULT_PARAMS['p4n']
+w=600
+dsves = np.linspace( -w, w, 100 )
+p4 = np.array( [ p4_func( x, p4a, p4b, p4n, s ) for s in dsves ] )
 p4 = p4.transpose()
 fig, ax = genfig(1)
-ax.plot( sves , p4[0] , label='x = Back'  , color='black'  )
-ax.plot( sves , p4[1] , label='x = Front' , color='blue' )
-ax.set_title("p4( x, Sves)")
-ax.set_xlabel("Sves Level")
+ax.plot( dsves , p4[0] , label='x = Back'  , color='black'  )
+ax.plot( dsves , p4[1] , label='x = Front' , color='blue' )
+ax.set_title("p4( x, dSves)")
+ax.set_xlabel("dSves Level")
 ax.set_ylabel("p4")
-w=0.01
-ax.set_xlim(-w, maxsves+w)
+w=600
+#ax.set_xlim(-w, w)
 w=0.01
 ax.set_ylim(p4b-p4a-w, p4b+p4a+w)
 ax.legend(loc='center right')
 showfig()
-fig.savefig( "coupled_p4_func.pdf", transparent=True )
+fig.savefig( pre+"coupled_p4_func.pdf", transparent=True )
 # }}}
 
-# p4a zero / pos {{{
-p4a = DEFAULT_PARAMS['p4a']
-sim = dose_response({'lbl' : 'Nz' , 'slevel' : 'StotNative'  , 'p4a' : 0 }).append(
-      dose_response({'lbl' : 'Oz' , 'slevel' : 'StotOE'      , 'p4a' : 0 })).append(
-      dose_response({'lbl' : 'Np' , 'slevel' : 'StotNative'  })).append(
-      dose_response({'lbl' : 'Op' , 'slevel' : 'StotOE'      }))
-sim = sim.pivot( sim.index        , 'lbl' )
-
-fig, ax = genfig(5)
+# Sves#{{{
+fig, ax = genfig(6)
 ax.set_xlabel("Input")
 ax.set_ylabel("Sves")
 ax.set_xlim(auto=True)
@@ -500,9 +503,35 @@ ax.plot( sim.index , sim['Sves[0]']['Oz'] , label='Zero Amp Overexpressed' , col
 ax.plot( sim.index , sim['Sves[0]']['Op'] , label='Pos Amp Overexpressed'  , color=color_oe     , linestyle='dashed' )
 ax.legend(loc='center right')
 showfig()
-fig.savefig( "Sves_coupled_p4.pdf", transparent=True )
+fig.savefig( pre+"Sves_coupled_p4.pdf", transparent=True )
+#}}}
 
-fig, ax = genfig(6)
+# Diff Sves {{{
+dsves = ( sim['Sves[1]'] - sim['Sves[0]'] ) / sim['gdm']
+p1 = np.array( sim['p1']['Nz'].tolist()).transpose()
+dp1 =( p1[1] - p1[0]) / sim['gdm']['Nz']
+fig, ax = genfig(7)
+ax.set_title("Diff Sves input response")
+ax.set_xlabel("Input")
+ax.set_ylabel("Diff (Front - Back)")
+ax.set_xlim(auto=True)
+ax.set_ylim(auto=True)
+#ax.set_ylim(0,20)
+ax.axhline( 0      , None        , None                           , color='black'      , lw=1 )
+ax.plot( sim.index , dp1         , label='Input p1'               , color='green'      , lw=5 )
+ax.plot( sim.index , dsves['Nz'] , label='Zero Amp Native'        , color=color_native , linestyle='solid' )
+ax.plot( sim.index , dsves['Np'] , label='Pos Amp Native'         , color=color_native , linestyle='dashed' )
+ax.plot( sim.index , dsves['Oz'] , label='Zero Amp Overexpressed' , color=color_oe     , linestyle='solid')
+ax.plot( sim.index , dsves['Op'] , label='Pos Amp Overexpressed'  , color=color_oe     , linestyle='dashed' )
+box = ax.get_position()
+ax.set_position( [box.x0, box.y0, box.width*0.6, box.height] )
+ax.legend(loc='upper right', bbox_to_anchor=(1.8,1) )
+showfig()
+fig.savefig( pre+"dSves_coupled_p4.pdf", transparent=True )
+#}}}
+
+# MI {{{
+fig, ax = genfig(8)
 ax.set_xlabel("Input")
 ax.set_ylabel("MI")
 ax.set_xlim(auto=True)
@@ -513,9 +542,12 @@ ax.plot( sim.index , sim['MI']['Nz'] , label='Zero Amp Native'        , color=co
 ax.plot( sim.index , sim['MI']['Np'] , label='Pos Amp Native'         , color=color_native , linestyle='dashed' )
 ax.plot( sim.index , sim['MI']['Oz'] , label='Zero Amp Overexpressed' , color=color_oe     , linestyle='solid')
 ax.plot( sim.index , sim['MI']['Op'] , label='Pos Amp Overexpressed'  , color=color_oe     , linestyle='dashed' )
-ax.legend(loc='lower right')
+ax.legend(loc='upper right')
 showfig()
-fig.savefig( "MI_coupled_p4.pdf", transparent=True )
+fig.savefig( pre+"MI_coupled_p4.pdf", transparent=True )
+#}}}
+
+#}}}
 
 # }}}
 
@@ -627,6 +659,22 @@ ax.get_figure().show()
 
 # }}}
 
+# sigmoid {{{
+dSves = np.linspace( -600, 600, 100)
+y = np.tanh( dSves/200. )
+
+fig, ax = genfig(1)
+ax.set_title("")
+ax.set_xlabel("dSves")
+ax.set_ylabel("sig")
+ax.set_xlim(auto=True)
+ax.set_ylim(auto=True)
+ax.plot( dSves , y , label='' )
+ax.legend()
+showfig()
+#fig.savefig( "temp.pdf", transparent=True )
+# }}}
+
 # Plot snippet {{{
 fig, ax = genfig()
 ax.set_title("")
@@ -634,8 +682,8 @@ ax.set_xlabel("")
 ax.set_ylabel("")
 ax.set_xlim(auto=True)
 ax.set_ylim(auto=True)
-ax.plot( x , y , label='' , color='' )
+ax.plot( x , y , label='' )
 ax.legend()
 showfig()
-fig.savefig( "temp.pdf", transparent=True )
+#fig.savefig( "temp.pdf", transparent=True )
 # }}}
