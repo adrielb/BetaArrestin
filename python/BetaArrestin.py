@@ -304,8 +304,8 @@ def runsim( param_list=[{}] ):
         pool.close()
     return pd.DataFrame.from_dict( sim )
 
-def dose_response( newparams={} ):
-    lenX = np.linspace( 0.01, 1.0, 50)
+def dose_response( newparams={}, start=0.01, stop=1.0, num=50 ):
+    lenX = np.linspace( start, stop, num )
     param_list = [ { 'l' : l } for l in lenX ]
     for p in param_list:
         p.update( newparams )
