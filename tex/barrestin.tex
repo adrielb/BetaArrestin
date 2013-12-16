@@ -1,3 +1,4 @@
+% Preamble {{{
 \documentclass{beamer}
 \graphicspath{{../python/}}
 \mode<presentation>
@@ -25,56 +26,11 @@
     \includegraphics[height=\textheight,width=0.9\textwidth,keepaspectratio=true]{#2}
   \end{frame}
 }
+%}}}
+
 \begin{document}
 
 \plotslide{Model Schematic}{../tikz/flow.pdf}
-
-
-\begin{frame}
-  \frametitle{Sves inhibits Rab11 localization}
-  \begin{itemize}
-    \item p4(dSves) aka Rab11 needs to be a function of the difference between
-      vescile scaffold in the front from the back
-    \item $dSves = Sves_{front} - Sves_{back}$
-    \item in other words, vescile scaffold and Rab11 are mutually inhibitory
-    \item Since native dSves is small, need fast p4 switching to amplify
-      native MI
-    \item Need slow p4 switching for the OE case in order to prevent positive
-      feedback locking, otherwise you wont see the chemorepulsion to attraction
-      transition
-  \end{itemize}
-\end{frame}
-
-\plotslide{Fast p4 switching}{n_coupled_p4_func.pdf}
-\plotslide{Fast p4 switching}{n_Sves_coupled_p4.pdf}
-\plotslide{Fast p4 switching}{n_dSves_coupled_p4.pdf}
-\plotslide{Fast p4 switching}{n_MI_coupled_p4.pdf}
-\begin{frame}
-  \frametitle{Fast p4 switching}
-  \begin{itemize}
-    \item we get a boost in native MI but no positive MI at high dose
-      overexpressed cells
-    \item but if we reduce the sigmoidal transition w.r.t. dSves, we can
-      amplify at OE levels at the expense of the native case
-  \end{itemize}
-\end{frame}
-\plotslide{Slow p4 switching}{oe_coupled_p4_func.pdf}
-\plotslide{Slow p4 switching}{oe_Sves_coupled_p4.pdf}
-\plotslide{Slow p4 switching}{oe_dSves_coupled_p4.pdf}
-\plotslide{Slow p4 switching}{oe_MI_coupled_p4.pdf}
-
-\begin{frame}
-  \frametitle{Sves inhibits Rab11 localization}
-  \begin{itemize}
-    \item I feel like we can almost get both cases to work
-    \item We have a single model that can amplify in the native case and in
-      the OE case, just with just a signle parameter change
-    \item Another way to interpret this is that vesicle scaffold inhibits
-      Rab11 translocation AND reduces its kinetics 
-  \end{itemize}
-\end{frame}
-
-\iffalse
 \plotslide{Constant p4}{constant_p4_func.pdf}
 \plotslide{Constant p4}{p4a_sign_change_Sves.pdf}
 \plotslide{Constant p4}{p4a_sign_change_MI.pdf}
@@ -120,7 +76,6 @@
 \plotslide{Rab11-DN}{rab11dn.pdf}
 
 %\plotslide{}{../hao/drugs_t.png}
-\fi
 
 \end{document}
 
