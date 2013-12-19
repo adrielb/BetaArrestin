@@ -68,22 +68,13 @@ def unpack_Q( Q ):
 def viz_opt():
     df = pd.read_csv( pre+'sim.csv' )
 
-reload( BetaArrestin )
-sim = dose_response({ 'slevel' : 'StotOE' }, num=1)
+sim = dose_response({ 'slevel' : 'StotOE' }, start=0.4, num=10)
 
-sim = dose_response({ 'slevel' : 'StotOE' })
 sim.to_csv( pre+'sim.csv', index=False )
 
 ols = sm.OLS( exog=sm.add_constant(sim.index), endog=sim['MI'] ).fit()
-ols.summary()
-
-
-x=np.arange( 5000 )
-y=x+0
-y[0] = 1
-ols = sm.OLS( exog=sm.add_constant(x), endog=y ).fit()
 ols.mse_resid
-ols.summary()
+
 
 l = np.array([0,1])
 est = ols.params['const'] + ols.params['x1'] * l
@@ -92,3 +83,9 @@ ax = plt.gca()
 ax.plot( l, est )
 plt.show()
 
+sim = dose_response({ 'slevel' : 'StotNative' }, start=0.1, num=10)
+sim.to_csv( pre+'sim-native.csv', index=False )
+
+ols = sm.OLS( exog=sm.add_constant(sim.index), endog=sim['MI'] ).fit()
+ols.mse_resid
+ols.params['x1']

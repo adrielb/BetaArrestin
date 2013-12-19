@@ -349,7 +349,7 @@ def showfig( idx=1 ):
     #plt.ion()
     #plt.get_current_fig_manager().window.activateWindow()
     plt.get_current_fig_manager().window.raise_()
-    fig.show()
+    plt.show()
 
 
 def max_mapk():
