@@ -1,6 +1,6 @@
 from BetaArrestin import *
 
-Stot = np.arange(0, 2, 0.05)
+Stot = np.arange(0, 2, 0.01)
 p = [ { 'StotOpt' : s,
         'slevel' : 'StotOpt',
         'p2'  : 0,

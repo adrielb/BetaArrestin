@@ -50,9 +50,6 @@
 \plotslide{Coupled p4}{Sves_coupled_p4.pdf}
 \plotslide{Coupled p4}{MI_coupled_p4.pdf}
 
-\begin{frame}
-  \frametitle{Comparison with experiments}
-\end{frame}
 \fi
 
 
@@ -60,17 +57,40 @@
 
 \plotslide{}{SmemVsp3.pdf}
 
-\plotslide{}{../hao/dose_response_ERK_t.png}
-\plotslide{}{InputVsMAPKpp.pdf}
+\begin{frame}
+  \frametitle{p4 as a function of Sves and dSves}
+  \begin{itemize}
+    \itemsep3em
+    \item Previously I've demonstrated why p4 had to be a function of dSves
+    \item dSves serves as the polarity compass btw front and back of the cell
+    \item Now I'm demonstrating why p4 needs to be a function of Sves as
+      well
+    \item Sves serves as sigmoidal strength factor
+      \begin{itemize}
+          \item Low Sves: short transition range
+          \item High Sves: long transition range
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+\plotslide{}{fig-p4func.pdf}
+\plotslide{}{fig-p4func3D_0.pdf}
+\plotslide{}{fig-p4func3D_1.pdf}
 
-\plotslide{}{../hao/dose_response_MI_t.png}
-\plotslide{}{InputVsMI.pdf}
+\begin{frame}
+  \frametitle{Comparison with experiments}
+\end{frame}
 
-\plotslide{}{../hao/exp-MIvsS_t.png}
-\plotslide{}{ScaffoldVsMAPKppMI.pdf}
+\plotslide{MAPKpp Dose Response}{../hao/dose_response_ERK_t.png}
+\plotslide{MAPKpp Dose Response}{InputVsMAPKpp.pdf} 
 
-\plotslide{}{../hao/gradient_response_t.png}
-\plotslide{}{GradientVsMI.pdf}
+\plotslide{MI Dose Response}{../hao/dose_response_MI_t.png}
+\plotslide{MI Dose Response}{InputVsMI.pdf}
+
+\plotslide{Scaffold Response}{../hao/exp-MIvsS_t.png}
+\plotslide{Scaffold Response}{ScaffoldVsMAPKppMI.pdf}
+
+\plotslide{Gradient Response}{../hao/gradient_response_t.png}
+\plotslide{Gradient Response}{GradientVsMI.pdf}
 
 \plotslide{Nocodazole treatment}{../hao/noco_t.png}
 \plotslide{$S_{ves} \rightarrow S_{cyto}, 20\%  p_4 $}{noco.pdf}

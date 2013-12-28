@@ -1,23 +1,18 @@
-all: fig-p4func.pdf
+FIGS=StotVsMAPKpp.pdf SmemVsp3.pdf fig-p4func.pdf InputVsMAPKpp.pdf InputVsMI.pdf \
+		 ScaffoldVsMAPKppMI.pdf GradientVsMI.pdf rab11dn.pdf
 
-run:
-	python BetaArrestin.py
+all: allfigs
+
+#${FIGS:pdf=py}: 
+
+allfigs: ${FIGS}
+
+%.pdf : %.py BetaArrestin.py
+	${PYTHON} $<
 
 opt:
 	${PYTHON} opt.py
 
-${FIGS}: BetaArrestin.py
-
-allfigs: ${FIGS}
-
-FIGS=StotVsMAPKpp.pdf SmemVsp3.pdf fig-p4func.pdf InputVsMAPKpp.pdf InputVsMI.pdf \
-		 ScaffoldVsMAPKppMI.pdf GradientVsMI.pdf rab11dn.pdf
-
-.SUFFIXES: .pdf .py
-.py.pdf:
-	${PYTHON} $<
-
-	
 clean:
 	rm *.pyc
 
@@ -25,3 +20,5 @@ cleanfigs:
 	rm ${FIGS}
 
 PYTHON=python -W ignore::DeprecationWarning
+
+.PHONY: all allfigs
