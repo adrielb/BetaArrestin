@@ -336,11 +336,14 @@ def gradient_response( newparams={} ):
 
 # }}}
 
+showfigs = False
+
 def genfig( idx=1 ):
     fig = plt.figure(idx)
     fig.clear()
     ax = fig.gca()
-    fig.show()
+    if showfigs:
+        fig.show()
     return fig, ax
 
 def showfig( idx=1 ):
@@ -351,7 +354,8 @@ def showfig( idx=1 ):
     #plt.ion()
     #plt.get_current_fig_manager().window.activateWindow()
     plt.get_current_fig_manager().window.raise_()
-    plt.show()
+    if showfigs:
+        plt.show()
 
 
 def max_mapk():
