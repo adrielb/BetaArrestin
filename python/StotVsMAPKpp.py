@@ -11,6 +11,8 @@ p = [ { 'StotOpt' : s,
         'p3d' : 1 } for s in Stot ]
 sim = runsim( p )
 
+#displayfig()
+
 fig, ax = genfig()
 ax.set_title("Open loop scaffold response")
 ax.set_xlabel("Stot")
@@ -18,6 +20,6 @@ ax.set_ylabel("MAPKpp")
 ax.set_xlim(auto=True)
 ax.set_ylim(0,1.01)
 ax.plot( sim['Stot'], sim['MAPKpp'])
-fig.show()
-
 fig.savefig( "StotVsMAPKpp.pdf", transparent=True )
+
+showfig(True)

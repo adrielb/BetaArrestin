@@ -1,0 +1,40 @@
+\documentclass[class=minimal,border=0pt]{standalone}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{backgrounds}
+\usetikzlibrary{fit}
+
+\begin{document}
+
+
+\tikzstyle{Scyto} = [draw,thick,rounded corners=1mm]
+\tikzstyle{MAPKpp} = [draw,thick,  fill=green!20]
+\tikzstyle{arrow} = [->,thick,font=\fontsize{8}{8}]
+\tikzstyle{Stot} = [rectangle, fill=gray!10, inner sep=0.4cm, rounded corners = 5mm, draw=black!50, dashed]
+
+\begin{tikzpicture}[inner sep=2mm,>=stealth']
+  %\draw[help lines] (-4,-4) grid (4,1);
+  %\fill (0,0) circle (2pt) {};
+
+  \begin{pgfonlayer}{background}
+    \node[Scyto, fill=blue!10] at (-2.5, 1) (Scyto) {$S_{cyto}$};
+    \node[Scyto, fill=blue!10] at ( 2.5, 1) (Smem)  {$S_{mem}$};
+    \node[Scyto, fill=blue!30] at (   0,-1) (Sves)  {$S_{ves}$};
+    \node[MAPKpp] at ( 0,-3.0) (MAPKpp) {MAPK$_{pp}$};
+
+    \draw[arrow] (Scyto.10) -- (Smem.170)  node[midway,above] {$p_1  = p_1(\mathit{Input})$}; 
+    \draw[arrow] (Smem.190) -- (Scyto.350) node[midway,below] {$p_2$}; 
+    \draw[arrow] (Smem)      .. controls +(down:1.3cm) and +(right:1.0cm) .. (Sves.east) node[auto,midway] {$p_3 = p_3(\mathit{S_{mem}})$};
+    \draw[arrow] (Sves.west) .. controls +(left:1.0cm) and +( down:1.3cm)  .. (Scyto) node[midway,auto] {$p_4 = p_4(x,\mathbf{S_{ves}}, \mathit{dS_{ves}})$};
+    \draw[arrow] (Sves) -- (MAPKpp);
+  \end{pgfonlayer}
+
+  \node [Stot, fit=(Scyto) (Smem) (Sves)] {};
+  \node[fill=gray!10]        at (   0,-0.1) (Stot) {\textbf{S}$_{tot}$};
+
+\end{tikzpicture}
+
+\end{document}
+

@@ -1,7 +1,7 @@
 FIGS=StotVsMAPKpp.pdf SmemVsp3.pdf fig-p4func.pdf InputVsMAPKpp.pdf InputVsMI.pdf \
 		 ScaffoldVsMAPKppMI.pdf GradientVsMI.pdf rab11dn.pdf
 
-all: p3effects.pdf
+all: rab11dn.pdf
 
 #${FIGS:pdf=py}: 
 
