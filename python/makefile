@@ -1,7 +1,7 @@
 FIGS=StotVsMAPKpp.pdf SmemVsp3.pdf fig-p4func.pdf InputVsMAPKpp.pdf InputVsMI.pdf \
 		 ScaffoldVsMAPKppMI.pdf GradientVsMI.pdf rab11dn.pdf
 
-all: InputVsMAPKpp.pdf
+all: p3effects.pdf
 
 #${FIGS:pdf=py}: 
 
@@ -19,6 +19,6 @@ clean:
 cleanfigs:
 	rm ${FIGS}
 
-PYTHON=python -W ignore::DeprecationWarning
+PYTHON=export DISPLAY=:0.2;python -W ignore::DeprecationWarning
 
 .PHONY: all allfigs

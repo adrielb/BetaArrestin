@@ -272,7 +272,7 @@ def solve_to_steady_state( newparams={} ):
     numiter = 0
     tsol = [ic]
     while dtzero > TOL:
-        tsol = odeint( equ, tsol[-1], tspan )
+        tsol = odeint( equ, tsol[-1], tspan, mxstep=2000 )
         ss = equ( tsol[-1], tend )
         dtzero = np.amax( abs( ss ) )
         numiter += 1
@@ -338,6 +338,10 @@ def gradient_response( newparams={} ):
 
 showfigs = False
 
+def displayfig():
+    global showfigs
+    showfigs = True
+
 def genfig( idx=1 ):
     fig = plt.figure(idx)
     fig.clear()
@@ -346,7 +350,7 @@ def genfig( idx=1 ):
         fig.show()
     return fig, ax
 
-def showfig( idx=1 ):
+def showfig( pause=False ):
     #fig = plt.figure( idx )
     fig = plt.gcf()
     fig.canvas.draw()
@@ -355,7 +359,10 @@ def showfig( idx=1 ):
     #plt.get_current_fig_manager().window.activateWindow()
     plt.get_current_fig_manager().window.raise_()
     if showfigs:
-        plt.show()
+        if pause:
+            plt.show()
+        else:
+            fig.show()
 
 
 def max_mapk():
