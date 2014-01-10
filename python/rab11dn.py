@@ -1,6 +1,5 @@
 from BetaArrestin import *
 
-# Noco and Rab11DN {{{
 '''
 Noco inhibits
 Rab11: recycling endosomes
@@ -30,8 +29,13 @@ ctrl = dose_response( { 'slevel' : 'StotNative'} )
 p4b = DEFAULT_PARAMS['p4b'] * 0.2
 noco = dose_response( { 'slevel' : 'StotNative', 'p4b': p4b } )
 
+csv = pd.DataFrame( index = ctrl.index )
+csv['MAPKpp-ctrl'] = ctrl['MAPKpp']
+csv['MAPKpp-noco'] = noco['MAPKpp']
+csv.index.name = 'Input'
+csv.to_csv('noco.csv')
+
 fig = plt.figure(1)
-fig.clear()
 ctrl['MAPKpp-noco'] = noco['MAPKpp']
 ax = ctrl['MAPKpp'].plot(color='blue', label='MAPKpp-ctrl')
 ax = ctrl['MAPKpp-noco'].plot(color='red')
@@ -44,6 +48,13 @@ fig.savefig( "noco.pdf", transparent=True )
 # Rab11DN
 rab11dn = dose_response( { 'slevel' : 'StotNative', 'p4a':0 } )
 
+csv = pd.DataFrame( index = ctrl.index )
+csv['MI-ctrl'] = ctrl['MI']
+csv['MI-rab11dn'] = rab11dn['MI']
+csv.index.name = 'Input'
+csv.to_csv('rab11dn.csv')
+
+#displayfig()
 fig, ax = genfig(2)
 fig.delaxes( ax )
 ax = fig.add_subplot( 1,2,1 )
@@ -60,7 +71,6 @@ avgMI = pd.Series(
             )
 ax = avgMI.plot(kind='bar', color=['blue','pink'])
 ax.set_xticklabels(['Ctrl','Rab11DN'],rotation='horizontal')
-showfig()
 fig.savefig( "rab11dn.pdf", transparent=True )
+showfig()
 
-#}}}
