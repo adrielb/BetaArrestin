@@ -1,11 +1,9 @@
 import numpy  as np
 import pandas as pd
-import matplotlib.pyplot as plt
 from scipy.integrate import odeint
 from multiprocessing import Pool
 from math import exp
 
-# Model {{{
 nproc = 16
 
 # DEFAULT_PARAMS {{{
@@ -333,36 +331,6 @@ def gradient_response( newparams={} ):
     for p in param_list:
         p.update( newparams )
     return runsim( param_list )
-
-# }}}
-
-showfigs = False
-
-def displayfig():
-    global showfigs
-    showfigs = True
-
-def genfig( idx=1 ):
-    fig = plt.figure(idx)
-    fig.clear()
-    ax = fig.gca()
-    if showfigs:
-        fig.show()
-    return fig, ax
-
-def showfig( pause=False ):
-    #fig = plt.figure( idx )
-    fig = plt.gcf()
-    fig.canvas.draw()
-    #fig.canvas.manager.window.move(1200,(idx-1) * 544)
-    #plt.ion()
-    #plt.get_current_fig_manager().window.activateWindow()
-    plt.get_current_fig_manager().window.raise_()
-    if showfigs:
-        if pause:
-            plt.show()
-        else:
-            fig.show()
 
 
 def max_mapk():
