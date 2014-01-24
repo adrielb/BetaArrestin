@@ -11,7 +11,7 @@ allfigs: ${FIGS}
 %.csv : %-sim.py BetaArrestin.py
 	${PYTHON} $<
 	
-%.pdf : %.csv %.py FigDisplay.py
+%.pdf : %.csv %.py FigDisplay.py matplotlibrc
 	${PYTHON} $*.py
 
 opt:

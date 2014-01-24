@@ -1,4 +1,4 @@
-### MATPLOTLIBRC FORMAT
+### MATPLOTLIBRC FORMAT# {{{
 
 # This is a sample matplotlib configuration file - you can find a copy
 # of it on your system in
@@ -20,8 +20,8 @@
 # (1.0, 0.5, 0.0) - a hex string, such as ff00ff or #ff00ff - a scalar
 # grayscale intensity such as 0.75 - a legal html color name, eg red,
 # blue, darkslategray
-
-#### CONFIGURATION BEGINS HERE
+# }}}
+#### CONFIGURATION BEGINS HERE# {{{
 
 # the default backend; one of GTK GTKAgg GTKCairo GTK3Agg GTK3Cairo
 # CocoaAgg MacOSX Qt4Agg TkAgg WX WXAgg Agg Cairo GDK PS PDF SVG
@@ -63,9 +63,9 @@ toolbar      : None   # None | toolbar2  ("classic" is deprecated)
 # Where your matplotlib data lives if you installed to a non-default
 # location.  This is where the matplotlib fonts, bitmaps, etc reside
 #datapath : /home/jdhunter/mpldata
+# }}}
 
-
-### LINES
+### LINES {{{
 # See http://matplotlib.org/api/artist_api.html#module-matplotlib.lines for more
 # information on line properties.
 lines.linewidth   : 4.0     # line width in points
@@ -79,8 +79,8 @@ lines.linewidth   : 4.0     # line width in points
 #lines.solid_joinstyle : miter       # miter|round|bevel
 #lines.solid_capstyle : projecting   # butt|round|projecting
 #lines.antialiased : True         # render lines in antialised (no jaggies)
-
-### PATCHES
+# }}}
+### PATCHES# {{{
 # Patches are graphical objects that fill 2D space, like polygons or
 # circles.  See
 # http://matplotlib.org/api/artist_api.html#module-matplotlib.patches
@@ -89,8 +89,8 @@ lines.linewidth   : 4.0     # line width in points
 #patch.facecolor        : blue
 #patch.edgecolor        : black
 #patch.antialiased      : True    # render patches in antialised (no jaggies)
-
-### FONT
+# }}}
+### FONT# {{{
 #
 # font properties used by text.Text.  See
 # http://matplotlib.org/api/font_manager_api.html for more
@@ -142,8 +142,8 @@ lines.linewidth   : 4.0     # line width in points
 #font.cursive        : Apple Chancery, Textile, Zapf Chancery, Sand, cursive
 #font.fantasy        : Comic Sans MS, Chicago, Charcoal, Impact, Western, fantasy
 #font.monospace      : Bitstream Vera Sans Mono, Andale Mono, Nimbus Mono L, Courier New, Courier, Fixed, Terminal, monospace
-
-### TEXT
+# }}}
+### TEXT# {{{
 # text properties used by text.Text.  See
 # http://matplotlib.org/api/artist_api.html#module-matplotlib.text for more
 # information on text properties
@@ -219,8 +219,8 @@ lines.linewidth   : 4.0     # line width in points
                        # Can be any of the LaTeX font names, including
                        # the special name "regular" for the same font
                        # used in regular text.
-
-### AXES
+# }}}
+### AXES {{{
 # default face and edge color, default tick sizes,
 # default fontsizes for ticklabels, and so on.  See
 # http://matplotlib.org/api/axes_api.html#module-matplotlib.axes
@@ -256,8 +256,8 @@ axes.labelweight    : bold  # weight of the x and y labels
 
 #polaraxes.grid      : True    # display grid on polar axes
 #axes3d.grid         : True    # display grid on 3d axes
-
-### TICKS
+# }}}
+### TICKS {{{
 # see http://matplotlib.org/api/axis_api.html#matplotlib.axis.Tick
 #xtick.major.size     : 4      # major tick size in points
 #xtick.minor.size     : 2      # minor tick size in points
@@ -278,15 +278,16 @@ axes.labelweight    : bold  # weight of the x and y labels
 #ytick.color          : k      # color of the tick labels
 #ytick.labelsize      : medium # fontsize of the tick labels
 #ytick.direction      : in     # direction: in, out, or inout
+#}}}
 
 
-### GRIDS
+### GRIDS {{{
 #grid.color       :   black   # grid color
 #grid.linestyle   :   :       # dotted
 #grid.linewidth   :   0.5     # in points
 #grid.alpha       :   1.0     # transparency, between 0.0 and 1.0
-
-### Legend
+# }}}
+### Legend {{{
 legend.fancybox      : True  # if True, use a rounded box for the
                                # legend, else a rectangle
 #legend.isaxes        : True
@@ -304,8 +305,8 @@ legend.fancybox      : True  # if True, use a rounded box for the
 #legend.shadow        : False
 #legend.frameon       : True   # whether or not to draw a frame around legend
 #legend.scatterpoints : 3 # number of scatter points
-
-### FIGURE
+# }}}
+### FIGURE {{{
 # See http://matplotlib.org/api/figure_api.html#matplotlib.figure.Figure
 #figure.figsize   : 8, 6    # figure size in inches
 #figure.dpi       : 80      # figure dots per inch
@@ -316,8 +317,9 @@ legend.fancybox      : True  # if True, use a rounded box for the
 #figure.max_open_warning : 20  # The maximum number of figures to open through
                                # the pyplot interface before emitting a warning.
                                # If less than one this feature is disabled.
-
-# The figure subplot parameters.  All dimensions are a fraction of the
+# }}}
+# The figure subplot parameters.  {{{
+# All dimensions are a fraction of the
 # figure width or height
 #figure.subplot.left    : 0.125  # the left side of the subplots of the figure
 #figure.subplot.right   : 0.9    # the right side of the subplots of the figure
@@ -325,19 +327,19 @@ legend.fancybox      : True  # if True, use a rounded box for the
 #figure.subplot.top     : 0.9    # the top of the subplots of the figure
 #figure.subplot.wspace  : 0.2    # the amount of width reserved for blank space between subplots
 #figure.subplot.hspace  : 0.2    # the amount of height reserved for white space between subplots
-
-### IMAGES
+# }}}
+### IMAGES {{{
 #image.aspect : equal             # equal | auto | a number
 #image.interpolation  : bilinear  # see help(imshow) for options
 #image.cmap   : jet               # gray | jet etc...
 #image.lut    : 256               # the size of the colormap lookup table
 #image.origin : upper             # lower | upper
 #image.resample  : False
-
-### CONTOUR PLOTS
+# }}}
+### CONTOUR PLOTS# {{{
 #contour.negative_linestyle :  dashed # dashed | solid
-
-### Agg rendering
+# }}}
+### Agg rendering# {{{
 ### Warning: experimental, 2008/10/10
 #agg.path.chunksize : 0           # 0 to disable; values in the range
                                   # 10000 to 100000 can improve speed slightly
@@ -347,7 +349,8 @@ legend.fancybox      : True  # if True, use a rounded box for the
                                   # It may cause minor artifacts, though.
                                   # A value of 20000 is probably a good
                                   # starting point.
-### SAVING FIGURES
+# }}}
+### SAVING FIGURES# {{{
 #path.simplify : True   # When True, simplify paths by removing "invisible"
                         # points to reduce file size and increase rendering
                         # speed
@@ -427,8 +430,8 @@ legend.fancybox      : True  # if True, use a rounded box for the
 #   from matplotlib import verbose.
 #verbose.level  : silent      # one of silent, helpful, debug, debug-annoying
 #verbose.fileo  : sys.stdout  # a log filename, sys.stdout or sys.stderr
-
-# Event keys to interact with figures/plots via keyboard.
+# }}}
+# Event keys to interact with figures/plots via keyboard.# {{{
 # Customize these settings according to your needs.
 # Leave the field(s) empty if you don't need a key-map. (i.e., fullscreen : '')
 
@@ -444,11 +447,11 @@ keymap.quit : q,ctrl+w, cmd+w        # close the current figure
 #keymap.yscale : l                   # toggle scaling of y-axes ('log'/'linear')
 #keymap.xscale : L, k                # toggle scaling of x-axes ('log'/'linear')
 #keymap.all_axes : a                 # enable all axes
-
-# Control location of examples data files
+# }}}
+# Control location of examples data files# {{{
 #examples.directory : ''   # directory to look in for custom installation
-
-###ANIMATION settings
+# }}}
+###ANIMATION settings# {{{
 #animation.writer : ffmpeg         # MovieWriter 'backend' to use
 #animation.codec : mp4             # Codec to use for writing movie
 #animation.bitrate: -1             # Controls size/quality tradeoff for movie.
@@ -464,3 +467,4 @@ keymap.quit : q,ctrl+w, cmd+w        # close the current figure
                                    # Path to mencoder binary. Without full path
                                    # $PATH is searched
 #animation.mencoder_args: ''       # Additional arguments to pass to mencoder
+# }}}
