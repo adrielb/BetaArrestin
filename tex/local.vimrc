@@ -1,5 +1,6 @@
 "set makeprg=make\ all
 "set makeprg=./equsubs.sed\ <\ dmath.tex\ >\ dmath.sed.tex
+set autochdir
 set nowrap
 set autoread
 set autowriteall
