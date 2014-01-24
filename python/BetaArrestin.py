@@ -312,17 +312,17 @@ def dose_response( newparams={}, start=0.01, stop=1.0, num=50 ):
     sim = runsim( param_list )
     return sim.set_index( 'l' )
 
-def scaffold_response( newparams={} ):
-    lenX = np.linspace( 0.2, 1.0, 25)
-    slevel = np.linspace( DEFAULT_PARAMS['StotNative'], DEFAULT_PARAMS['StotOE'], 250 )
+def scaffold_response( newparams={}, start=0.2, stop=1.0, num=25, snum=250 ):
+    lenX = np.linspace( start, stop, num )
+    slevel = np.linspace( DEFAULT_PARAMS['StotNative'], DEFAULT_PARAMS['StotOE'], snum )
     param_list = [ { 'l' : l, 'slevel' : 'StotOpt', 'StotOpt' : s } for l in lenX for s in slevel]
     for p in param_list:
         p.update( newparams )
     return runsim( param_list )
 
-def gradient_response( newparams={} ):
-    lenX = np.linspace( 0.2, 1.0, 25 )
-    grad = np.linspace( 0.0, 1.0, 40 )
+def gradient_response( newparams={}, start=0.2, stop=1.0, num=25, gnum=40 ):
+    lenX = np.linspace( start, stop, num )
+    grad = np.linspace( 0.0, 1.0, gnum )
     slevel = [ 'StotNative', 'StotOpt' ]
     param_list = [ {'grad'   : g,
                     'l'      : l,

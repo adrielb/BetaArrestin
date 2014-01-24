@@ -1,3 +1,5 @@
+set autochdir
+
 nnoremap <buffer> <leader>r :wall \| SlimeSend1 %run -i BetaArrestin.py<CR>
 nnoremap <leader>m  :make\|redraw!<CR>
 

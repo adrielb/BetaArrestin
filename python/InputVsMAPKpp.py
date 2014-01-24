@@ -1,10 +1,11 @@
 from BetaArrestin import *
+from FigDisplay import *
 
-
-# MAPKpp, MI, Sves vs dose {{{
-sim = dose_response({'slevel' : 'StotNative' }).append(
-      dose_response({'slevel' : 'StotOE' }) )
+sim = pd.read_csv('InputVsMAPKpp.csv')
+sim = sim.set_index( ['Input'] )
 sim = sim.pivot( sim.index, 'slevel' )
+
+#displayfig()
 
 colorN = 'blue'
 colorO = 'red'
