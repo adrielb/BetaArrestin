@@ -2,7 +2,7 @@ PYTHON=export DISPLAY=:0.2;python -W ignore::DeprecationWarning
 
 FIGS=StotVsMAPKpp.pdf SmemVsp3.pdf fig-p4func.pdf InputVsMAPKpp.pdf InputVsMI.pdf \
 		 ScaffoldVsMAPKppMI.pdf GradientVsMI.pdf rab11dn.pdf p3effects-params.pdf \
-		 p3effects.pdf noco.pdf
+		 p3effects.pdf noco.pdf MIdensity.pdf
 
 all: allfigs
 

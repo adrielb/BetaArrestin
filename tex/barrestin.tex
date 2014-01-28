@@ -1,32 +1,4 @@
-% Preamble {{{
-\documentclass{beamer}
-\graphicspath{{../python/}}
-\mode<presentation>
-{
-  \usetheme{Boadilla}
-  %\usetheme{Warsaw}
-  \setbeamercovered{transparent}
-  \setbeamertemplate{navigation symbols}{}
-  \setbeamertemplate{background canvas}[vertical shading][bottom=brown!10,top=yellow!10]
-  \setbeamertemplate{footline}{}
-  \setbeamertemplate{frametitle}[default][center]
-  \setbeamerfont{frametitle}{size=\LARGE,series=\bfseries}
-  %\setsansfont[BoldFont={Droid Sans Bold}]{Droid Sans}
-  %\setbeamerfont{frametitle}{
-}
-\usepackage[english]{babel}
-\usepackage[latin1]{inputenc}
-\usepackage{times}
-\usepackage[T1]{fontenc}
-
-\newcommand{\plotslide}[2]{
-  \begin{frame}
-    \frametitle{#1}
-    \centering
-    \includegraphics[height=\textheight,width=0.9\textwidth,keepaspectratio=true]{#2}
-  \end{frame}
-}
-%}}}
+\input{preamble.tex}
 
 \begin{document}
 
@@ -56,93 +28,7 @@
 \plotslide{Open Loop Response}{../tikz/flow_stot.pdf}
 \plotslide{}{StotVsMAPKpp.pdf}
 
-\plotslide{}{SmemVsp3.pdf}
-
-\begin{frame}
-  \frametitle{Why is p3 a bell shaped response?}
-  \begin{itemize}
-    \itemsep3em
-    \item Each part of the bell shaped curved is simulated to justify its use
-    \begin{itemize}
-      \item Constant term
-      \item Linear rising term
-      \item Just the falling side
-      \item Bell shape
-      \begin{itemize}
-        \item by combining the rising and falling terms 
-      \end{itemize}
-    \end{itemize}
-  \end{itemize}
-\end{frame}
-
-\plotslide{}{p3effects-params.pdf}
-
-\plotslide{}{p3effects_Constant.pdf}
-\begin{frame}
-  \frametitle{Results for constant p3}
-  \begin{itemize}
-    \itemsep3em
-    \item At native levels, we get a saturating increase in MAPKpp, producing
-      a negatively sloping MI curve
-      \begin{itemize}
-          \item Experimentally MI is constant w.r.t. dose
-      \end{itemize}
-    \item At overexpressed levels, the simulation only produces negative MI
-      values
-      \begin{itemize}
-          \item Experimentally MI goes from negative to positive
-      \end{itemize}
-  \end{itemize}
-\end{frame}
-
-\plotslide{}{p3effects_Rising.pdf}
-\begin{frame}
-  \frametitle{Results for rising p3}
-  \begin{itemize}
-    \itemsep3em
-    \item At native levels, MAPKpp now rises linearly with dose, producing
-      a flat MI response since it is the derivative
-      \begin{itemize}
-          \item This is what is observed experimentally
-      \end{itemize}
-    \item At overexpressed levels, the simulation still only produces negative MI
-      values
-      \begin{itemize}
-          \item Experimentally MI goes from negative to positive
-      \end{itemize}
-  \end{itemize}
-\end{frame}
-
-\plotslide{}{p3effects_Falling.pdf}
-\begin{frame}
-  \frametitle{Results for falling p3}
-  \begin{itemize}
-    \itemsep3em
-    \item At native levels, MAPKpp saturates rapidly just like the constant
-      case, producing a decreasing MI response 
-      \begin{itemize}
-          \item MI should be constant
-      \end{itemize}
-    \item At overexpressed levels, MAPKpp is now able to rise at high inputs after
-      falling, producing a MI response that goes from negative to positive
-      \begin{itemize}
-          \item Experimentally MI goes from negative to positive
-      \end{itemize}
-  \end{itemize}
-\end{frame}
-
-\plotslide{}{p3effects_Bell.pdf}
-\begin{frame}
-  \frametitle{Results for bell shaped p3}
-  \begin{itemize}
-    \itemsep3em
-    \item Now the experimental results can be satisfied at both expression
-      levels
-    \item At native levels, MAPKpp rises linearly, producing constant MI 
-    \item At overexpressed levels, MAPKpp has an inverted bell response,  
-      producing a MI curve that changes sign
-  \end{itemize}
-\end{frame}
+\input{p3response.tex}
 
 \begin{frame}
   \frametitle{p4 as a function of Sves and dSves}

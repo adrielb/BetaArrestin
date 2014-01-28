@@ -4,7 +4,7 @@ from FigDisplay import *
 mapkpp = pd.read_csv( 'noco.csv' )
 mapkpp = mapkpp.set_index( ['name', 'Input'] )
 
-displayfig()
+#displayfig()
 
 fig, ax = genfig()
 

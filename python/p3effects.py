@@ -34,7 +34,7 @@ def plotMAPKpp( idx ):
     ax.grid()
     ax.legend(loc='upper right')
     # p3 inset
-    rect = [0.55, 0.55, 0.3, 0.2]
+    rect = [0.61, 0.54, 0.25, 0.2]
     ax = fig.add_axes(rect)
     ax.set_xlabel("Smem")
     ax.set_ylabel("p3")

@@ -1,0 +1,39 @@
+% Preamble
+\documentclass{beamer}
+\graphicspath{{../python/}}
+\mode<presentation>
+{
+  \usetheme{Boadilla}
+  %\usetheme{Warsaw}
+  \setbeamercovered{transparent}
+  \setbeamertemplate{navigation symbols}{}
+  \setbeamertemplate{background canvas}[vertical shading][bottom=brown!10,top=yellow!10]
+  \setbeamertemplate{footline}{}
+  \setbeamertemplate{items}[circle]
+  \setbeamertemplate{frametitle}[default][center]
+  \setbeamerfont{frametitle}{size=\LARGE,series=\bfseries}
+  %\setsansfont[BoldFont={Droid Sans Bold}]{Droid Sans}
+  %\setbeamerfont{frametitle}{
+}
+\usepackage[english]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{times}
+\usepackage[T1]{fontenc}
+
+\newcommand{\plotslide}[2]{
+  \begin{frame}
+    \frametitle{#1}
+    \centering
+    \includegraphics[height=\textheight,width=0.9\textwidth,keepaspectratio=true]{#2}
+  \end{frame}
+}
+
+% Adding footnotes 
+% http://www.math.umbc.edu/~rouben/beamer/quickstart-Z-H-17.html
+% The reference environment takes two arguments, These specify the footnote’s
+% position relative to the slide’s top left corner. A Beamer slide is
+% 128mm×96mm.
+\usepackage[absolute,overlay]{textpos} 
+\newenvironment{reference}[2]{% 
+  \begin{textblock*}{\textwidth}(#1,#2) 
+      \footnotesize\it\bgroup\color{red!50!black}}{\egroup\end{textblock*}} 
