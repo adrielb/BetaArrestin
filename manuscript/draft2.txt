@@ -1,238 +1,250 @@
-Scaffold proteins can both facilitate or inhibit signaling processes in a 
-concentration-dependent manner [REF]. This dual function can be achieved, 
-since scaffolds expressed at lower or optimal levels can enforce juxtaposition 
-of interacting molecular species, whereas scaffold over-expression can titrate 
-these molecular species away from each other. This dose dependence suggests 
-that uneven spatial distribution of scaffold molecules within a cell can result 
-in a spatially inhomogeneous signaling outcome, which in turn might lead to 
-polarization of cellular functions regulated by the signaling. If these functions are 
-associated with re-organization of cellular cytoskeleton, oriented cell growth or 
-migration may ensue. Indeed, within the context of the yeast mating response, 
-inhomogeneous distribution of a scaffold protein within a cell responding to a 
-pheromone gradient can result in a spatially graded distribution of the associated 
-MAPK signaling [REF]. Furthermore, global variation of the scaffold levels within 
-the same signaling system has the predicted biphasic effect on downstream 
-gene regulation [REF]. However, it is not clear whether the scaffold-mediated 
-intracellular gradient of MAPK triggered in this response is causally related to the 
-directed cell growth associated with the mating response [REF]. Furthermore, in 
-spite of these suggestive findings in budding yeast, the existence of similar cell 
-polarization mechanisms and their possible relationship to directed migration 
-response in other cell types, e.g., in mammalian migratory cells, remains unclear. 
+Scaffold proteins can both facilitate or inhibit signaling processes in a
+concentration-dependent manner [REF]. This dual function can be achieved,
+since scaffolds expressed at lower or optimal levels can enforce juxtaposition
+of interacting molecular species, whereas scaffold over-expression can titrate
+these molecular species away from each other. This dose dependence suggests
+that uneven spatial distribution of scaffold molecules within a cell can
+result in a spatially inhomogeneous signaling outcome, which in turn might
+lead to polarization of cellular functions regulated by the signaling. If
+these functions are associated with re-organization of cellular cytoskeleton,
+oriented cell growth or migration may ensue. Indeed, within the context of the
+yeast mating response, inhomogeneous distribution of a scaffold protein within
+a cell responding to a pheromone gradient can result in a spatially graded
+distribution of the associated MAPK signaling [REF]. Furthermore, global
+variation of the scaffold levels within the same signaling system has the
+predicted biphasic effect on downstream gene regulation [REF]. However, it is
+not clear whether the scaffold-mediated intracellular gradient of MAPK
+triggered in this response is causally related to the directed cell growth
+associated with the mating response [REF]. Furthermore, in spite of these
+suggestive findings in budding yeast, the existence of similar cell
+polarization mechanisms and their possible relationship to directed migration
+response in other cell types, e.g., in mammalian migratory cells, remains
+unclear. 
 
-A ubiquitous mammalian scaffold molecule implicated in the control of chemotactic 
-responses is beta-arrestin. Beta-arrestins are members of the arrestin protein 
-family initially identified as the blockers of the G-protein coupled receptor (GPCR) 
-signaling and promoters of the receptor internalization [REF]. However, subsequent 
-research also implicated these proteins in classical scaffolding functions, by 
-demonstrating their association with and regulation of multiple signaling pathways 
-[REF]. Furthermore, a recent study demonstrated that beta-arrestin-2 function is 
-essential for directed migration of HEK293 cells expressing Angiotensin II (AngII) 
-receptor (AT1aR) in sharp gradients of AngII. This result however, left open 
-multiple questions about the putative beta-arresin role in control of chemotaxis. 
-Does it enforce chemotaxis as a classical scaffold, by promoting polarization 
-of signaling and cytoskeletal components, as proposed above, or is its role in 
-regulation of chemotaxis purely permissive? Is the signaling pathway scaffolding 
-or receptor internalization function of beta-arrestin primary in this response? 
-Moreover, it is unclear if the distribution of beta-arrestin within the cells exposed 
-to AngII gradient is spatially inhomogeneous, and if so, whether the polarization of 
-the signaling can be compromised in very shallow AngII concentration gradients? 
-Answering these questions may reveal a previously unappreciated new mechanism 
-of cell polarization and chemotactic response. 
+A ubiquitous mammalian scaffold molecule implicated in the control of
+chemotactic responses is beta-arrestin. Beta-arrestins are members of the
+arrestin protein family initially identified as the blockers of the G-protein
+coupled receptor (GPCR) signaling and promoters of the receptor
+internalization [REF]. However, subsequent research also implicated these
+proteins in classical scaffolding functions, by demonstrating their
+association with and regulation of multiple signaling pathways [REF].
+Furthermore, a recent study demonstrated that beta-arrestin-2 function is
+essential for directed migration of HEK293 cells expressing Angiotensin II
+(AngII) receptor (AT1aR) in sharp gradients of AngII. This result however,
+left open multiple questions about the putative beta-arresin role in control
+of chemotaxis.  Does it enforce chemotaxis as a classical scaffold, by
+promoting polarization of signaling and cytoskeletal components, as proposed
+above, or is its role in regulation of chemotaxis purely permissive? Is the
+signaling pathway scaffolding or receptor internalization function of
+beta-arrestin primary in this response?  Moreover, it is unclear if the
+distribution of beta-arrestin within the cells exposed to AngII gradient is
+spatially inhomogeneous, and if so, whether the polarization of the signaling
+can be compromised in very shallow AngII concentration gradients?  Answering
+these questions may reveal a previously unappreciated new mechanism of cell
+polarization and chemotactic response. 
 
-In this study, using a combination of diverse experimental techniques and modeling, 
-we set out to ascertain the importance of beta-arrestin in chemotactic regulation 
-and to investigate the underlying mechanisms. We found that the control of 
-chemotactic behavior by beta-arrestin depends on its ability to serve as a classical 
-scaffold protein in the Erk1/2 MAPK(Erk) signaling pathway, but also, surprisingly, 
-that both receptor internalization and signal scaffolding functions of beta-arrestin 
-are critically important for effective chemotaxis. Trafficking of internalized receptor 
-complexes was essential for amplification of shallow input gradients, whose 
-direction was decoded by signaling through the Erk pathway. Overexpression 
-of beta-arrestin-2 led to dramatic changes in cell migration behavior, including 
-conversion from chemo-attraction to chemo-repulsion. Overall, the interplay 
-between the scaffold expression, input dose and intracellular trafficking was 
-found to be critical in defining this new mechanism of cellular polarization and 
-chemotactic migration. 
+In this study, using a combination of diverse experimental techniques and
+modeling, we set out to ascertain the importance of beta-arrestin in
+chemotactic regulation and to investigate the underlying mechanisms. We found
+that the control of chemotactic behavior by beta-arrestin depends on its
+ability to serve as a classical scaffold protein in the Erk1/2 MAPK(Erk)
+signaling pathway, but also, surprisingly, that both receptor internalization
+and signal scaffolding functions of beta-arrestin are critically important for
+effective chemotaxis. Trafficking of internalized receptor complexes was
+essential for amplification of shallow input gradients, whose direction was
+decoded by signaling through the Erk pathway. Overexpression of
+beta-arrestin-2 led to dramatic changes in cell migration behavior, including
+conversion from chemo-attraction to chemo-repulsion. Overall, the interplay
+between the scaffold expression, input dose and intracellular trafficking was
+found to be critical in defining this new mechanism of cellular polarization
+and chemotactic migration. 
 
 RESULTS
 
-The initial evidence for the importance of beta-arrestin in chemotactic response to 
-AngII gradients was obtained from trans-well experiments [REF]. However, these 
-assays do not always have unambiguous interpretation, as the results can depend on 
-both migratory and invasive cell behavior. We therefore first validated chemotactic 
-behavior by direct monitoring of live cell migration within a microfluidic device, 
-whose design allowed for the analysis of cell responses to diffusion based gradients 
-[REF]. We indeed found that HEK293 cells with exogenously expressed AT1aR 
-displayed a pronounced chemotactic behavior within shallow AngII gradients. We 
-also observed that A7r5 rat vascular smooth muscle cells endogenously expressing 
-AngIIR displayed a strong chemotactic response to AngII, supporting its function as 
-an effective natural chemoattractant. Increasing the value of the AngII gradient led 
-to stronger chemotactic attraction of HEK293 cells, the response that was further 
-amplified when the levels of beta-arresin were moderately over-expressed. We 
-also confirmed that siRNA based silencing of beta-arresin expression completely 
-eliminated chemotaxis, and that chemotaxis could occur in the gradients of a biased 
-AT1aR agonist, SII, and thus was beta-arrestin dependent (????). Furthermore, we 
-observed that chemotactic response to SII was surprisingly significantly stronger 
-that that to AngII, as evidenced by normalization of the results to account for 
-different receptor affinity of these two compounds. These results suggested that the 
-bone fide chemotactic response to AngII was indeed beta-arrestin dependent. 
+The initial evidence for the importance of beta-arrestin in chemotactic
+response to AngII gradients was obtained from trans-well experiments [REF].
+However, these assays do not always have unambiguous interpretation, as the
+results can depend on both migratory and invasive cell behavior. We therefore
+first validated chemotactic behavior by direct monitoring of live cell
+migration within a microfluidic device, whose design allowed for the analysis
+of cell responses to diffusion based gradients [REF]. We indeed found that
+HEK293 cells with exogenously expressed AT1aR displayed a pronounced
+chemotactic behavior within shallow AngII gradients. We also observed that
+A7r5 rat vascular smooth muscle cells endogenously expressing AngIIR displayed
+a strong chemotactic response to AngII, supporting its function as an
+effective natural chemoattractant. Increasing the value of the AngII gradient
+led to stronger chemotactic attraction of HEK293 cells, the response that was
+further amplified when the levels of beta-arresin were moderately
+over-expressed. We also confirmed that siRNA based silencing of beta-arresin
+expression completely eliminated chemotaxis, and that chemotaxis could occur
+in the gradients of a biased AT1aR agonist, SII, and thus was beta-arrestin
+dependent (????). Furthermore, we observed that chemotactic response to SII
+was surprisingly significantly stronger that that to AngII, as evidenced by
+normalization of the results to account for different receptor affinity of
+these two compounds. These results suggested that the bone fide chemotactic
+response to AngII was indeed beta-arrestin dependent. 
 
-How does beta-arrestin-2 mediated signaling control the chemotactic response? To 
-analyze the underlying molecular mechanisms in greater detail, we first exposed 
-the cells to spatially homogenous step-wise elevations of AngII concentration. 
-We used several live cell probes to follow different stages of the AngII triggered 
-signal propagation. We found that, at both AngII doses examined, beta-arrestin 
-displayed transient translocation to the membrane, followed by persistent cytosolic 
-localization in complex with AT1aR within internalized vesicles. The complex 
-formation was reported by the … FRET signal… We confirmed that prevention of 
-endocytosis and resulting vesicle formation led to inhibition of the chemotactic 
-response suggesting that internalized AT1aR-beta-arrestin complex was the 
-functionally important form of beta-arrestin in chemotactic signaling. This result 
-further suggested that the signaling species activated by the complex would be 
-associated with internalized vesicles. We found that Erk1/2 (ERK) activity was 
-upregulated contemporaneously with AT1aR-beta-arrestin complex formation. 
-This MAPK underwent strong, dose dependent activation followed by incomplete 
-adaptation to the steady levels dependent on the AngII dose. Inhibition of Erk 
-activation was found to inhibit chemotactic response, suggesting its functional 
-significance in the beta-arrestin regulated chemotactic behavior. Addition of AngII 
-also triggered strong and transient translocation of actin to the plasma membrane 
-and associated expansion of the membrane. This translocation was AngII dose 
-dependent. 
+How does beta-arrestin-2 mediated signaling control the chemotactic response?
+To analyze the underlying molecular mechanisms in greater detail, we first
+exposed the cells to spatially homogenous step-wise elevations of AngII
+concentration.  We used several live cell probes to follow different stages of
+the AngII triggered signal propagation. We found that, at both AngII doses
+examined, beta-arrestin displayed transient translocation to the membrane,
+followed by persistent cytosolic localization in complex with AT1aR within
+internalized vesicles. The complex formation was reported by the … FRET
+signal… We confirmed that prevention of endocytosis and resulting vesicle
+formation led to inhibition of the chemotactic response suggesting that
+internalized AT1aR-beta-arrestin complex was the functionally important form
+of beta-arrestin in chemotactic signaling. This result further suggested that
+the signaling species activated by the complex would be associated with
+internalized vesicles. We found that Erk1/2 (ERK) activity was upregulated
+contemporaneously with AT1aR-beta-arrestin complex formation.  This MAPK
+underwent strong, dose dependent activation followed by incomplete adaptation
+to the steady levels dependent on the AngII dose. Inhibition of Erk activation
+was found to inhibit chemotactic response, suggesting its functional
+significance in the beta-arrestin regulated chemotactic behavior. Addition of
+AngII also triggered strong and transient translocation of actin to the plasma
+membrane and associated expansion of the membrane. This translocation was
+AngII dose dependent. 
 
-When average time-dependent responses of the distinct signaling species analyzed 
-above were normalized to the time of AngII addition and overlaid on the same 
-graph, it became clear that Erk activation closely followed the kinetics of AT1aR-
-beta-arrestin complex formation, prior to its partial adaptation. The kinetics of 
-actin response was hypersensitive to the signal addition, displaying both rapid 
-activation and rapid adaptation. Overexpression of actin within the cells led to 
-an increased stress fiber formation and cell spreading. In such cells, the higher 
-surface to volume ratio was predicted to favor a more rapid translocation of beta-
-arrestin to the plasma membrane, which was indeed confirmed. This, in turn 
-was associated with a correspondingly faster translocation of actin to the plasma 
-membrane, further suggesting causative link between beta-arrestin activation and 
-actin-based morphology change. In summary, these results suggested that AngII 
-triggers a sequence of signaling events ultimately leading to both dose dependent 
-Erk activation and actin-dependent morphological change, with both outcomes 
-potentially relevant to promoting cell migration. 
+When average time-dependent responses of the distinct signaling species
+analyzed above were normalized to the time of AngII addition and overlaid on
+the same graph, it became clear that Erk activation closely followed the
+kinetics of AT1aR- beta-arrestin complex formation, prior to its partial
+adaptation. The kinetics of actin response was hypersensitive to the signal
+addition, displaying both rapid activation and rapid adaptation.
+Overexpression of actin within the cells led to an increased stress fiber
+formation and cell spreading. In such cells, the higher surface to volume
+ratio was predicted to favor a more rapid translocation of beta- arrestin to
+the plasma membrane, which was indeed confirmed. This, in turn was associated
+with a correspondingly faster translocation of actin to the plasma membrane,
+further suggesting causative link between beta-arrestin activation and
+actin-based morphology change. In summary, these results suggested that AngII
+triggers a sequence of signaling events ultimately leading to both dose
+dependent Erk activation and actin-dependent morphological change, with both
+outcomes potentially relevant to promoting cell migration. 
 
-Since beta-arrestin can regulate signaling events by both controlling receptor 
-internalization and directly scaffolding signaling pathways, beta-arrestin 
-overexpression can potentially affect signaling outcome through either or both of 
-these processes. We thus explored, at several distinct doses of AngII, beta-arrestin 
-expression in amounts leading to strong impairment of cell migration directionality, 
-would negatively affect both receptor internalization and Erk signaling. Indeed, 
-we found that, for all doses of AngII, high scaffold levels dramatically decreased 
-beta-arrestin-enriched vesicle formation. The intermediate levels of beta-arrestin 
-expression led to a progressive increase in vesicle formation, as the dose of AngII 
-increased. Erk signaling was also negatively affected by high levels of beta-arrestin 
-expression. However, it displayed a more complex dependence on the AngII dose. 
-For both beta-arrestin levels analyzed, the dose dependencies were biphasic, with 
-the maximum levels reached at different AngII concentration values. These complex 
-cellular responses called for development of a computational model capable of 
-accounting for the experimental results obtained so far, and of predicting cell 
-behaviors under different circumstances, particularly under the AngII gradient 
-stimulation. 
+Since beta-arrestin can regulate signaling events by both controlling receptor
+internalization and directly scaffolding signaling pathways, beta-arrestin
+overexpression can potentially affect signaling outcome through either or both
+of these processes. We thus explored, at several distinct doses of AngII,
+beta-arrestin expression in amounts leading to strong impairment of cell
+migration directionality, would negatively affect both receptor
+internalization and Erk signaling. Indeed, we found that, for all doses of
+AngII, high scaffold levels dramatically decreased beta-arrestin-enriched
+vesicle formation. The intermediate levels of beta-arrestin expression led to
+a progressive increase in vesicle formation, as the dose of AngII increased.
+Erk signaling was also negatively affected by high levels of beta-arrestin
+expression. However, it displayed a more complex dependence on the AngII dose.
+For both beta-arrestin levels analyzed, the dose dependencies were biphasic,
+with the maximum levels reached at different AngII concentration values. These
+complex cellular responses called for development of a computational model
+capable of accounting for the experimental results obtained so far, and of
+predicting cell behaviors under different circumstances, particularly under
+the AngII gradient stimulation. 
 
-The model illustrated in the schematic??? was based on the idea that beta-arrestin 
-levels can control the signaling outputs by biphasically affecting both receptor 
-internalization at the plasma membrane and Erk activation in the vesicles. 
-Furthermore, it was assumed that Erk activity could display a degree of scaffold-
-independent activity in the cytosol. The resulting model was partially based on 
-our prior model of the scaffold-mediated MAPK signaling, with the important 
-modification to account for several cellular compartments: plasma membrane, 
-cytosol and vesicles. The model, after parameter adjustment could successfully 
-account for several experimental datasets described above [????]. We next extended 
-the model by introducing spatial dimensionality into simulations and attempting 
-to predict cell responses to gradients of AngII. Although the model could account 
-for some degree of cell polarization, the differences between the signaling activities 
-in the rear and front portions of the cell tended to be very weak in shallow AngII 
-gradients. This suggested that an amplification mechanism may be present in the 
-signaling network such that it might amplify shallow input gradients into stronger 
-polarized intracellular signaling responses. We next examined this prediction and 
-modified the model to account for a possible amplification mechanism.
-When examined in AngII gradients, the intracellular distributions of internalized 
-receptor, beta-arrestin and Erk activity displayed strong asymmetry, which 
-exceeded the asymmetry expected based on the AngII input gradient alone. This 
-result suggested that indeed, there was a mechanism to amplify the difference 
-between the signaling activities in the front and the rear of the cells. Since the beta-
-arrestin localization and Erk activity were confined to the vesicles, one immediate 
-possibility for an amplification mechanisms was that not only vesicle formation 
-(through internalization) was affected by the asymmetry of the input, but also 
-vesicle recycling, with a greater degree of recycling on the side of the cell opposite 
-to the side with a greater degree of internalization. To test this idea we first noted 
-that vesicle trafficking, but not vesicle formation, was microtubule-dependent. 
-Inhibition of microtubules with nocodazole, a microtublule disrupting agent, also 
-progressively reduced amplification of beta-arrestin polarization in the AngII 
-gradient. This result not only confirmed potential role of microtubule-based vesicle 
-trafficking in gradient amplification, but raised the question of whether this process 
-can be linked to vesicle recycling. Previously, it has been determined that a small 
-GTP-ase Rab11 could control endosome recycling in a microtubule dependent 
-fashion. Furthermore, Rab11 has been associated with various forms of in vivo cell 
-migration [REF]. We found that, in cells exposed to AngII gradients, Rab11 
-translocated to the back of the cell, consistent with possible gradient induced 
-polarization of vesicle recycling. Inhibition of Rab11 by overexpression of its 
-dominant negative form indeed resulted in the loss of signal amplification and 
-biased cell migration, further supporting its functionality in gradient sensing. We 
-thus modified the model to account for the asymmetric vesicle formation and 
-recycling occurring in the beta-arrestin-2 and Rab11 manner, respectively. 
-The model made several important predictions that we sought to validate 
-experimentally. First, it predicted that, in line with beta-arrestin playing a role of 
-a classical scaffold molecule, different levels of scaffold expression are expected 
-to result in biphasic changes in both Erk activity and the corresponding bias in 
-chemotactic response. Furthermore, the optimal levels of the scaffold for these 
-two responses were predicted to be shifted with respect to each other, so that 
-chemotactic bias would peak at a lower scaffold level relative to the scaffold 
-level optimizing Erk activation. This was indeed observed in the experiments, 
-when clones expressing different levels of beta-arrestin were analyzed. The 
-model predicted and experiments confirmed that microtubule disruption by 
-nocodazole can lead to a relative increase in the Erk activity, due to accumulation of 
-intracellular vesicles. 
+The model illustrated in the schematic??? was based on the idea that
+beta-arrestin levels can control the signaling outputs by biphasically
+affecting both receptor internalization at the plasma membrane and Erk
+activation in the vesicles.  Furthermore, it was assumed that Erk activity
+could display a degree of scaffold- independent activity in the cytosol. The
+resulting model was partially based on our prior model of the
+scaffold-mediated MAPK signaling, with the important modification to account
+for several cellular compartments: plasma membrane, cytosol and vesicles. The
+model, after parameter adjustment could successfully account for several
+experimental datasets described above [????]. We next extended the model by
+introducing spatial dimensionality into simulations and attempting to predict
+cell responses to gradients of AngII. Although the model could account for
+some degree of cell polarization, the differences between the signaling
+activities in the rear and front portions of the cell tended to be very weak
+in shallow AngII gradients. This suggested that an amplification mechanism may
+be present in the signaling network such that it might amplify shallow input
+gradients into stronger polarized intracellular signaling responses. We next
+examined this prediction and modified the model to account for a possible
+amplification mechanism.  When examined in AngII gradients, the intracellular
+distributions of internalized receptor, beta-arrestin and Erk activity
+displayed strong asymmetry, which exceeded the asymmetry expected based on the
+AngII input gradient alone. This result suggested that indeed, there was a
+mechanism to amplify the difference between the signaling activities in the
+front and the rear of the cells. Since the beta- arrestin localization and Erk
+activity were confined to the vesicles, one immediate possibility for an
+amplification mechanisms was that not only vesicle formation (through
+internalization) was affected by the asymmetry of the input, but also vesicle
+recycling, with a greater degree of recycling on the side of the cell opposite
+to the side with a greater degree of internalization. To test this idea we
+first noted that vesicle trafficking, but not vesicle formation, was
+microtubule-dependent.  Inhibition of microtubules with nocodazole, a
+microtublule disrupting agent, also progressively reduced amplification of
+beta-arrestin polarization in the AngII gradient. This result not only
+confirmed potential role of microtubule-based vesicle trafficking in gradient
+amplification, but raised the question of whether this process can be linked
+to vesicle recycling. Previously, it has been determined that a small GTP-ase
+Rab11 could control endosome recycling in a microtubule dependent fashion.
+Furthermore, Rab11 has been associated with various forms of in vivo cell
+migration [REF]. We found that, in cells exposed to AngII gradients, Rab11
+translocated to the back of the cell, consistent with possible gradient
+induced polarization of vesicle recycling. Inhibition of Rab11 by
+overexpression of its dominant negative form indeed resulted in the loss of
+signal amplification and biased cell migration, further supporting its
+functionality in gradient sensing. We thus modified the model to account for
+the asymmetric vesicle formation and recycling occurring in the
+beta-arrestin-2 and Rab11 manner, respectively.  The model made several
+important predictions that we sought to validate experimentally. First, it
+predicted that, in line with beta-arrestin playing a role of a classical
+scaffold molecule, different levels of scaffold expression are expected to
+result in biphasic changes in both Erk activity and the corresponding bias in
+chemotactic response. Furthermore, the optimal levels of the scaffold for
+these two responses were predicted to be shifted with respect to each other,
+so that chemotactic bias would peak at a lower scaffold level relative to the
+scaffold level optimizing Erk activation. This was indeed observed in the
+experiments, when clones expressing different levels of beta-arrestin were
+analyzed. The model predicted and experiments confirmed that microtubule
+disruption by nocodazole can lead to a relative increase in the Erk activity,
+due to accumulation of intracellular vesicles. 
 
-Variation of scaffold levels and of average local concentrations of AngII was 
-predicted to lead to complex chemotactic responses. An important assumption here, 
-stemming from the earlier experimental results, was that the vesicle formation 
-was positively regulated by AngII levels, promoting beta-arrestin recruitment. 
-For the level of the scaffold, optimal for chemotaxis, the model predicted and 
-experiment confirmed that the response would be attractive at all levels of local 
-AngII, with a weak or no dependence on the AngII dose. On the other hand, for 
-the highly overexpressed beta-arrestin levels, the model and experiment showed 
-that cells can switch from chemo-attraction to chemo-repulsion at the low AngII 
-concentrations, and switch again to chemo-attraction at higher AngII levels. The 
-explanation suggested by the model was that the repulsive response was due to the 
-inhibition of Erk signaling at high scaffold levels in the vesicles, thus maximizing Erk 
-signaling on the side of the cell exposed to lower rather than higher AngII inputs. 
-On the other hand, the switch back to attraction was associated with an additional 
-effect of decreased vesicle formation when scaffold and AngII input levels were both 
-high, thus negating the effect of the scaffold-based suppression of Erk signaling from 
-the vesicles. The model therefore predicted that this ‘double negative’ effect of the 
-scaffold over-expression at high AngII levels should be compensated by a greater 
-vesicle retention, e.g., by inhibiting microtublule-mediated vesicle trafficking and 
-recycling. Indeed, treatment of cells containing over-expressed beta-arrestin-2 with 
-nocodazole led to uniform repulsive response at all AngII concentration levels. 
+Variation of scaffold levels and of average local concentrations of AngII was
+predicted to lead to complex chemotactic responses. An important assumption
+here, stemming from the earlier experimental results, was that the vesicle
+formation was positively regulated by AngII levels, promoting beta-arrestin
+recruitment.  For the level of the scaffold, optimal for chemotaxis, the model
+predicted and experiment confirmed that the response would be attractive at
+all levels of local AngII, with a weak or no dependence on the AngII dose. On
+the other hand, for the highly overexpressed beta-arrestin levels, the model
+and experiment showed that cells can switch from chemo-attraction to
+chemo-repulsion at the low AngII concentrations, and switch again to
+chemo-attraction at higher AngII levels. The explanation suggested by the
+model was that the repulsive response was due to the inhibition of Erk
+signaling at high scaffold levels in the vesicles, thus maximizing Erk
+signaling on the side of the cell exposed to lower rather than higher AngII
+inputs.  On the other hand, the switch back to attraction was associated with
+an additional effect of decreased vesicle formation when scaffold and AngII
+input levels were both high, thus negating the effect of the scaffold-based
+suppression of Erk signaling from the vesicles. The model therefore predicted
+that this ‘double negative’ effect of the scaffold over-expression at high
+AngII levels should be compensated by a greater vesicle retention, e.g., by
+inhibiting microtublule-mediated vesicle trafficking and recycling. Indeed,
+treatment of cells containing over-expressed beta-arrestin-2 with nocodazole
+led to uniform repulsive response at all AngII concentration levels. 
 
-The model was also successful in predicting other properties of the cell migration 
-response, including the dependence of the chemotactic bias on the gradient value 
-[Fig.??]. Overall, the consistency between the model and experiment strongly 
-suggested that the model correctly captures the essence of the chemotactic 
-response controlled by beta-arrestin. Surprisingly, both the role of beta-arrestin 
-in the scaffolding signaling species within the vesicles and its role in vesicles 
-trafficking (along with the reciprocal role of Rab11), were critically important for 
-effective chemotaxis in shallow ligand gradients. The vesicle trafficking resulted in 
-amplification of extracellular ligand asymmetry, which was then interpreted by the 
-cells according to the combination of the input strength and scaffold expression, 
-and resulting strongly asymmetric Erk activity, cell polarization and directional 
-migration. 
+The model was also successful in predicting other properties of the cell
+migration response, including the dependence of the chemotactic bias on the
+gradient value [Fig.??]. Overall, the consistency between the model and
+experiment strongly suggested that the model correctly captures the essence of
+the chemotactic response controlled by beta-arrestin. Surprisingly, both the
+role of beta-arrestin in the scaffolding signaling species within the vesicles
+and its role in vesicles trafficking (along with the reciprocal role of
+Rab11), were critically important for effective chemotaxis in shallow ligand
+gradients. The vesicle trafficking resulted in amplification of extracellular
+ligand asymmetry, which was then interpreted by the cells according to the
+combination of the input strength and scaffold expression, and resulting
+strongly asymmetric Erk activity, cell polarization and directional migration. 
 
 Discussion points
 
-NB!!! Need to link to actin and RSK better
-p38 role (possibly related to the trans-well assay),
-A new mechanism
-Can help explain the role of Rab11 in other systems 
-A different role for vesicle trafficking than usually assumed
-Is flexible
-Natural way to get both chemoattraction and chemorepulsion
-Not clear how Rab11 distribution is controlled but we have excluded certain 
-possibilities
-Can be at play in many G-protein and beta-arrestin dependent systems, including 
-possibly GF signaling
+NB!!! Need to link to actin and RSK better p38 role (possibly related to the
+trans-well assay), A new mechanism Can help explain the role of Rab11 in other
+systems A different role for vesicle trafficking than usually assumed Is
+flexible Natural way to get both chemoattraction and chemorepulsion Not clear
+how Rab11 distribution is controlled but we have excluded certain
+possibilities Can be at play in many G-protein and beta-arrestin dependent
+systems, including possibly GF signaling
