@@ -1,4 +1,6 @@
 % Preamble
+\RequirePackage[l2tabu, orthodox]{nag}
+
 \documentclass{beamer}
 \graphicspath{{../python/}}
 \mode<presentation>
@@ -17,7 +19,7 @@
 }
 \usepackage[english]{babel}
 \usepackage[latin1]{inputenc}
-\usepackage{times}
+\usepackage{arev}
 \usepackage[T1]{fontenc}
 
 \newcommand{\plotslide}[2]{
@@ -36,4 +38,4 @@
 \usepackage[absolute,overlay]{textpos} 
 \newenvironment{reference}[2]{% 
   \begin{textblock*}{\textwidth}(#1,#2) 
-      \footnotesize\it\bgroup\color{red!50!black}}{\egroup\end{textblock*}} 
+      \footnotesize\textit\bgroup\color{red!50!black}}{\egroup\end{textblock*}} 

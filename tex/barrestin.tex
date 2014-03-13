@@ -1,5 +1,7 @@
 \input{preamble.tex}
 
+%\includeonlyframes{test}
+
 \begin{document}
 
 \plotslide{Model Schematic}{../tikz/flow.pdf}
@@ -30,7 +32,7 @@
 
 \input{p3response.tex}
 
-\begin{frame}
+\begin{frame}[label=test]
   \frametitle{p4 as a function of Sves and dSves}
   \begin{itemize}
     \itemsep3em
@@ -58,6 +60,9 @@
 
 \plotslide{MI Dose Response}{../hao/dose_response_MI_t.png}
 \plotslide{MI Dose Response}{InputVsMI.pdf}
+
+\plotslide{MI Density Response}{../hao/MI_density_t.png}
+\plotslide{MI Density Response}{MIdensity.pdf}
 
 \plotslide{Scaffold Response}{../hao/exp-MIvsS_t.png}
 \plotslide{Scaffold Response}{ScaffoldVsMAPKppMI.pdf}
