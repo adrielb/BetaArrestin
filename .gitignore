@@ -12,3 +12,5 @@
 *.pyc
 *.fls
 *.fdb_latexmk
+tags
+Session.vim

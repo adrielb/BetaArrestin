@@ -1,6 +1,6 @@
 from BetaArrestin import *
 
-sim = gradient_response( )
+sim = gradient_response( start=0.5 )
 
 simGrad = sim[ ['slevel', 'grad', 'MI'] ]
 

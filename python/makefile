@@ -4,7 +4,7 @@ FIGS=StotVsMAPKpp.pdf SmemVsp3.pdf fig-p4func.pdf InputVsMAPKpp.pdf InputVsMI.pd
 		 ScaffoldVsMAPKppMI.pdf GradientVsMI.pdf rab11dn.pdf p3effects-params.pdf \
 		 p3effects.pdf noco.pdf MIdensity.pdf
 
-all: allfigs
+all: tags p4effects.pdf
 
 allfigs: ${FIGS}
 
@@ -23,13 +23,16 @@ clean:
 cleanfigs:
 	rm ${FIGS}
 
+tags: *.py
+	ctags -R
+
 p3effects.csv: p3effects-params.csv
 
 noco.csv: InputVsMAPKpp.csv
 rab11dn.csv: InputVsMAPKpp.csv
 
 
-.PHONY: all allfigs clean cleanfigs
+.PHONY: all allfigs clean cleanfigs tags
 .PRECIOUS: %.csv
 
 

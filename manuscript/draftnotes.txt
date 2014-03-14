@@ -1,4 +1,17 @@
 Scaffold proteins
   faciltate
   inhibit
+ 
+
+ 
+
+1. scaffold expression
+2. input dose
+3. intracellular trafficking
+
+Barr regulates signaling by
+  1. controlling receptor internalization
+  2. direct scaffolding of signaling proteins
+
+?? differences between
 

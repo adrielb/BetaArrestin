@@ -1,8 +1,9 @@
 from BetaArrestin import *
 from FigDisplay import *
 
-kde = pd.read_csv('MIdensity.csv')
+#displayfig()
 
+kde = pd.read_csv('MIdensity.csv')
 
 colorN = 'blue'
 colorO = 'red'

@@ -8,3 +8,6 @@ let g:slime_default_config = {"socket_name": "default", "target_pane": "1.0"}
 "let g:slime_default_config = {"socket_name": "default", "target_pane": "ipython:1.1"}
 
 "wmctrl -Fa 'Figure 1'
+nmap     <CR>         <Plug>SlimeParagraphSend
+nmap     <leader><CR> <Plug>SlimeLineSend
+xmap     <CR>         <Plug>SlimeRegionSend
