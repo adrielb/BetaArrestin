@@ -14,3 +14,5 @@ augroup pythonREPL
   autocmd FileType python nmap <buffer> <leader><CR> <Plug>SlimeParagraphSend
   autocmd FileType python xmap <buffer> <CR>         <Plug>SlimeRegionSend
 augroup END
+
+nnoremap <leader>ad :Tabularize /:\<bar>,<bar>\ze}<CR>:Tabularize /}<CR>

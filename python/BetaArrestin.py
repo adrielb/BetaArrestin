@@ -27,7 +27,8 @@ DEFAULT_PARAMS = {
     'p3e'     : 1.5 ,
     'p4a'     : 0.003 ,
     'p4b'     : 6.5 ,
-    'p4n'     : 50 ,
+    'p4n'     : 495 ,
+    'p4m'     : -47.5 ,
     'Di'      : 0.0001,
     'tp'      : 5e-1
 }
@@ -59,6 +60,7 @@ def gen_equ( params={} ):
     p3e = params['p3e']
     p4a = params['p4a']
     p4b = params['p4b']
+    p4m = params['p4m']
     p4n = params['p4n']
     Di = params['Di']
     # }}}
@@ -170,7 +172,7 @@ def gen_equ( params={} ):
         Sves[0] = C1[0] + C2[0] + C3[0] + C4[0] + C5[0] + C6[0] + C7[0] + C8[0] + C9[0]
         Sves[1] = C1[1] + C2[1] + C3[1] + C4[1] + C5[1] + C6[1] + C7[1] + C8[1] + C9[1]
         dSves = (Sves[1]-Sves[0]) / gdm
-        p4 = p4_func( x, p4a, p4b, Sves, dSves  )
+        p4 = p4_func( x, p4a, p4b, p4m, p4n, Sves, dSves  )
 
         p3 = tp * p3
         p4 = tp * p4
@@ -235,8 +237,8 @@ def gen_equ( params={} ):
 def p3_func( Smem, a, b, c, d, e ):
     return (a + b * Smem) * ( (1-d) / (1 + np.exp( (Smem - e) * c) ) + d )
 
-def p4_func( x, a, b, Sves, dSves ):
-    Sn = 495 * Sves - 47.5
+def p4_func( x, a, b, m, n, Sves, dSves ):
+    Sn = n * Sves + m
     Sn = np.clip( Sn, 0.1, 1e3 )
     A = a * np.tanh( dSves / Sn )
     return x * (b-A) + (1-x) * (b+A)
