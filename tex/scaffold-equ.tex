@@ -1,0 +1,59 @@
+\documentclass{article}
+\usepackage{amsmath}
+
+\begin{document}
+
+Model Description
+
+Model Equations
+
+f'(x, t) as the time derivative
+
+\dots rest of scaffold model (ref)
+
+x \in \{ \text{back} , \text{front} \}
+
+\[\begin{align}
+    \text{Scyto}'(x,t)      & = p_4(\text{Sves}, \text{dSves}) * C_1(x,t)    - p_1(x) \text{Scyto}(x,t) - D \nabla^2 \text{Scyto}(x,t)+p_2 * \text{Smem}(x,t) \\
+    \text{Smem}'(x,t)       & = p_1(x) * \text{Scyto}(x,t) - p_2 * \text{Smem}(x,t) - p_3(\text{Smem}) * \text{Smem}(x,t)                                     \\
+    C_1'(x,t)               & = p_3(\text{Smem}) * \text{Smem}(x,t)  - p_4(\text{Sves}, \text{dSves}) * C_1(x,t) + \dots                                      \\
+    \text{Sves}(x,t)               & = \sum_{i=1}^{9}C_i(x,t)                                                                                                        \\
+    \text{dSves}(t)                & = \text{Sves}(\text{front},t) - \text{Sves}(\text{back},t)                                                                                           \\
+    p_1(x)                  & = p5 * grad * maxdose * (l + dX * x)                                                                                            \\
+    p_3(Smem; a,b,c,d,e)    & = (a + b * \text{Smem}) * \left( \frac{ 1-d }{ 1 + \e^{ (\text{Smem} - e) * c}  } + d \right)                                   \\
+    A(\text{Sves}, \text{dSves}; a, m, n) & = a * \tanh \left ( \frac{\text{dSves}}{n * \text{Sves} + m} \right )                                                                         \\
+    p_4(x; A, b)            & = x * (b-A) + (1-x) * (b+A)                                                                                                     \\
+    \text{MI}               & = \frac{  \text{MAPKpp}_{\text{front}}
+                                      - \text{MAPKpp}_{\text{back}} }
+                                     { dX * \text{maxdose} } 
+\end{align}
+
+\begin{tabular}{lr}
+  \textbf{Parameter} & \textbf{Value} \\ \hline
+    grad             & 1.0            \\
+    maxdose          & 0.0085         \\
+    l                & 1.0            \\
+    dX               & 0.0001         \\
+    slevel           & StotNone       \\
+    Stot             & 0.0            \\
+    StotNone         & 0.0            \\
+    StotNative       & 1.5            \\
+    StotOpt          & 3.3            \\
+    StotOE           & 42.0           \\
+    p2               & 0.89           \\
+    p5               & 7.7            \\
+    p3a              & 0.00088        \\
+    p3b              & 0.48           \\
+    p3c              & 2.1            \\
+    p3d              & 0.02           \\
+    p3e              & 1.5            \\
+    p4a              & 0.003          \\
+    p4b              & 6.5            \\
+    p4n              & 495            \\
+    p4m              & -47.5          \\
+    D                & 0.0001         \\
+    tp               & 5e-1
+\end{tabular}
+
+\end{document}
+
