@@ -2,6 +2,9 @@
 "set makeprg=./equsubs.sed\ <\ dmath.tex\ >\ dmath.sed.tex
 "let g:LatexBox_custom_indent=0
 let b:main_tex_file="barrestin.tex"
+let b:main_tex_file="view.tex"
+let b:main_tex_file="scaffold-equ.tex"
+
 
 set autochdir
 set smartindent
@@ -29,5 +32,12 @@ let g:LatexBox_quickfix=2
 set wildignore+=*.nav,*.out,*.snm,*.fdb_latexmk,*.log
 
 
+nnoremap <leader>at :Tabularize /&<CR>:Tabularize /\\\\<CR>
+nnoremap <leader>a& :Tabularize /&/l0<CR>
 
+augroup fileoptions
+  autocmd!
+  autocmd BufEnter scaffold-equ.tex setlocal formatoptions-=t
+  autocmd BufEnter scaffold-equ.tex setlocal conceallevel=0
+augroup END
 

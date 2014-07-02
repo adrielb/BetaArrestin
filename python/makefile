@@ -4,7 +4,7 @@ FIGS=StotVsMAPKpp.pdf SmemVsp3.pdf fig-p4func.pdf InputVsMAPKpp.pdf InputVsMI.pd
 		 ScaffoldVsMAPKppMI.pdf GradientVsMI.pdf rab11dn.pdf p3effects-params.pdf \
 		 p3effects.pdf noco.pdf MIdensity.pdf
 
-all: tags p4effects.pdf
+all: tags p4effects.pdf InputVsMAPKpp.pdf
 
 allfigs: ${FIGS}
 
