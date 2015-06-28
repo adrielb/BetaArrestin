@@ -1,6 +1,7 @@
 /* Simulator
  */
 functions { #{{{
+  // p3 / p4 funcs {{{
   real p3_func( real Smem
               , real a
               , real b
@@ -30,6 +31,7 @@ functions { #{{{
     A <- a * tanh( dSves / Sn );
     return x * (b-A) + (1-x) * (b+A);
   }
+  //}}}
   real[] barr_model( real t
                     , real[] y
                     , real[] theta
@@ -64,6 +66,7 @@ functions { #{{{
     real C8[2];
     real C9[2];
     real Smem[2];
+    real Sves[2];
 
     vector[2] x;
     real tp;
@@ -89,6 +92,8 @@ functions { #{{{
     real p4m;
     real p4n;
     real Di;
+    real gdm;
+    real dSves;
     //}}}
     // Fixed MAPK-params:a1 <- 1 {{{
     real a1;
@@ -260,19 +265,23 @@ functions { #{{{
     p1 <- p5 * dose;
     p1 <- tp * p1;
     p2 <- tp * p2;
-    p3[1] <- p3_func( Smem, p3a, p3b, p3c, p3d, p3e );
-    p3[2] <- p3_func( Smem, p3a, p3b, p3c, p3d, p3e );
+    p3[1] <- p3_func( Smem[1], p3a, p3b, p3c, p3d, p3e );
+    p3[2] <- p3_func( Smem[2], p3a, p3b, p3c, p3d, p3e );
 
     Sves[1] <- C1[1] + C2[1] + C3[1] + C4[1] + C5[1] + C6[1] + C7[1] + C8[1] + C9[1];
     Sves[2] <- C1[2] + C2[2] + C3[2] + C4[2] + C5[2] + C6[2] + C7[2] + C8[2] + C9[2];
 
-    gdm = ( grad * dX * maxdose );
-    dSves = (Sves[2]-Sves[1]) / gdm;
+    gdm <- ( grad * dX * maxdose );
+    dSves <- (Sves[2]-Sves[1]) / gdm;
 
-    p4 <- p4_func( x, p4a, p4b, p4m, p4n, Sves, dSves  );
+    p4[1] <- p4_func( x[1], p4a, p4b, p4m, p4n, Sves[1], dSves  );
+    p4[2] <- p4_func( x[2], p4a, p4b, p4m, p4n, Sves[2], dSves  );
 
-    p3 <- tp * p3;
-    p4 <- tp * p4;
+    p3[1] <- tp * p3[1];
+    p3[2] <- tp * p3[2];
+
+    p4[1] <- tp * p4[1];
+    p4[2] <- tp * p4[2];
     //}}}
     // state equations:  dydt[50] <- f(.) {{{
     dydt[1]  <- C1[1]*p4[1] - p1[1]*Scyto[1] + Di*(-Scyto[1] + Scyto[2]) + p2*Smem[1];
