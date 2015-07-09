@@ -5,6 +5,7 @@ set makeprg=./error.sh
 
 function! CompileStan()
   write
-  SlimeSend1 dso <- stan_model( stanc_ret=stanc(file="./model.stan") )
-  make
+  call system( "tmux send-keys C-l")
+  SlimeSend1 stanc(file="./steady-state-model.stan")
+  silent make
 endfunction
