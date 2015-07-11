@@ -15,9 +15,7 @@ functions { # {{{
 } # }}}
 
 data { #{{{
-  real dX;
-
-  int<lower=0> N; 
+  int<lower=0> N;
   row_vector[N] l;
   vector[N] MI_obs;
   int Sexp[N];   // Expression level: 1 - native, 2 - overexpressed
@@ -27,7 +25,7 @@ data { #{{{
 
 transformed data { #{{{
   vector[2] x;
-  real zero[N];  
+  real zero[N];
   zero <- rep_array(0.0, N);
   x[1] <- 0;
   x[2] <- 1;
@@ -36,6 +34,8 @@ transformed data { #{{{
 parameters { #{{{
   real<lower=0> w;
   real<lower=0> b;
+  real<lower=0> b2;
+  real<lower=0> dX;
 } #}}}
 
 transformed parameters { #{{{
@@ -43,16 +43,18 @@ transformed parameters { #{{{
   row_vector[N] MI;
   matrix[2,N] MAPKpp;
 
-  Sves[1]   <- b + w * (l + dX * x[1]);
-  Sves[2]   <- b + w * (l + dX * x[2]);
+  Sves[1]   <- b + w * (l);
+  Sves[2]   <- b + w * (l) + b2;
   MAPKpp[1] <- biphasicMAPKpp( Sves[1] );
   MAPKpp[2] <- biphasicMAPKpp( Sves[2] );
   MI        <- (MAPKpp[2] - MAPKpp[1]) / (dX);
 } #}}}
 
 model { #{{{
-  w ~ normal( 0, 10 );
-  b ~ normal( 0, 10 );
+  dX ~ normal( 0, 1e-1 );
+  w ~ normal( 0, 1e-1 );
+  b ~ normal( 0, 1e-1 );
+  b2 ~ normal( 0, 1e-1 );
   MI_obs ~ normal( MI, sigma );
 } #}}}
 
