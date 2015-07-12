@@ -15,7 +15,7 @@ dfOE <- data.frame( l=runif( N, 0.1, 1)
                  )
 dfOE$MI=2*(dfOE$l - 0.4)+rnorm(N,0,df.sigma)
 # df <- rbind( dfN, dfOE)
-df <- dfN
+df <- dfOE
 qplot( x=l, y=MI, data=df, color=Expression, geom="point", ylim=c(-0.5,1.3))
 
 
@@ -110,8 +110,16 @@ traceplot(fit, "b2")
 
 str(fit, max.level=2)
 
+qplot(x=as.vector(t(samps$Sves[,1,])), y=as.vector(t(samps$MAPKpp[,1,])), geom="jitter") +
+geom_jitter( position=position_jitter(width=0.01, height=0.01), alpha=0.01)
 
-df.Sves <- data.frame(t(samps$Sves[,1,])) %>% 
+qplot(x=as.vector(t(samps$Sves[,1,])), y=as.vector(t(samps$Sves[,2,])), geom="point") +
+  geom_abline( intercept=0, slope=1, size=2, color='red')
+
+qplot(x=as.vector(t(samps$MAPKpp[,1,])), y=as.vector(t(samps$MAPKpp[,2,])), geom="point") +
+  geom_abline( intercept=0, slope=1, size=2, color='red')
+
+df.Sves <- data.frame(t(samps$Sves[,2,])) %>% 
   mutate(l=df$l) %>% 
     gather( param, Sves, -l ) 
 qplot( x=l, y=Sves, data=df.Sves, color=param, geom="line") +
@@ -120,21 +128,19 @@ qplot( x=l, y=Sves, data=df.Sves, color=param, geom="line") +
 df.MAPKpp <- data.frame(t(samps$MAPKpp[,1,])) %>% 
   mutate(l=df$l) %>% 
     gather( param, MAPKpp, -l ) 
-qplot( x=l, y=MAPKpp, data=df.MAPKpp, color=param, geom="line") +
+qplot( x=l, y=MAPKpp, data=df.MAPKpp, color=param, geom="line", ylim=c(0,1)) +
   theme(legend.position="none")
 
 df.MI <- data.frame(t(samps$MI)) %>% 
   mutate(l=df$l) %>% 
   gather( param, MI, -l ) %>% 
   rbind( data.frame( l=df$l, param="data", MI=df$MI))
-qplot( x=l, y=MI, data=df.MI, color=param, geom="line")
+qplot( x=l, y=MI, data=df.MI, color=param, geom="line") +
+  theme(legend.position="none")
 
 qplot( x=1:nrow(samps$lp__), y=exp(samps$lp__), geom="line")
 
-qplot( x=samps$w, geom="histogram") + 
-  geom_line(aes(x=seq(-1,1,.1), y=dnorm(seq(-1,1,0.1),0,1e-1)))
-
-qplot( x=seq(-1,1,.01), y=dnorm(seq(-1,1,0.01),0,1e-1))
+qplot( x=samps$b, geom="histogram", binwidth=0.01)
 
 qplot( x=samps$dX, geom="density", xlim=c(0,1)) +
   stat_function(fun=dnorm, arg=list(sd=1e-1), geom="path", color="blue" )
@@ -145,14 +151,14 @@ qplot( x=samps$b, geom="density", xlim=c(0,1)) +
 qplot( x=samps$b2, geom="density", xlim=c(0,1)) +
   stat_function(fun=dnorm, arg=list(sd=1e-1), geom="path", color="blue" )
 
-qplot( x=samps$w, geom="density", xlim=c(0,1)) +
+qplot( x=samps$w, geom="density", xlim=c(-2,2)) +
   stat_function(fun=dnorm, arg=list(sd=1e-1), geom="path", color="blue" )
 
-qplot( x=as.vector(samps$MI), geom="density", xlim=c(0.5,1.5)) + 
+qplot( x=as.vector(samps$MI), geom="density", xlim=c(-0.5,1.5)) + 
   stat_function(fun=dnorm, arg=list(mean=1,sd=df.sigma), geom="path", color="blue" )
 
 
-summary(samps$b2)
+summary(samps$dX)
 
 qplot( x=samps$w, y=samps$b )
 qplot( x=samps$b, y=samps$b2 )

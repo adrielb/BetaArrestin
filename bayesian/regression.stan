@@ -32,7 +32,7 @@ transformed data { #{{{
 } #}}}
 
 parameters { #{{{
-  real<lower=0> w;
+  real<upper=0> w;
   real<lower=0> b;
   real<lower=0> b2;
   real<lower=0> dX;
