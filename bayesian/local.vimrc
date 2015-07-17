@@ -6,6 +6,6 @@ set makeprg=./error.sh
 function! CompileStan()
   write
   call system( "tmux send-keys C-l")
-  SlimeSend1 stanc(file="./regression.stan")
+  SlimeSend1 stanc(file="./gp-regression.stan")
   silent make
 endfunction
