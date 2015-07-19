@@ -6,7 +6,7 @@ library(rstan)
 # }}}
 
 # data {{{
-N <- 30
+N <- 40
 df.sigma=0.1
 dfN <- data.frame( l=runif( N, 0.1, 1)
                  ,MI=rnorm(N, 1, df.sigma)
@@ -15,9 +15,9 @@ dfN <- data.frame( l=runif( N, 0.1, 1)
 dfOE <- data.frame( l=runif( N, 0.1, 1)
                  ,Expression=as.factor( rep( 'OE', N))
                  )
-dfOE$MI=2*(dfOE$l - 0.4)+0*rnorm(N,0,df.sigma)
-# df <- rbind( dfN, dfOE)
-df <- dfOE
+dfOE$MI=2*(dfOE$l - 0.4)+rnorm(N,0,df.sigma)
+df <- rbind( dfN, dfOE)
+# df <- dfOE
 qplot( x=l, y=MI, data=df, color=Expression, geom="point", ylim=c(-0.5,1.3))
 
 
@@ -43,6 +43,15 @@ chol(outer(x,x))
 max(S*lower.tri( S ))
 
 tail(x,-1) - head(x,-1) 
+
+library(MASS)
+
+Sigma=matrix(c(
+ 1,1,
+ 1,1
+ ), 2,2)
+qplot( x=X1, y=X2, data=data.frame(mvrnorm( n=10000, mu=c(0,0), Sigma=Sigma)))
+chol(Sigma)
 # }}}
 
 dso.gp.fit <- stan_model( stanc_ret=stanc(file="./gp-fit.stan") )
@@ -57,7 +66,7 @@ biphasicCurve <- function (x) {
   g + (a + b*x)/(1 + exp(-c + d*x))
 }
 
-df.biphasic <- data.frame( s=seq(0,2,0.1) ) 
+df.biphasic <- data.frame( s=seq(0,2,0.5) ) 
 df.biphasic$y <- biphasicCurve( df.biphasic$s )
 
 qplot( x=s, y=y, data=df.biphasic, geom="line") +
@@ -136,12 +145,13 @@ dplist <- c( list( N=2*nrow(df.biphasic)
 dplist$N <- length(dplist$x)
 
 dplist <- list( 
-   N=51
-  ,x=seq(-10,10,.4)
-  , rho_sq = 1./10000
-  , eta_sq = 100
-  , sig_sq = 1e-3
+   N=40
+  , rho_sq = 1e2
+  , eta_sq = 2
+  , sig_sq = 0
 )
+dplist$x=0:(dplist$N-1)/(dplist$N-1)
+print(dplist)
 
 with( dplist,
      qplot(c(0, 1)
@@ -153,16 +163,13 @@ with( dplist,
      geom_hline( yintercept=eta_sq, size=2, color='red', alpha=0.5)
 )
 
-qplot(sort(df$l),1,geom="point")
-
-
 gp.sampling <- NULL
 gp.sampling <- 
   sampling(dso.gp.sim
            , data=dplist
            , chains=8e0
-           , iter=1000
-           , warmup=990
+           , iter=200
+           , warmup=190
            )
 samps <- NULL
 samps <- extract(gp.sampling)
@@ -180,7 +187,6 @@ df.gp.sim <- data.frame(
   ,t(samps$y)
   ) %>% 
   gather( y, value, -l)
-str(df.gp.sampling)
 qplot( x=l, y=value, data=df.gp.sim, color=y, geom="line", alpha=0.9) +
   theme(legend.position="none")
 
@@ -319,7 +325,7 @@ datalist=list(
               , y1=fitlist$y
               , N2=0
               , x2=seq(0,2,0.001)
-              , rho=0.5/(0.11)^2
+              , rho=0.5/(7.91)^2
               )
 datalist$N2 <- length(datalist$x2)
 
@@ -336,9 +342,66 @@ str(samps)
 df.fit <- NULL
 df.fit <- data.frame( x=datalist$x2, t(samps$y2) ) %>% 
   gather( y2, value, -x ) 
-ggplot( data=df.fit, aes(x=x, y=value)) +
+ggplot( data=df.fit, aes(x=x, y=value, color=y2)) +
   geom_path(alpha=0.3) +
-  geom_point( data=df.biphasic, aes( x=s, y=y), color="red", size=4, alpha=0.5)
+  geom_point( data=df.biphasic, aes( x=s, y=y), color="red", size=4, alpha=0.5) +
+  ylim( 0, 1)
 
 df.fit %>% filter( x>0.05, x<0.15 )
 # }}}
+
+dso.gp.barr  <- stan_model( stanc_ret=stanc(file="./gp-barrestin.stan") )
+
+# gp-barr {{{
+datalist=list(  N=nrow(df)
+              , l=df$l
+              , dl=0.01
+              , MI_obs=df$MI
+              , Sexp=as.integer(df$Expression)
+              , SvesX=c(0,0.2,1)
+              , SvesLenScale=0.1
+              , sigma=df.sigma
+              )
+datalist$N1  <- length(datalist$SvesX)
+datalist$rho <- 0.5/(datalist$SvesLenScale)^2
+print(datalist)
+
+gp.barr <- NULL
+gp.barr <- 
+  sampling(dso.gp.barr
+           , data=datalist
+           , chains=8
+           , iter=1e2
+           )
+samps <- NULL
+samps <- extract(gp.barr)
+str(samps)
+
+df.fit <- NULL
+df.fit <- data.frame( x=datalist$SvesX, t(samps$SvesY) ) %>% 
+  gather( samples, SvesY, -x ) 
+ggplot( data=df.fit, aes(x=x, y=SvesY, color=samples)) +
+  geom_line(alpha=0.3) +
+  ylim(0,2.5) +
+  theme(legend.position="none")
+
+df.fit <- NULL
+df.fit <- data.frame( l=c(datalist$l,datalist$l+datalist$dl), t(samps$SvesVec )) %>% 
+  gather( sample, Sves, -l ) 
+ggplot( data=df.fit, aes(x=l, y=Sves, color=sample )) +
+  geom_line(alpha=0.3) +
+  ylim(0,2.5) +
+  theme(legend.position="none")
+
+df.fit <- NULL
+df.fit <- data.frame( l=datalist$l, t(samps$MI) ) %>% 
+  gather( sample, MI, -l ) 
+ggplot() +
+  geom_line( data=df.fit, aes(x=l, y=MI, color=sample, alpha=0.3)) +
+  geom_point( data=df, aes(x=l, y=MI, color=Expression, size=3  )) +
+  theme(legend.position="none")
+
+qplot( x=samps$dX )
+
+# }}}
+

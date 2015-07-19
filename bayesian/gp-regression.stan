@@ -16,7 +16,6 @@ transformed data { #{{{
   for (i in 1:(N-1)) {
     for (j in (i+1):N) {
       Sigma[i,j] <- eta_sq * exp( -rho_sq * pow( x[i] - x[j], 2));
-                    eta_2  * exp( -rho_2  * pow( x[i] - x[j], 2));
       Sigma[j,i] <- Sigma[i,j];
     }
   }
