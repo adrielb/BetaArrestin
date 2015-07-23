@@ -145,10 +145,10 @@ dplist <- c( list( N=2*nrow(df.biphasic)
 dplist$N <- length(dplist$x)
 
 dplist <- list( 
-   N=40
+   N=1000
   , rho_sq = 1e2
   , eta_sq = 2
-  , sig_sq = 0
+  , sig_sq = 0.000001
 )
 dplist$x=0:(dplist$N-1)/(dplist$N-1)
 print(dplist)
@@ -169,7 +169,7 @@ gp.sampling <-
            , data=dplist
            , chains=8e0
            , iter=200
-           , warmup=190
+           , warmup=197
            )
 samps <- NULL
 samps <- extract(gp.sampling)
@@ -186,8 +186,9 @@ df.gp.sim <- data.frame(
   l=dplist$x
   ,t(samps$y)
   ) %>% 
-  gather( y, value, -l)
+  gather( y, value, -l) %>% filter( l>0.495, l<0.505)
 qplot( x=l, y=value, data=df.gp.sim, color=y, geom="line", alpha=0.9) +
+  geom_point() +
   theme(legend.position="none")
 
 qplot( x=df$l, y=samps$Sves[,], geom="line")
@@ -346,6 +347,70 @@ ggplot( data=df.fit, aes(x=x, y=value, color=y2)) +
   geom_path(alpha=0.3) +
   geom_point( data=df.biphasic, aes( x=s, y=y), color="red", size=4, alpha=0.5) +
   ylim( 0, 1)
+
+df.fit %>% filter( x>0.05, x<0.15 )
+# }}}
+
+dso.pred.sim <- stan_model( stanc_ret=stanc(file="./gp-predict-sim.stan") )
+
+# gp-predict-sim {{{
+datalist <- list( 
+                x1=c(0.0,2.0)
+              , x2=seq(0,2,0.1)
+              , rho=0.5/(2.11)^2
+              )
+datalist$N1 <- length(datalist$x1)
+datalist$N2 <- length(datalist$x2)
+with( c(datalist, list(eta_sq=1)),
+     qplot(c(0,1)
+           , stat = "function"
+           , fun=function(x) eta_sq*exp(-rho*(x^2)) 
+           , geom = "line"
+           , ylim = c(0,eta_sq)
+           ) +
+     geom_hline( yintercept=eta_sq, size=2, color='red', alpha=0.5)
+)
+
+gp.pred.sim <- NULL
+gp.pred.sim <- sampling(dso.pred.sim
+                        , data=datalist
+                        , chains=8
+                        , iter=1e2
+                        , warmup=1e2-1
+                        )
+samps <- NULL
+samps <- extract(gp.pred.sim)
+str(samps)
+df.samps <- as.data.frame(samps) %>% 
+  mutate( sample=factor(1:length(samps$lp__)) ) %>% 
+  gather( param, value, -sample) %>% 
+  separate( param, into=c("param","idx"), convert=TRUE) %>% 
+  mutate( x=0 )
+df.samps[df.samps$param=='y1','x'] <- df.samps %>% filter( param=='y1' ) %>% mutate( x=datalist$x1[idx] ) %>% select( x ) 
+df.samps[df.samps$param=='y2','x'] <- df.samps %>% filter( param=='y2' ) %>% mutate( x=datalist$x2[idx] ) %>% select( x ) 
+
+df.samps %>% select( param ) %>% distinct()
+
+ggplot( data=df.samps %>% filter( param=='y2' ), aes(x=x, y=value, color=sample)) +
+  geom_line( ) + 
+  geom_line( data=df.samps %>% filter( param=='y1' ) ) + geom_point( data=df.samps %>% filter( param=='y1' ),  size=4) +
+  theme(legend.position="none")
+
+df.fit <- NULL
+
+df.fit1 <- data.frame( x=datalist$x1, t(samps$y1), param=1 ) %>% 
+  gather( sample, y, -x, -param ) 
+
+df.fit <- data.frame( x=datalist$x2, t(samps$y2), param=2 ) %>% 
+  gather( sample, y, -x, -param )
+
+    rbind(df.fit, df.fit1 )
+
+ggplot( data=df.fit, aes(x=x, y=y2, color=sample)) +
+  geom_path(alpha=0.3) +
+  geom_point( data=df.biphasic, aes( x=s, y=y), color="red", size=4, alpha=0.5) +
+  ylim(-3,3) +
+  theme(legend.position="none")
 
 df.fit %>% filter( x>0.05, x<0.15 )
 # }}}
