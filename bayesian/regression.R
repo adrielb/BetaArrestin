@@ -1,8 +1,10 @@
 # libs # {{{
+library(gridExtra)
 library(ggplot2)
 library(dplyr)
 library(tidyr)
 library(rstan) 
+options(dplyr.print_min=50)
 # }}}
 
 # data {{{
@@ -16,8 +18,8 @@ dfOE <- data.frame( l=runif( N, 0.1, 1)
                  ,Expression=as.factor( rep( 'OE', N))
                  )
 dfOE$MI=2*(dfOE$l - 0.4)+rnorm(N,0,df.sigma)
-df <- rbind( dfN, dfOE)
-# df <- dfOE
+# df <- rbind( dfN, dfOE)
+df <- dfOE
 qplot( x=l, y=MI, data=df, color=Expression, geom="point", ylim=c(-0.5,1.3))
 
 
@@ -144,11 +146,20 @@ dplist <- c( list( N=2*nrow(df.biphasic)
   , as.list(gp.params$par) )
 dplist$N <- length(dplist$x)
 
+dplist <- list(
+    x=df$l
+  , rho_sq = 1e1
+  , eta_sq = 1
+  , sig_sq = 1e-6
+)
+dplist$N=length(dplist$x)
+print(dplist)
+
 dplist <- list( 
    N=1000
-  , rho_sq = 1e2
+  , rho_sq = 1e1
   , eta_sq = 2
-  , sig_sq = 0.000001
+  , sig_sq = 1e-6
 )
 dplist$x=0:(dplist$N-1)/(dplist$N-1)
 print(dplist)
@@ -160,7 +171,8 @@ with( dplist,
            , geom = "line"
            , ylim = c(0,eta_sq)
            ) +
-     geom_hline( yintercept=eta_sq, size=2, color='red', alpha=0.5)
+     geom_hline( yintercept=eta_sq, size=2, color='red', alpha=0.5) +
+     geom_hline( yintercept=sig_sq, size=2, color='blue', alpha=0.5)
 )
 
 gp.sampling <- NULL
@@ -186,9 +198,8 @@ df.gp.sim <- data.frame(
   l=dplist$x
   ,t(samps$y)
   ) %>% 
-  gather( y, value, -l) %>% filter( l>0.495, l<0.505)
+  gather( y, value, -l) 
 qplot( x=l, y=value, data=df.gp.sim, color=y, geom="line", alpha=0.9) +
-  geom_point() +
   theme(legend.position="none")
 
 qplot( x=df$l, y=samps$Sves[,], geom="line")
@@ -420,16 +431,23 @@ dso.gp.barr  <- stan_model( stanc_ret=stanc(file="./gp-barrestin.stan") )
 # gp-barr {{{
 datalist=list(  N=nrow(df)
               , l=df$l
-              , dl=0.01
+              , dl=0.001
               , MI_obs=df$MI
               , Sexp=as.integer(df$Expression)
-              , SvesX=c(0,0.2,1)
-              , SvesLenScale=0.1
               , sigma=df.sigma
+              , SvesMu=2.0
+              , rho_sq=1e0
+              , eta_sq=1e0
+              , sig_sq=1e-7
               )
 datalist$N1  <- length(datalist$SvesX)
-datalist$rho <- 0.5/(datalist$SvesLenScale)^2
 print(datalist)
+df.l <- with( datalist,
+  rbind( data.frame(side=1, idL=1:length(l), l=l),
+         data.frame(side=2, idL=1:length(l), l=l+dl) )
+)
+df.l <- df.l %>% mutate( side=factor(side) )
+df.l %>% sample_n(50)
 
 gp.barr <- NULL
 gp.barr <- 
@@ -437,36 +455,79 @@ gp.barr <-
            , data=datalist
            , chains=8
            , iter=1e2
+           , warmup=1e2-10
            )
 samps <- NULL
 samps <- extract(gp.barr)
 str(samps)
 
-df.fit <- NULL
-df.fit <- data.frame( x=datalist$SvesX, t(samps$SvesY) ) %>% 
-  gather( samples, SvesY, -x ) 
-ggplot( data=df.fit, aes(x=x, y=SvesY, color=samples)) +
-  geom_line(alpha=0.3) +
-  ylim(0,2.5) +
-  theme(legend.position="none")
+df.samps <- NULL
+df.samps <- samps %>% as.data.frame() %>% tbl_df() %>%
+  mutate( sample=factor(1:length(samps$lp__)) ) %>% 
+  gather( param, value, -sample, -dX, -lp__) %>% 
+  separate( param, into=c("param","side","idL"), convert=TRUE, extra="merge") %>%
+  filter( param!="SvesVec" ) %>%
+  filter( param!="z" ) %>% 
+  mutate( side=factor(side) )
+df.samps[df.samps$param=='MI','idL'] <- df.samps[df.samps$param=='MI','side']
+df.samps[df.samps$param=='MI','side'] <- 1
+df.samps <- left_join( df.samps, df.l, by=c("side","idL") ) %>% 
+  spread( param, value )
+MAXSAMPLES <- df.samps$sample %>% as.numeric() %>% max()
+# df.samps <- df.samps %>% filter(sample==sample.int(size=1, n=MAXSAMPLES))
+df.samps %>% print()
 
-df.fit <- NULL
-df.fit <- data.frame( l=c(datalist$l,datalist$l+datalist$dl), t(samps$SvesVec )) %>% 
-  gather( sample, Sves, -l ) 
-ggplot( data=df.fit, aes(x=l, y=Sves, color=sample )) +
-  geom_line(alpha=0.3) +
-  ylim(0,2.5) +
+ggSves <- NULL
+ggSves <- ggplot( data=df.samps, aes(x=l, y=Sves, color=sample, group=sample )) +
+  geom_line(alpha=0.9) +
+  geom_point(aes(alpha=0.1,color=side,shape=side, size=2)) +
+  coord_flip() +
+  # ylim(0,2.5) +
   theme(legend.position="none")
-
-df.fit <- NULL
-df.fit <- data.frame( l=datalist$l, t(samps$MI) ) %>% 
-  gather( sample, MI, -l ) 
-ggplot() +
-  geom_line( data=df.fit, aes(x=l, y=MI, color=sample, alpha=0.3)) +
-  geom_point( data=df, aes(x=l, y=MI, color=Expression, size=3  )) +
+ggMAPKpp <- NULL
+ggMAPKpp <- ggplot( data=df.samps %>% mutate(side=factor(side)), aes(x=l, y=MAPKpp, color=sample )) +
+  geom_line(alpha=0.9) +
+  geom_point(aes(alpha=0.1,color=side,shape=side, size=2)) +
+  # ylim(0,2.5) +
   theme(legend.position="none")
+ggMS <- NULL
+ggMS <- ggplot( data=df.samps, aes(x=Sves, y=MAPKpp, color=sample)) +
+  geom_line(alpha=0.9) +
+  geom_jitter( position=position_jitter(width=0.1, height=0.01)) +
+  geom_point() +
+  # ylim(0,2.5) +
+  theme(legend.position="none")
+ggMI <- NULL
+ggMI <- ggplot() + 
+  geom_line(data=df.samps %>% filter(side==1), aes(x=l, y=MI, color=sample, group=sample  ) ) +
+  geom_point( data=df, aes(x=l, y=MI, size=3, group=NULL, color=NULL)) +
+  theme(legend.position="none")
+grid.arrange( ggMAPKpp, ggMS, ggMI, ggSves, ncol=2)
 
-qplot( x=samps$dX )
+qplot( x=log10(samps$dX), geom="density")
+
+qplot( x=l, y=Sves, data=df.samps, color=side, geom="point")
+
+qplot( data=
+      df.samps %>% select( idL, side, Sves) %>% spread( side, Sves) %>% left_join( df.l %>% filter( side==1) %>% select( -side), by="idL" ) %>% arrange( l )
+      , x=`1`, y=`2`, geom="path", color=l) +
+  geom_abline( intercept=0, slope=1, size=2, color='red', alpha=0.5) +
+  geom_point(size=3)
+
+qplot( data=
+      df.samps %>% select( idL, side, MAPKpp) %>% spread( side, MAPKpp) %>% left_join( df.l %>% filter( side==1) %>% select( -side), by="idL" ) %>% arrange( l )
+      , x=`1`, y=`2`, geom="path", color=l) +
+  geom_abline( intercept=0, slope=1, size=2, color='red', alpha=0.5) +
+  geom_point(size=3)
+
+
+qplot( x=l, y=dSves, data=
+df.samps %>% select( idL, side, Sves) %>% spread( side, Sves) %>% mutate( dSves=`2` - `1`) %>% left_join( df.l %>% filter( side==1) %>% select( -side), by="idL" ) %>% arrange( l )
+      , color=l, geom="point")
+
+qplot( x=l, y=diff, data=
+df.samps %>% select( idL, side, MAPKpp) %>% spread( side, MAPKpp) %>% mutate( diff=`2` - `1`) %>% left_join( df.l %>% filter( side==1) %>% select( -side), by="idL" ) %>% arrange( l )
+      , color=l, geom="line")
 
 # }}}
 
