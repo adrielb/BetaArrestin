@@ -4,7 +4,7 @@ library(ggplot2)
 library(dplyr)
 library(tidyr)
 library(rstan) 
-options(dplyr.print_min=50)
+options(dplyr.print_min=45)
 # }}}
 
 # data {{{
@@ -19,7 +19,7 @@ dfOE <- data.frame( l=runif( N, 0.1, 1)
                  )
 dfOE$MI=2*(dfOE$l - 0.4)+rnorm(N,0,df.sigma)
 # df <- rbind( dfN, dfOE)
-df <- dfOE
+df <- dfN
 qplot( x=l, y=MI, data=df, color=Expression, geom="point", ylim=c(-0.5,1.3))
 
 
@@ -68,7 +68,7 @@ biphasicCurve <- function (x) {
   g + (a + b*x)/(1 + exp(-c + d*x))
 }
 
-df.biphasic <- data.frame( s=seq(0,2,0.5) ) 
+df.biphasic <- data.frame( s=seq(0,2,0.01) ) 
 df.biphasic$y <- biphasicCurve( df.biphasic$s )
 
 qplot( x=s, y=y, data=df.biphasic, geom="line") +
@@ -156,10 +156,12 @@ dplist$N=length(dplist$x)
 print(dplist)
 
 dplist <- list( 
-   N=1000
-  , rho_sq = 1e1
-  , eta_sq = 2
-  , sig_sq = 1e-6
+    N=100
+  , rho_sq = 1e0
+  , eta_sq = 2e-3
+  , sig_sq = 1e-8
+  , mu = 0.1
+  , k1 = 1e7
 )
 dplist$x=0:(dplist$N-1)/(dplist$N-1)
 print(dplist)
@@ -180,7 +182,7 @@ gp.sampling <-
   sampling(dso.gp.sim
            , data=dplist
            , chains=8e0
-           , iter=200
+           , iter=220
            , warmup=197
            )
 samps <- NULL
@@ -201,6 +203,10 @@ df.gp.sim <- data.frame(
   gather( y, value, -l) 
 qplot( x=l, y=value, data=df.gp.sim, color=y, geom="line", alpha=0.9) +
   theme(legend.position="none")
+
+samps$y %>% sd()
+
+sqrt(200)
 
 qplot( x=df$l, y=samps$Sves[,], geom="line")
 
@@ -435,12 +441,14 @@ datalist=list(  N=nrow(df)
               , MI_obs=df$MI
               , Sexp=as.integer(df$Expression)
               , sigma=df.sigma
-              , SvesMu=2.0
-              , rho_sq=1e0
-              , eta_sq=1e0
-              , sig_sq=1e-7
+              , SvesMu=dplist$mu
+              , rho_sq=dplist$rho_sq
+              , eta_sq=dplist$eta_sq
+              , sig_sq=dplist$sig_sq
+              , dXmin=1e-3
+              , dXmax=1e3
+              , k1=dplist$k1
               )
-datalist$N1  <- length(datalist$SvesX)
 print(datalist)
 df.l <- with( datalist,
   rbind( data.frame(side=1, idL=1:length(l), l=l),
@@ -476,26 +484,25 @@ df.samps <- left_join( df.samps, df.l, by=c("side","idL") ) %>%
 MAXSAMPLES <- df.samps$sample %>% as.numeric() %>% max()
 # df.samps <- df.samps %>% filter(sample==sample.int(size=1, n=MAXSAMPLES))
 df.samps %>% print()
-
 ggSves <- NULL
 ggSves <- ggplot( data=df.samps, aes(x=l, y=Sves, color=sample, group=sample )) +
   geom_line(alpha=0.9) +
-  geom_point(aes(alpha=0.1,color=side,shape=side, size=2)) +
+  # geom_point(aes(alpha=0.1,color=side,shape=side, size=2)) +
   coord_flip() +
   # ylim(0,2.5) +
   theme(legend.position="none")
 ggMAPKpp <- NULL
 ggMAPKpp <- ggplot( data=df.samps %>% mutate(side=factor(side)), aes(x=l, y=MAPKpp, color=sample )) +
   geom_line(alpha=0.9) +
-  geom_point(aes(alpha=0.1,color=side,shape=side, size=2)) +
-  # ylim(0,2.5) +
+  # geom_point(aes(alpha=0.1,color=side,shape=side, size=2)) +
+  ylim(0,1) +
   theme(legend.position="none")
 ggMS <- NULL
 ggMS <- ggplot( data=df.samps, aes(x=Sves, y=MAPKpp, color=sample)) +
   geom_line(alpha=0.9) +
   geom_jitter( position=position_jitter(width=0.1, height=0.01)) +
   geom_point() +
-  # ylim(0,2.5) +
+  ylim(0,1) +
   theme(legend.position="none")
 ggMI <- NULL
 ggMI <- ggplot() + 
@@ -504,7 +511,9 @@ ggMI <- ggplot() +
   theme(legend.position="none")
 grid.arrange( ggMAPKpp, ggMS, ggMI, ggSves, ncol=2)
 
-qplot( x=log10(samps$dX), geom="density")
+qplot( x=log10(samps$dX), geom="density", xlim=c(-3,3), fill="black")
+
+qplot( x=log10(samps$dX), geom="bar")
 
 qplot( x=l, y=Sves, data=df.samps, color=side, geom="point")
 
@@ -523,7 +532,7 @@ qplot( data=
 
 qplot( x=l, y=dSves, data=
 df.samps %>% select( idL, side, Sves) %>% spread( side, Sves) %>% mutate( dSves=`2` - `1`) %>% left_join( df.l %>% filter( side==1) %>% select( -side), by="idL" ) %>% arrange( l )
-      , color=l, geom="point")
+      , color=l, geom="line") + geom_point()
 
 qplot( x=l, y=diff, data=
 df.samps %>% select( idL, side, MAPKpp) %>% spread( side, MAPKpp) %>% mutate( diff=`2` - `1`) %>% left_join( df.l %>% filter( side==1) %>% select( -side), by="idL" ) %>% arrange( l )

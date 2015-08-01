@@ -26,6 +26,9 @@ data { #{{{
   real<lower=0> eta_sq;
   real<lower=0> rho_sq;
   real<lower=0> sig_sq;
+  real<lower=0> dXmin;
+  real<lower=0> dXmax;
+  real<lower=0> k1;
 } #}}}
 
 transformed data { #{{{
@@ -42,12 +45,12 @@ transformed data { #{{{
 
   for (i in 1:(N2-1)) {
     for (j in (i+1):N2) {
-      Sigma[i,j] <- eta_sq * exp( -rho_sq * pow( l2[i] - l2[j], 2));
+      Sigma[i,j] <- k1 * eta_sq * exp( -rho_sq * pow( l2[i] - l2[j], 2));
       Sigma[j,i] <- Sigma[i,j];
     }
   }
   for (i in 1:N2) {
-    Sigma[i,i] <- eta_sq + sig_sq;
+    Sigma[i,i] <- k1 * eta_sq + sig_sq;
   }
   L <- cholesky_decompose(Sigma);
   
@@ -55,7 +58,7 @@ transformed data { #{{{
 
 parameters { #{{{
   vector[N2] z;
-  real<lower=1e-3,upper=1e3> dX;
+  real<lower=dXmin,upper=dXmax> dX;
 } #}}}
 
 transformed parameters { #{{{
@@ -64,7 +67,7 @@ transformed parameters { #{{{
   row_vector[N] MI;
   matrix[2,N] MAPKpp;
 
-  SvesVec   <- SvesMu + L * z;
+  SvesVec   <- SvesMu + (L * z) / sqrt(k1);
   Sves[1]   <- to_row_vector(head( SvesVec, N ));
   Sves[2]   <- to_row_vector(tail( SvesVec, N ));
   MAPKpp[1] <- biphasicMAPKpp( Sves[1] );
