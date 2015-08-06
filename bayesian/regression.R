@@ -19,7 +19,7 @@ dfOE <- data.frame( l=runif( N, 0.1, 1)
                  )
 dfOE$MI=2*(dfOE$l - 0.4)+rnorm(N,0,df.sigma)
 # df <- rbind( dfN, dfOE)
-df <- dfN
+df <- dfOE
 qplot( x=l, y=MI, data=df, color=Expression, geom="point", ylim=c(-0.5,1.3))
 
 
@@ -68,10 +68,10 @@ biphasicCurve <- function (x) {
   g + (a + b*x)/(1 + exp(-c + d*x))
 }
 
-df.biphasic <- data.frame( s=seq(0,2,0.01) ) 
+df.biphasic <- data.frame( s=seq(0.01,2,0.01) ) 
 df.biphasic$y <- biphasicCurve( df.biphasic$s )
 
-qplot( x=s, y=y, data=df.biphasic, geom="line") +
+qplot( x=log10(s), y=y, data=df.biphasic, geom="line") +
   geom_point()
 # }}}
 
@@ -158,9 +158,9 @@ print(dplist)
 dplist <- list( 
     N=100
   , rho_sq = 1e0
-  , eta_sq = 2e-3
+  , eta_sq = 2e-1
   , sig_sq = 1e-8
-  , mu = 0.1
+  , mu = -1.0
   , k1 = 1e7
 )
 dplist$x=0:(dplist$N-1)/(dplist$N-1)
@@ -437,7 +437,7 @@ dso.gp.barr  <- stan_model( stanc_ret=stanc(file="./gp-barrestin.stan") )
 # gp-barr {{{
 datalist=list(  N=nrow(df)
               , l=df$l
-              , dl=0.001
+              , dl=0.00001
               , MI_obs=df$MI
               , Sexp=as.integer(df$Expression)
               , sigma=df.sigma
@@ -487,6 +487,7 @@ df.samps %>% print()
 ggSves <- NULL
 ggSves <- ggplot( data=df.samps, aes(x=l, y=Sves, color=sample, group=sample )) +
   geom_line(alpha=0.9) +
+  scale_y_log10() +
   # geom_point(aes(alpha=0.1,color=side,shape=side, size=2)) +
   coord_flip() +
   # ylim(0,2.5) +
@@ -534,8 +535,8 @@ qplot( x=l, y=dSves, data=
 df.samps %>% select( idL, side, Sves) %>% spread( side, Sves) %>% mutate( dSves=`2` - `1`) %>% left_join( df.l %>% filter( side==1) %>% select( -side), by="idL" ) %>% arrange( l )
       , color=l, geom="line") + geom_point()
 
-qplot( x=l, y=diff, data=
-df.samps %>% select( idL, side, MAPKpp) %>% spread( side, MAPKpp) %>% mutate( diff=`2` - `1`) %>% left_join( df.l %>% filter( side==1) %>% select( -side), by="idL" ) %>% arrange( l )
+qplot( x=l, y=dMAPKpp, data=
+df.samps %>% select( idL, side, MAPKpp) %>% spread( side, MAPKpp) %>% mutate( dMAPKpp=`2` - `1`) %>% left_join( df.l %>% filter( side==1) %>% select( -side), by="idL" ) %>% arrange( l )
       , color=l, geom="line")
 
 # }}}

@@ -21,7 +21,7 @@ data { #{{{
   vector[N] MI_obs;
   int Sexp[N];   // Expression level: 1 - native, 2 - overexpressed
 
-  real<lower=0> SvesMu;
+  real          SvesMu;
   real<lower=0> sigma;
   real<lower=0> eta_sq;
   real<lower=0> rho_sq;
@@ -68,6 +68,9 @@ transformed parameters { #{{{
   matrix[2,N] MAPKpp;
 
   SvesVec   <- SvesMu + (L * z) / sqrt(k1);
+  for (i in 1:N2) {
+    SvesVec[i] <- pow( 10, SvesVec[i] );
+  }
   Sves[1]   <- to_row_vector(head( SvesVec, N ));
   Sves[2]   <- to_row_vector(tail( SvesVec, N ));
   MAPKpp[1] <- biphasicMAPKpp( Sves[1] );
