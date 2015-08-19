@@ -7,6 +7,6 @@ set makeprg=./error.sh
 function! CompileStan()
   write
   call system( "tmux send-keys C-l")
-  SlimeSend1 stanc(file="./gp-barrestin.stan")
+  SlimeSend1 stanc(file="./gp-simple.stan")
   silent make
 endfunction

@@ -5,6 +5,7 @@ library(dplyr)
 library(tidyr)
 library(rstan) 
 options(dplyr.print_min=45)
+rstan_options(auto_write=TRUE)
 # }}}
 
 # data {{{
@@ -190,6 +191,8 @@ samps <- extract(gp.sampling)
 str(samps)
 
 print(gp.sampling)
+
+pairs(gp.sampling)
 
 traceplot(gp.sampling)
 
@@ -541,3 +544,90 @@ df.samps %>% select( idL, side, MAPKpp) %>% spread( side, MAPKpp) %>% mutate( dM
 
 # }}}
 
+dso.gp.simple <- stan_model( file="./gp-simple.stan" )
+
+# gp-simple {{{
+
+datalist=list(  N=10
+              , dl=0.01
+              , sigma=0.1
+              , rho_sq=dplist$rho_sq
+              , eta_sq=dplist$eta_sq
+              , sig_sq=dplist$sig_sq
+              , dXmin=1e-2
+              , dXmax=1e1
+              , k1=1
+              )
+datalist$l <- runif( datalist$N, 0.1, 1)
+datalist <- within( datalist, {
+  l <- 1:N / N
+  MI_obs <- 2*(l - 0.4) + 0*rnorm(N,0,sigma)
+})
+qplot( x=datalist$l, y=datalist$MI_obs, geom="point")
+df.l <- with( datalist,
+  data.frame(idL=seq(1,2*length(l)), l=c(l, l+dl))
+)
+df.l %>% print()
+
+gp.simple <- NULL
+gp.simple <- 
+  sampling(dso.gp.simple
+           , data=datalist
+           , chains=8
+           , iter=2e2+100
+           , warmup=2e2
+           )
+samps <- NULL
+samps <- extract(gp.simple,c("lp__","dX","MI","MAPKppVec","SvesVec"))
+str(samps)
+
+traceplot(gp.simple)
+
+traceplot(gp.simple, inc_warmup=FALSE, pars="lp__")
+
+pairs(gp.simple, pars=c("lp__","dX","MI[1]","MI[2]","MI[3]","MI[4]"))
+
+print(gp.simple)
+
+df.samps <- NULL
+df.samps <- samps %>% as.data.frame() %>% tbl_df() %>%
+  mutate( sample=factor(1:length(samps$lp__)) ) %>% 
+  gather( param, value, -sample, -dX, -lp__) %>% 
+  separate( param, into=c("param","idL"), convert=TRUE, extra="merge") %>%
+  left_join( df.l, by=c("idL") ) %>% 
+  spread( param, value )
+
+MAXSAMPLES <- df.samps$sample %>% as.numeric() %>% max()
+df.samps <- df.samps %>% filter(sample %in% sample.int(size=10, n=MAXSAMPLES))
+df.samps %>% print()
+
+ggSves <- NULL
+ggSves <- ggplot( data=df.samps, aes(x=l, y=SvesVec, color=sample, group=sample )) +
+  geom_line(alpha=0.9) +
+  # geom_point(aes(alpha=0.1,color=side,shape=side, size=2)) +
+  coord_flip() +
+  # ylim(0,2.5) +
+  theme(legend.position="none")
+ggMAPKpp <- NULL
+ggMAPKpp <- ggplot( data=df.samps, aes(x=l, y=MAPKppVec, color=sample )) +
+  geom_line(alpha=0.9) +
+  geom_point(aes(alpha=0.9,size=2)) +
+  theme(legend.position="none")
+ggMS <- NULL
+ggMS <- ggplot( data=df.samps, aes(x=SvesVec, y=MAPKppVec, color=sample)) +
+  geom_line(alpha=0.9) +
+  geom_point() +
+  theme(legend.position="none")
+ggMI <- NULL
+ggMI <- ggplot() + 
+  geom_point(data=df.samps %>% na.omit(), aes(x=l, y=MI, color=lp__, group=sample ), size=3, alpha=0.9 ) +
+  geom_point( data=data.frame(l=datalist$l,MI=datalist$MI_obs), aes(x=l, y=MI, size=3, group=NULL, color=NULL)) +
+  theme(legend.position="none")
+grid.arrange( ggMAPKpp, ggMS, ggMI, ggSves, ncol=2)
+
+qplot( x=log10(samps$dX), geom="bar")
+
+qplot( x=samps$lp__, geom="bar")
+
+
+# }}}
