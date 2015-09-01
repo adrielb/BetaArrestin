@@ -631,3 +631,128 @@ qplot( x=samps$lp__, geom="bar")
 
 
 # }}}
+
+dso.gp.deriv <- stan_model( file="./gp-deriv.stan" )
+
+#  gp-deriv {{{
+
+datalist=list(  N=20
+              , l=c()
+              , MI_obs=c()
+              , sigma=0.1
+              , rho_sq = 1e0
+              , eta_sq = 2e-1
+              , sig_sq = 1e-8
+              , Nx=50
+              , x2=c()
+              )
+datalist <- within( datalist, {
+  l <- runif( datalist$N, 0.1, 1)
+  MI_obs <- 2*(l - 0.4) + rnorm(N,0,sigma)
+  x2 <- 1:Nx / Nx
+})
+qplot( x=datalist$l, y=datalist$MI_obs, geom="point")
+df.l <- with( datalist, {
+  data.frame(idL=seq(1,length(l)), l=l)
+})
+df.l %>% print()
+
+gp.deriv.opt <- optimizing( dso.gp.deriv
+                           ,data=datalist
+                           ,iter=1e4
+                           ,as_vector=FALSE
+                           )
+
+df.opt.deriv <- with( gp.deriv.opt$par, 
+  data.frame( l=datalist$x2, MAPKpp, Sves)
+)
+ggSvesMAPKpp <- qplot( x=Sves, y=MAPKpp, data=df.opt.deriv, geom="path")
+ggSves <- qplot( x=l, y=Sves, data=df.opt.deriv, geom="line")
+ggMAPKpp <- qplot( x=l, y=MAPKpp, data=df.opt.deriv, geom="line")
+df.deriv.l <- data.frame( l=datalist$l
+                         ,MI_obs=datalist$MI_obs
+                         ,pred=gp.deriv.opt$par$MI_l
+                         )
+ggMI <- ggplot( data=df.deriv.l, aes(x=l, y=MI_obs)) +
+  geom_point(size=5) +
+  geom_line(aes(x=l,y=pred))
+grid.arrange( ggMAPKpp, ggSvesMAPKpp, ggMI, ggSves, ncol=2)
+
+iter <- 100
+gp.deriv <- NULL
+gp.deriv <- 
+  sampling(dso.gp.deriv
+           , data=datalist
+           , chains=4
+           , iter=iter+10
+           , warmup=iter
+           , init=0
+           )
+str(extract(gp.deriv))
+samps <- NULL
+samps <- extract(gp.deriv,c("lp__","dSves_dl","dMAPKpp_dSves","MI_l"))
+str(samps)
+
+
+df.pred <- extract(gp.deriv,c("lp__","MAPKpp","Sves")) %>% as.data.frame() %>% tbl_df() %>%
+  mutate( sample=factor(1:length(samps$lp__)) ) %>% 
+  gather( param, value, -sample, -lp__) %>% 
+  separate( param, into=c("param","idL"), sep="[.]", convert=TRUE, extra="merge") %>%
+  left_join( data.frame(l=datalist$x2,idL=1:length(datalist$x2)), by=c("idL") ) %>% 
+  spread( param, value )
+
+
+
+traceplot(gp.deriv)
+
+traceplot(gp.deriv, inc_warmup=FALSE, pars="lp__")
+
+print(gp.deriv)
+
+df.samps <- NULL
+df.samps <- samps %>% as.data.frame() %>% tbl_df() %>%
+  mutate( sample=factor(1:length(samps$lp__)) ) %>% 
+  gather( param, value, -sample, -lp__) %>% 
+  separate( param, into=c("param","idL"), sep="[.]", convert=TRUE, extra="merge") %>%
+  left_join( df.l, by=c("idL") ) %>% 
+  spread( param, value )
+print(df.samps)
+
+MAXSAMPLES <- df.samps$sample %>% as.numeric() %>% max()
+df.samps <- df.samps %>% filter(sample %in% sample.int(size=10, n=MAXSAMPLES))
+df.samps %>% print()
+
+ggplot() + 
+  geom_line(data=df.samps, aes(x=l, y=MI_l, color=sample, group=sample ), size=3, alpha=0.2 ) +
+  geom_point( data=data.frame(l=datalist$l,MI=datalist$MI_obs), aes(x=l, y=MI, size=3, group=NULL, color=NULL)) +
+  theme(legend.position="none")
+
+ggSves <- NULL
+ggSves <- ggplot( data=df.pred, aes(x=l, y=Sves, color=sample, group=sample )) +
+  geom_line(alpha=0.9) +
+  # geom_point(aes(alpha=0.1,color=side,shape=side, size=2)) +
+  coord_flip() +
+  # ylim(0,2.5) +
+  theme(legend.position="none")
+ggMAPKpp <- NULL
+ggMAPKpp <- ggplot( data=df.pred, aes(x=l, y=MAPKpp, color=sample )) +
+  geom_line(alpha=0.9) +
+  geom_point(aes(alpha=0.9,size=2)) +
+  theme(legend.position="none")
+ggMS <- NULL
+ggMS <- ggplot( data=df.pred, aes(x=Sves, y=MAPKpp, color=sample)) +
+  geom_line(alpha=0.9) +
+  geom_point() +
+  theme(legend.position="none")
+ggMI <- NULL
+ggMI <- ggplot() + 
+  geom_line(data=df.samps, aes(x=l, y=MI_l, color=lp__, group=sample ), size=3, alpha=0.9 ) +
+  geom_point( data=data.frame(l=datalist$l,MI=datalist$MI_obs), aes(x=l, y=MI, size=3, group=NULL, color=NULL)) +
+  theme(legend.position="none")
+grid.arrange( ggMAPKpp, ggMS, ggMI, ggSves, ncol=2)
+
+qplot( x=log10(samps$dX), geom="bar")
+
+qplot( x=samps$lp__, geom="bar")
+
+# }}}
