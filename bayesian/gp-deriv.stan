@@ -63,101 +63,80 @@ functions { # {{{
 
 data { #{{{
   int<lower=0> N;
-  int<lower=0> Nx;
   vector[N] l;
   vector[N] MI_obs;
-  vector[Nx] x2;
 
   real<lower=0> sigma;
   real<lower=0> eta_sq;
-  real<lower=0> rho_sq;
+  real<lower=0> rho_sq_l;
+  real<lower=0> rho_sq_s;
   real<lower=0> sig_sq;
 } #}}}
 
 transformed data { #{{{
-  matrix[N+Nx,N+Nx] L;
-  vector[N+Nx*2]zero;
-  int NNx;
-  int NNx2;
+  matrix[N*2,N*2] L; // [w1, y1]
+  vector[N] zero;
+  int N2;
+  N2 <- N*2;
 
-  NNx <- N + Nx;
-  NNx2<- N + Nx*2;
-
-  zero <- rep_vector( 0, NNx2);
+  zero <- rep_vector( 0, N);
 
   {
-    matrix[NNx,NNx] Sigma_l;  // [w1, y2]
-    matrix[N,N] Kww;   // kw  [x1, x1]
-    matrix[N,Nx] Kwy;  // kwy [x1, x2]
-    matrix[Nx,Nx] Kyy; // ky  [x2, x2]
+    matrix[N2,N2] Sigma_l;  // [w1]
+    matrix[N,N] Kww; // kw  [w1, w1]
+    matrix[N,N] Kwy; // kwy [w1,y1]
+    matrix[N,N] Kyy; // ky  [y1,y1]
 
-    Kww <- CovW( l, rho_sq, eta_sq, sig_sq );
-    Kwy <- CovWY( l, x2, rho_sq, eta_sq);
-    Kyy <- CovY( x2, rho_sq, eta_sq, sig_sq );
+    Kww <- CovW( l, rho_sq_l, eta_sq, sig_sq );
+    Kwy <- CovWY( l, l, rho_sq_l, eta_sq);
+    Kyy <- CovY( l, rho_sq_l, eta_sq, sig_sq );
 
     Sigma_l <- append_row( 
       append_col( Kww , Kwy ),
       append_col( Kwy', Kyy));
+
     L <- cholesky_decompose(Sigma_l);
   }
 } #}}}
 
 parameters { #{{{
-  vector[NNx] z_Sves;
-  vector[NNx2] MAPKppVec;
+  vector[N2] z_Sves;
+  vector[N] dMAPKpp_dSves;
 } #}}}
 
 transformed parameters { #{{{
-  vector[NNx] SvesVec; // [w1, y2]
+  vector[N2] SvesVec;
   vector[N] dSves_dl;
-  vector[N] dMAPKpp_dSves;
+  vector[N] Sves_l;
   vector[N] MI_l;
+  matrix[N,N] Sigma_Sves;
 
   SvesVec <- (L * z_Sves);
   dSves_dl <- head(SvesVec, N);
-  dMAPKpp_dSves <- head(MAPKppVec,N);
+  Sves_l <- tail(SvesVec, N);
+  Sigma_Sves <- CovW( Sves_l, rho_sq_s, eta_sq, sig_sq );
   MI_l <- dMAPKpp_dSves .* dSves_dl;
 } #}}}
 
 model { #{{{
-  matrix[NNx2,NNx2] Sigma_Sves;
-  int N1;
-  int N2;
-  N1 <- N;
-  N2 <- Nx;
-  { 
-    matrix[N1,N1] Kww;     // kw(x1,x1)
-    matrix[N1,N2] Ky;      // kwy(x1,x2)
-    matrix[N1,N2] Kw;      // kww(x1,x2)
-    matrix[N2,N2] Omega11; // kyy(x1,x1)
-    matrix[N2,N2] Omega22; // kww(x2,x2)
-    matrix[N2,N2] Omega12; // kwy(x2,x2)
-
-    Kww     <- CovW(  l, rho_sq, eta_sq, sig_sq );
-    Omega11 <- CovY( x2, rho_sq, eta_sq, sig_sq );
-    Omega22 <- CovW( x2, rho_sq, eta_sq, sig_sq );
-    Omega12 <- CovWY(x2, x2, rho_sq, eta_sq);
-    Ky      <- CovWY( l, x2, rho_sq, eta_sq);
-    Kw      <- CovWW( l, x2, rho_sq, eta_sq);
-
-    Sigma_Sves <- append_row( append_row( 
-        append_col( append_col( Kww,      Ky ),      Kw )
-      , append_col( append_col( Ky', Omega11 ),-Omega12 ))
-      , append_col( append_col( Kw',-Omega12'), Omega22 ));
-
-  }
-
   z_Sves ~ normal( 0, 1 );
-  MAPKppVec ~ multi_normal( zero, Sigma_Sves );
+  dMAPKpp_dSves ~ multi_normal( zero, Sigma_Sves );
   MI_obs ~ normal( MI_l, sigma );
 } #}}}
 
 generated quantities { #{{{
-  // vector[Nx] MI;
-  vector[Nx] MAPKpp;
-  vector[Nx] Sves;
-  
-  MAPKpp <- segment(MAPKppVec,N+1,Nx);
-  Sves <- tail(SvesVec,Nx);
+  vector[N] MAPKpp;
+  {
+    matrix[N,N] K;
+    matrix[N,N] Kt_divSigma;
+    matrix[N,N] Omega;
+    matrix[N,N] Tau;
 
+    K <- CovWY( Sves_l, Sves_l, rho_sq_s, eta_sq);
+    Omega <- CovY( Sves_l, rho_sq_s, eta_sq, sig_sq);
+
+    Kt_divSigma <- K' / Sigma_Sves;
+    Tau <- Omega - Kt_divSigma * K;
+    MAPKpp <- multi_normal_rng( Kt_divSigma * dMAPKpp_dSves, Tau );
+  }
 } #}}}

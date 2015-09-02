@@ -636,20 +636,18 @@ dso.gp.deriv <- stan_model( file="./gp-deriv.stan" )
 
 #  gp-deriv {{{
 
-datalist=list(  N=20
+datalist=list(  N=100
               , l=c()
               , MI_obs=c()
               , sigma=0.1
-              , rho_sq = 1e0
-              , eta_sq = 2e-1
+              , rho_sq_l = 1e1
+              , rho_sq_s = 1e-2
+              , eta_sq = 2e0
               , sig_sq = 1e-8
-              , Nx=50
-              , x2=c()
               )
 datalist <- within( datalist, {
   l <- runif( datalist$N, 0.1, 1)
-  MI_obs <- 2*(l - 0.4) + rnorm(N,0,sigma)
-  x2 <- 1:Nx / Nx
+  MI_obs <- 1*(l - 0.5) + rnorm(N,0,sigma) 
 })
 qplot( x=datalist$l, y=datalist$MI_obs, geom="point")
 df.l <- with( datalist, {
@@ -663,10 +661,11 @@ gp.deriv.opt <- optimizing( dso.gp.deriv
                            ,as_vector=FALSE
                            )
 
+df.opt.deriv <- NULL
 df.opt.deriv <- with( gp.deriv.opt$par, 
-  data.frame( l=datalist$x2, MAPKpp, Sves)
+  data.frame( l=datalist$l, MAPKpp, Sves=Sves_l)
 )
-ggSvesMAPKpp <- qplot( x=Sves, y=MAPKpp, data=df.opt.deriv, geom="path")
+ggSvesMAPKpp <- qplot( x=Sves, y=MAPKpp, data=df.opt.deriv, geom="line")
 ggSves <- qplot( x=l, y=Sves, data=df.opt.deriv, geom="line")
 ggMAPKpp <- qplot( x=l, y=MAPKpp, data=df.opt.deriv, geom="line")
 df.deriv.l <- data.frame( l=datalist$l
@@ -756,3 +755,5 @@ qplot( x=log10(samps$dX), geom="bar")
 qplot( x=samps$lp__, geom="bar")
 
 # }}}
+
+dso.gp.deriv <- stan_model( file="./gp-deriv-both.stan" )
