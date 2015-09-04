@@ -756,4 +756,57 @@ qplot( x=samps$lp__, geom="bar")
 
 # }}}
 
-dso.gp.deriv <- stan_model( file="./gp-deriv-both.stan" )
+dso.gp.deriv.both <- stan_model( file="./gp-deriv-both.stan" )
+
+#  gp-deriv-both {{{
+
+datalist=list(  N=c(78,20)
+              , l_Native=c()
+              , l_OE=c()
+              , MI_obs=c()
+              , sigma=0.1
+              , rho_sq_l = 1e1
+              , rho_sq_s = 1e-2
+              , eta_sq = 2e0
+              , sig_sq = 1e-8
+              )
+datalist <- within( datalist, {
+  l_Native <- runif( datalist$N[1], 0.1, 1)
+  l_OE <- runif( datalist$N[2], 0.1, 1)
+  MI_obs  <- c( 0.5 + rnorm(N[1],0,sigma) 
+               , 1*(l_OE - 0.5) + rnorm(N[2],0,sigma))
+})
+df.data <- with( datalist, 
+  data.frame( l=c(l_Native, l_OE)
+             ,MI_obs=MI_obs
+             ,Expression=factor( c(rep("Native",N[1])
+                                  ,rep("OE",N[2])))
+             ,idL=c( 1:N[1], 1:N[2])
+             )
+)
+qplot( x=l, y=MI_obs, data=df.data, geom="point", color=Expression, size=4)
+
+opt.gp.deriv.both <- NULL
+opt.gp.deriv.both <- 
+  optimizing( dso.gp.deriv.both
+             ,data=datalist
+             ,iter=1e4
+             ,as_vector=FALSE
+             )
+
+df.opt.deriv.both <- NULL
+df.opt.deriv.both <- with( opt.gp.deriv.both$par, 
+  cbind( df.data, data.frame( MAPKpp, Sves=Sves_l, MI) )
+) %>% tbl_df()
+ggSvesMAPKpp <- qplot( x=Sves, y=MAPKpp, data=df.opt.deriv.both, geom="line", size=3) +
+  theme(legend.position="none")
+ggSves <- qplot( x=l, y=Sves, data=df.opt.deriv.both, geom="line", color=Expression) +
+  theme(legend.position="none")
+ggMAPKpp <- qplot( x=l, y=MAPKpp, data=df.opt.deriv.both, geom="line", color=Expression) +
+  theme(legend.position="none")
+ggMI <- ggplot(data=df.opt.deriv.both) +
+  geom_point( aes(x=l, y=MI_obs, size=5, color=Expression)) +
+  geom_line( aes(x=l, y=MI, size=1, color=Expression)) +
+  theme(legend.position="none")
+grid.arrange( ggMAPKpp, ggSvesMAPKpp, ggMI, ggSves, ncol=2)
+# }}}
