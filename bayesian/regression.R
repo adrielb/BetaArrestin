@@ -760,7 +760,7 @@ dso.gp.deriv.both <- stan_model( file="./gp-deriv-both.stan" )
 
 #  gp-deriv-both {{{
 
-datalist=list(  N=c(78,20)
+datalist=list(  N=c(30,30)
               , l_Native=c()
               , l_OE=c()
               , MI_obs=c()
@@ -769,6 +769,8 @@ datalist=list(  N=c(78,20)
               , rho_sq_s = 1e-2
               , eta_sq = 2e0
               , sig_sq = 1e-8
+              , OE_diff = 9
+              , OE_sig = 0.1
               )
 datalist <- within( datalist, {
   l_Native <- runif( datalist$N[1], 0.1, 1)
@@ -790,7 +792,7 @@ opt.gp.deriv.both <- NULL
 opt.gp.deriv.both <- 
   optimizing( dso.gp.deriv.both
              ,data=datalist
-             ,iter=1e4
+             ,iter=1e5
              ,as_vector=FALSE
              )
 
@@ -798,7 +800,9 @@ df.opt.deriv.both <- NULL
 df.opt.deriv.both <- with( opt.gp.deriv.both$par, 
   cbind( df.data, data.frame( MAPKpp, Sves=Sves_l, MI) )
 ) %>% tbl_df()
-ggSvesMAPKpp <- qplot( x=Sves, y=MAPKpp, data=df.opt.deriv.both, geom="line", size=3) +
+ggSvesMAPKpp <- ggplot(data=df.opt.deriv.both ) +
+  geom_line( aes(x=Sves, y=MAPKpp, size=2)) +
+  geom_line( aes(x=Sves, y=MAPKpp, size=1, color=Expression)) +
   theme(legend.position="none")
 ggSves <- qplot( x=l, y=Sves, data=df.opt.deriv.both, geom="line", color=Expression) +
   theme(legend.position="none")

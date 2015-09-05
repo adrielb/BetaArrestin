@@ -94,6 +94,8 @@ data { #{{{
   real<lower=0> rho_sq_l;
   real<lower=0> rho_sq_s;
   real<lower=0> sig_sq;
+  real<lower=0> OE_diff;
+  real<lower=0> OE_sig;
 } #}}}
 
 transformed data { #{{{
@@ -128,6 +130,7 @@ transformed parameters { #{{{
   vector[N[2]] dMAPKpp_dSves_OE;     // [w_OE]
   vector[N_both] Sves_l;      // [y_N, y_OE]
   matrix[N_both,N_both] Sigma_Sves;
+  real Sves_diff;
 
   SvesVec_Native <- (L_Native * z_Sves_Native);
   dSves_dl_Native <- head(SvesVec_Native, N[1]);
@@ -147,6 +150,7 @@ transformed parameters { #{{{
   }
   Sigma_Sves <- CovW( Sves_l, rho_sq_s, eta_sq, sig_sq );
   MI <- dMAPKpp_dSves .* dSves_dl;
+  Sves_diff <- mean( Sves_l_OE ) - mean( Sves_l_Native );
 } #}}}
 
 model { #{{{
@@ -154,6 +158,7 @@ model { #{{{
   z_Sves_OE ~ normal( 0, 1 );
   dMAPKpp_dSves ~ multi_normal( zero, Sigma_Sves ); // [w_N, w_OE]
   MI_obs ~ normal( MI, sigma );
+  Sves_diff ~ normal(OE_diff, OE_sig);
 } #}}}
 
 generated quantities { #{{{
