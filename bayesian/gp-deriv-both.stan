@@ -81,6 +81,25 @@ functions { # {{{
       return L;
     }
   }
+  vector GenMAPKpp_rng( vector Sves_l, vector Sves_pred, matrix Sigma_Sves, vector dMAPKpp_dSves, real rho_sq, real eta_sq, real sig_sq) {
+    int N_data;
+    int N_MAPKpp;
+    N_data <- num_elements( Sves_l );
+    N_MAPKpp <- num_elements( Sves_pred );
+
+    {
+      matrix[N_data,N_MAPKpp] K; // k_wy
+      matrix[N_MAPKpp,N_data] Kt_divSigma; // k_wy * ik_w
+      matrix[N_MAPKpp,N_MAPKpp] Omega;  // k_y
+      matrix[N_MAPKpp,N_MAPKpp] Tau;
+      K <- CovWY( Sves_l, Sves_pred, rho_sq, eta_sq);
+      Omega <- CovY( Sves_pred, rho_sq, eta_sq, sig_sq);
+
+      Kt_divSigma <- K' / Sigma_Sves;
+      Tau <- Omega - Kt_divSigma * K;
+      return multi_normal_rng( Kt_divSigma * dMAPKpp_dSves, Tau );
+    }
+  }
 } # }}}
 
 data { #{{{
@@ -96,6 +115,7 @@ data { #{{{
   real<lower=0> sig_sq;
   real<lower=0> OE_diff;
   real<lower=0> OE_sig;
+  int<lower=0>  N_MAPKpp;
 } #}}}
 
 transformed data { #{{{
@@ -163,17 +183,27 @@ model { #{{{
 
 generated quantities { #{{{
   vector[N_both] MAPKpp;
-  {
-    matrix[N_both,N_both] K;
-    matrix[N_both,N_both] Kt_divSigma;
-    matrix[N_both,N_both] Omega;
-    matrix[N_both,N_both] Tau;
+  vector[N_MAPKpp+N_both] MAPKpp_pred;
+  vector[N_MAPKpp+N_both] Sves_pred;
 
-    K <- CovWY( Sves_l, Sves_l, rho_sq_s, eta_sq);
-    Omega <- CovY( Sves_l, rho_sq_s, eta_sq, sig_sq);
+  real Sves_min;
+  real Sves_max;
+  real dSves;
 
-    Kt_divSigma <- K' / Sigma_Sves;
-    Tau <- Omega - Kt_divSigma * K;
-    MAPKpp <- multi_normal_rng( Kt_divSigma * dMAPKpp_dSves, Tau );
+  Sves_min <- min( Sves_l );
+  Sves_max <- max( Sves_l );
+  Sves_min <- if_else(Sves_min<0,1.1,0.9) * Sves_min;
+  Sves_max <- if_else(Sves_max>0,1.1,0.9) * Sves_max;
+  dSves <- (Sves_max - Sves_min) / N_MAPKpp;
+  
+  for (i in 1:N_MAPKpp) {
+    Sves_pred[i] <- Sves_min + i * dSves;
   }
+  for (i in 1:N_both) {
+    Sves_pred[i+N_MAPKpp] <- Sves_l[i];
+  }
+
+  MAPKpp_pred <- GenMAPKpp_rng( Sves_l, Sves_pred, Sigma_Sves, dMAPKpp_dSves, rho_sq_s, eta_sq, sig_sq);
+  MAPKpp <- tail(MAPKpp_pred, N_both);
+  
 } #}}}

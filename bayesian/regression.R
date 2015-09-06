@@ -771,6 +771,7 @@ datalist=list(  N=c(30,30)
               , sig_sq = 1e-8
               , OE_diff = 9
               , OE_sig = 0.1
+              , N_MAPKpp=100
               )
 datalist <- within( datalist, {
   l_Native <- runif( datalist$N[1], 0.1, 1)
@@ -800,9 +801,12 @@ df.opt.deriv.both <- NULL
 df.opt.deriv.both <- with( opt.gp.deriv.both$par, 
   cbind( df.data, data.frame( MAPKpp, Sves=Sves_l, MI) )
 ) %>% tbl_df()
-ggSvesMAPKpp <- ggplot(data=df.opt.deriv.both ) +
-  geom_line( aes(x=Sves, y=MAPKpp, size=2)) +
-  geom_line( aes(x=Sves, y=MAPKpp, size=1, color=Expression)) +
+df.opt.deriv.both.pred <- with( opt.gp.deriv.both$par,  
+  data.frame( Sves_pred, MAPKpp_pred)
+)
+ggSvesMAPKpp <- ggplot( ) +
+  geom_line( data=df.opt.deriv.both.pred, aes( x=Sves_pred, y=MAPKpp_pred, size=2)) +
+  geom_line( data=df.opt.deriv.both, aes(x=Sves, y=MAPKpp, size=1, color=Expression)) +
   theme(legend.position="none")
 ggSves <- qplot( x=l, y=Sves, data=df.opt.deriv.both, geom="line", color=Expression) +
   theme(legend.position="none")
@@ -813,4 +817,5 @@ ggMI <- ggplot(data=df.opt.deriv.both) +
   geom_line( aes(x=l, y=MI, size=1, color=Expression)) +
   theme(legend.position="none")
 grid.arrange( ggMAPKpp, ggSvesMAPKpp, ggMI, ggSves, ncol=2)
+
 # }}}
